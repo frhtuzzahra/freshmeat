@@ -88,12 +88,6 @@ function editData() {
     })
 }
 
-function add() {
-    url = "add";
-    $(".modal-title").html("Add Data");
-    $('.modal button[type="submit"]').html("Add")
-}
-
 function edit(id) {
     $.ajax({
         url: get_pelangganUrl,

@@ -11,9 +11,15 @@ class Stok_masuk_model extends CI_Model
 		return $this->db->insert($this->table, $data);
 	}
 
+	public function update($id, $data)
+	{
+		$this->db->where('id', $id);
+		return $this->db->update($this->table, $data);
+	}
+
 	public function read()
 	{
-		$this->db->select('stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga');
+		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga');
 		$this->db->from($this->table);
 		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
 		return $this->db->get();
@@ -33,6 +39,13 @@ class Stok_masuk_model extends CI_Model
 		$this->db->select('stok');
 		$this->db->where('id', $id);
 		return $this->db->get('produk')->row();
+	}
+
+	public function getStokMasuk($id)
+	{
+		$this->db->select('id, status');
+		$this->db->where('id', $id);
+		return $this->db->get('stok_masuk')->row();
 	}
 
 	public function addStok($id, $stok)

@@ -18,6 +18,17 @@ class Stok_masuk extends CI_Controller
 		$this->load->view('stok_masuk');
 	}
 
+	public function lunas()
+	{
+		$id = $this->input->post('id');
+		$data = array(
+			'status' => 'Lunas'
+		);
+		if ($this->stok_masuk_model->update($id, $data)) {
+			echo json_encode('sukses');
+		}
+	}
+
 	public function read()
 	{
 		header('Content-type: application/json');
@@ -25,14 +36,25 @@ class Stok_masuk extends CI_Controller
 			foreach ($this->stok_masuk_model->read()->result() as $stok_masuk) {
 				$tanggal = new DateTime($stok_masuk->tanggal);
 				$data[] = array(
+					// $id = $stok_masuk->id,
+					// 'id' => $stok_masuk->id,
 					'tanggal' => $tanggal->format('d-m-Y H:i:s'),
 					'barcode' => $stok_masuk->barcode,
 					'nama_produk' => $stok_masuk->nama_produk,
 					'harga' => $stok_masuk->harga,
 					'total' => $stok_masuk->harga * $stok_masuk->jumlah,
 					'jumlah' => $stok_masuk->jumlah,
-					'status' => $stok_masuk->status,
-					'keterangan' => $stok_masuk->keterangan
+					'status' => ($stok_masuk->status == 'Lunas') ? '<button type="button" class="btn btn-sm btn-success">' . $stok_masuk->status . '</button>' : '
+					<div class="btn-group">
+					<button type="button" class="btn btn-sm btn-danger">' . $stok_masuk->status . '</button>
+                    <button type="button" class="btn btn-sm btn-danger dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
+                      <span class="sr-only">Toggle Dropdown</span>
+                    </button>
+                    <div class="dropdown-menu" role="menu">
+					<button class="dropdown-item" onclick="update(' . $stok_masuk->id . ')">Lunas</button>
+                    </div>
+					</div>',
+					'keterangan' => $stok_masuk->keterangan,
 				);
 			}
 		} else {
@@ -67,12 +89,32 @@ class Stok_masuk extends CI_Controller
 		}
 	}
 
+	public function update()
+	{
+		$id = $this->input->post('id');
+		$data = array(
+			'status' => "lunas",
+		);
+		if ($this->stok_masuk_model->update($id, $data)) {
+			echo json_encode('sukses');
+		}
+	}
+
 	public function get_barcode()
 	{
 		$barcode = $this->input->post('barcode');
-		$kategori = $this->stok_masuk_model->getKategori($id);
+		$kategori = $this->stok_masuk_model->getKategori($barcode);
 		if ($kategori->row()) {
 			echo json_encode($kategori->row());
+		}
+	}
+
+	public function get_stok_masuk()
+	{
+		$id = $this->input->post('id');
+		$stok_masuk = $this->stok_masuk_model->getStokMasuk($id);
+		if ($stok_masuk->row()) {
+			echo json_encode($stok_masuk->row());
 		}
 	}
 

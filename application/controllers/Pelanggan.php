@@ -1,12 +1,13 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pelanggan extends CI_Controller {
+class Pelanggan extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('status') !== 'login' ) {
+		if ($this->session->userdata('status') !== 'login') {
 			redirect('/');
 		}
 		$this->load->model('pelanggan_model');
@@ -15,6 +16,13 @@ class Pelanggan extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('pelanggan');
+	}
+
+	public function cetak()
+	{
+		$data['pelanggan'] = $this->pelanggan_model->read()->result();
+		$data['label'] = "Data Pelanggan";
+		$this->load->view('laporan_pelanggan_pdf', $data);
 	}
 
 	public function read()
@@ -27,7 +35,7 @@ class Pelanggan extends CI_Controller {
 					'jenis_kelamin' => $pelanggan->jenis_kelamin,
 					'alamat' => $pelanggan->alamat,
 					'telepon' => $pelanggan->telepon,
-					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$pelanggan->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$pelanggan->id.')">Delete</button>'
+					'action' => '<button class="btn btn-sm btn-success" onclick="edit(' . $pelanggan->id . ')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove(' . $pelanggan->id . ')">Delete</button>'
 				);
 			}
 		} else {
@@ -69,7 +77,7 @@ class Pelanggan extends CI_Controller {
 			'telepon' => $this->input->post('telepon'),
 			'jenis_kelamin' => $this->input->post('jenis_kelamin')
 		);
-		if ($this->pelanggan_model->update($id,$data)) {
+		if ($this->pelanggan_model->update($id, $data)) {
 			echo json_encode('sukses');
 		}
 	}
@@ -77,7 +85,7 @@ class Pelanggan extends CI_Controller {
 	public function get_pelanggan()
 	{
 		$id = $this->input->post('id');
-		$pelanggan = $this->pelanggan_model->getSupplier($id);
+		$pelanggan = $this->pelanggan_model->getPelanggan($id);
 		if ($pelanggan->row()) {
 			echo json_encode($pelanggan->row());
 		}
@@ -96,7 +104,6 @@ class Pelanggan extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
-
 }
 
 /* End of file Pelanggan.php */

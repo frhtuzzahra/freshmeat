@@ -1,12 +1,13 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Supplier extends CI_Controller {
+class Supplier extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('status') !== 'login' ) {
+		if ($this->session->userdata('status') !== 'login') {
 			redirect('/');
 		}
 		$this->load->model('supplier_model');
@@ -15,6 +16,13 @@ class Supplier extends CI_Controller {
 	public function index()
 	{
 		$this->load->view('supplier');
+	}
+
+	public function cetak()
+	{
+		$data['supplier'] = $this->supplier_model->read()->result();
+		$data['label'] = "Data Supplier";
+		$this->load->view('laporan_supplier_pdf', $data);
 	}
 
 	public function read()
@@ -27,7 +35,7 @@ class Supplier extends CI_Controller {
 					'alamat' => $supplier->alamat,
 					'telepon' => $supplier->telepon,
 					'keterangan' => $supplier->keterangan,
-					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$supplier->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$supplier->id.')">Delete</button>'
+					'action' => '<button class="btn btn-sm btn-success" onclick="edit(' . $supplier->id . ')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove(' . $supplier->id . ')">Delete</button>'
 				);
 			}
 		} else {
@@ -69,7 +77,7 @@ class Supplier extends CI_Controller {
 			'telepon' => $this->input->post('telepon'),
 			'keterangan' => $this->input->post('keterangan')
 		);
-		if ($this->supplier_model->update($id,$data)) {
+		if ($this->supplier_model->update($id, $data)) {
 			echo json_encode('sukses');
 		}
 	}
@@ -96,7 +104,6 @@ class Supplier extends CI_Controller {
 		}
 		echo json_encode($data);
 	}
-
 }
 
 /* End of file Supplier.php */

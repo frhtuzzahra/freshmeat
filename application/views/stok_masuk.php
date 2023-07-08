@@ -32,6 +32,10 @@
             <div class="col">
               <h1 class="m-0 text-dark">Stok Masuk</h1>
             </div><!-- /.col -->
+            <div class="col">
+              <!-- button cetak -->
+              <a href="<?php echo base_url('supplier/cetak') ?>" class="btn btn-primary float-right" target="_blank">Cetak</a>
+            </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>
@@ -67,7 +71,36 @@
       <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+  </div>
 
+  <div class="modal fade" id="modaledit">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Lunas</h5>
+          <button class="close" data-dismiss="modal">
+            <span>&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form id="formUpdate">
+            <div class="form-group">
+              <p>
+                Ubah status menjadi lunas?
+              </p>
+              <input type="hidden" name="id" id="id">
+              <div class="form-group d-none">
+                <select name="status" class="form-control">
+                  <option value="lunas" selected disabled>Lunas</option>
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-success" type="submit">Ya</button>
+            <button class="btn btn-danger" data-dismiss="modal">Close</button>
+          </form>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div class="modal fade" id="modal">
@@ -135,10 +168,12 @@
   <script>
     var readUrl = '<?php echo site_url('stok_masuk/read') ?>';
     var addUrl = '<?php echo site_url('stok_masuk/add') ?>';
+    var updateUrl = '<?php echo site_url('stok_masuk/update') ?>';
+    var getStokMasukUrl = '<?php echo site_url('stok_masuk/get_stok_masuk') ?>';
     var getBarcodeUrl = '<?php echo site_url('produk/get_barcode') ?>';
     var supplierSearchUrl = '<?php echo site_url('supplier/search') ?>';
   </script>
-  <script src="<?php echo base_url('assets/js/stok_masuk.min.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/unminify/stok_masuk.js') ?>"></script>
 </body>
 
 </html>

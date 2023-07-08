@@ -1,4 +1,4 @@
-let stok_masuk = $("#stok_masuk").DataTable({
+let url, stok_masuk = $("#stok_masuk").DataTable({
     responsive: true,
     scrollX: true,
     ajax: readUrl,
@@ -21,7 +21,13 @@ let stok_masuk = $("#stok_masuk").DataTable({
     }, {
         data: "jumlah"
     }, {
-        data: "keterangan"
+        data: "harga"
+    }, {
+        data: "total"
+    }, {
+        data: "status",
+    }, {
+        data: "keterangan", 
     }]
 });
 
@@ -57,6 +63,49 @@ function addData() {
         }
     })
 }
+
+function updateData() {
+    $.ajax({
+        url: updateUrl,
+        type: "post",
+        dataType: "json",
+        data: $("#formUpdate").serialize(),
+        success: () => {
+            $(".modal").modal("hide");
+            Swal.fire("Sukses", "Sukses Mengedit Data", "success");
+            reloadTable()
+        },
+        error: err => {
+            console.log(err)
+        }
+    })
+}
+
+function update(id) {
+    Swal.fire({
+        title: "Update",
+        text: "Update data ini?",
+        type: "warning",
+        showCancelButton: true
+    }).then(() => {
+        $.ajax({
+            url: updateUrl,
+            type: "post",
+            dataType: "json",
+            data: {
+                id: id
+            },
+            success: a => {
+                Swal.fire("Sukses", "Sukses Update Data", "success");
+                reloadTable()
+            },
+            error: a => {
+                console.log(a)
+            }
+        })
+    })
+}
+
 stok_masuk.on("order.dt search.dt", () => {
     stok_masuk.column(0, {
         search: "applied",
@@ -65,15 +114,17 @@ stok_masuk.on("order.dt search.dt", () => {
         el.innerHTML = val + 1
     })
 });
+
 $("#form").validate({
     errorElement: "span",
     errorPlacement: (err, el) => {
         err.addClass("invalid-feedback"), el.closest(".form-group").append(err)
     },
     submitHandler: () => {
-        addData()
+        "edit" == url ? updateData() : addData()
     }
 });
+
 $("#tanggal").datetimepicker({
     format: "dd-mm-yyyy h:ii:ss"
 });
