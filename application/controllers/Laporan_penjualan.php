@@ -19,14 +19,16 @@ class Laporan_penjualan extends CI_Controller
 
 		$this->load->model('transaksi_model', 'transaksi');
 		if (empty($tgl_awal) && empty($tgl_akhir)) {
-			$data['laporan_penjualan'] = $this->transaksi->readAll();
+			$data['laporan_penjualan'] = $this->transaksi->readAll()->result();
+			$data['label'] = "Data Semua Transaksi";
 		} else {
-			$data['laporan_penjualan'] = $this->transaksi->getTransaksiWithPeriode($tgl_awal, $tgl_akhir);
+			$data['laporan_penjualan'] = $this->transaksi->getTransaksiWithPeriode($tgl_awal, $tgl_akhir)->result();
+			$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+			$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+			$label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
+			$data['label'] = $label;
 		}
-		$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
-		$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
-		$label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
-		$data['label'] = $label;
+
 		$this->load->view('laporan_penjualan_pdf', $data);
 	}
 }
