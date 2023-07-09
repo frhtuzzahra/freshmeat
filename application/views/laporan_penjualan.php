@@ -31,26 +31,17 @@
             </div><!-- /.col -->
             <div class="col">
               <!-- form filter laporan -->
-              <form method="post" action="<?= base_url('laporan_penjualan/cetak') ?>">
+              <form method="post" action="<?= base_url('laporan_penjualan/cetak') ?>" target="_blank">
                 <div class="row">
-                  <div class="col-md-3">
+                  <div class="col">
                     <div class="input-group">
-                      <input type="date" class="form-control" name="tgl_awal">
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="input-group">
-                      <input type="date" class="form-control" name="tgl_akhir">
-                    </div>
-                  </div>
-                  <div class="col-md-3">
-                    <div class="input-group">
+                      <input type="date" class="form-control mr-1" name="tgl_awal">
+                      <input type="date" class="form-control mr-1" name="tgl_akhir">
                       <button type="submit" class="btn btn-primary">Cetak</button>
                     </div>
                   </div>
                 </div>
               </form>
-
             </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->

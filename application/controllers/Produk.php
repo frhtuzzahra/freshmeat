@@ -75,6 +75,7 @@ class Produk extends CI_Controller
 			'satuan' => $this->input->post('satuan'),
 			'kategori' => $this->input->post('kategori'),
 			'harga' => $this->input->post('harga'),
+			'harga_jual' => $this->input->post('harga_jual'),
 			'stok' => $this->input->post('stok')
 		);
 		if ($this->produk_model->update($id, $data)) {

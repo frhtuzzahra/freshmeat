@@ -107,6 +107,7 @@ function edit(id) {
             $('[name="satuan"]').append(`<option value='${res.satuan_id}'>${res.satuan}</option>`);
             $('[name="kategori"]').append(`<option value='${res.kategori_id}'>${res.kategori}</option>`);
             $('[name="harga"]').val(res.harga);
+            $('[name="harga_jual"]').val(res.harga_jual);
             $('[name="stok"]').val(res.stok);
             $(".modal").modal("show");
             $(".modal-title").html("Edit Data");

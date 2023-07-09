@@ -18,7 +18,7 @@ class Laporan_penjualan extends CI_Controller
 		$tgl_akhir = $this->input->post('tgl_akhir');
 
 		$this->load->model('transaksi_model', 'transaksi');
-		if (empty($tgl_awal) && empty($tgl_akhir)) {
+		if (empty($tgl_awal) || empty($tgl_akhir)) {
 			$data['laporan_penjualan'] = $this->transaksi->readAll()->result();
 			$data['label'] = "Data Semua Transaksi";
 		} else {

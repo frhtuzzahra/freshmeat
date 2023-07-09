@@ -36,8 +36,6 @@ class Stok_masuk extends CI_Controller
 			foreach ($this->stok_masuk_model->read()->result() as $stok_masuk) {
 				$tanggal = new DateTime($stok_masuk->tanggal);
 				$data[] = array(
-					// $id = $stok_masuk->id,
-					// 'id' => $stok_masuk->id,
 					'tanggal' => $tanggal->format('d-m-Y H:i:s'),
 					'barcode' => $stok_masuk->barcode,
 					'nama_produk' => $stok_masuk->nama_produk,
@@ -100,14 +98,14 @@ class Stok_masuk extends CI_Controller
 		}
 	}
 
-	public function get_barcode()
-	{
-		$barcode = $this->input->post('barcode');
-		$kategori = $this->stok_masuk_model->getKategori($barcode);
-		if ($kategori->row()) {
-			echo json_encode($kategori->row());
-		}
-	}
+	// public function get_barcode()
+	// {
+	// 	$barcode = $this->input->post('barcode');
+	// 	$kategori = $this->stok_masuk_model->getKategori($barcode);
+	// 	if ($kategori->row()) {
+	// 		echo json_encode($kategori->row());
+	// 	}
+	// }
 
 	public function get_stok_masuk()
 	{

@@ -29,6 +29,20 @@
             <div class="col">
               <h1 class="m-0 text-dark">Laporan Stok Masuk</h1>
             </div><!-- /.col -->
+            <div class="col">
+              <!-- form filter laporan -->
+              <form method="post" action="<?= base_url('laporan_stok_masuk/cetak') ?>" target="_blank">
+                <div class="row">
+                  <div class="col">
+                    <div class="input-group">
+                      <input type="date" class="form-control mr-1" name="tgl_awal">
+                      <input type="date" class="form-control mr-1" name="tgl_akhir">
+                      <button type="submit" class="btn btn-primary">Cetak</button>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>

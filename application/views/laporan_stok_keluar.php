@@ -31,7 +31,7 @@
             </div><!-- /.col -->
             <div class="col">
               <!-- Button cetak -->
-              <a href="<?php echo base_url('stok_keluar/cetak') ?>" class="btn btn-primary float-right"><i class="fa fa-print"></i> Cetak</a>
+              <a href="<?php echo base_url('stok_keluar/cetak') ?>" class="btn btn-primary float-right" target="_blank"><i class="fa fa-print"></i> Cetak</a>
             </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
