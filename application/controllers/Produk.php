@@ -18,6 +18,13 @@ class Produk extends CI_Controller
 		$this->load->view('produk');
 	}
 
+	public function cetak()
+	{
+		$data['produk'] = $this->produk_model->read()->result();
+		$data['label'] = "Data Produk";
+		$this->load->view('cetak_produk_pdf', $data);
+	}
+
 	public function read()
 	{
 		header('Content-type: application/json');

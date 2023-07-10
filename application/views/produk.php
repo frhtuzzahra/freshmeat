@@ -31,6 +31,10 @@
             <div class="col">
               <h1 class="m-0 text-dark">Produk</h1>
             </div><!-- /.col -->
+            <div class="col">
+              <!-- button cetak -->
+              <a href="<?php echo base_url('produk/cetak') ?>" class="btn btn-primary float-right" target="_blank">Cetak</a>
+            </div>
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
       </div>

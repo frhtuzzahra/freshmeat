@@ -22,7 +22,7 @@ class Supplier extends CI_Controller
 	{
 		$data['supplier'] = $this->supplier_model->read()->result();
 		$data['label'] = "Data Supplier";
-		$this->load->view('laporan_supplier_pdf', $data);
+		$this->load->view('cetak_supplier_pdf', $data);
 	}
 
 	public function read()

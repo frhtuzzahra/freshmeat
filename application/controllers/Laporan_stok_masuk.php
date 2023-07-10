@@ -29,7 +29,7 @@ class Laporan_stok_masuk extends CI_Controller
 			$data['label'] = $label;
 		}
 
-		$this->load->view('laporan_stok_masuk_pdf', $data);
+		$this->load->view('cetak_laporan_stok_masuk_pdf', $data);
 	}
 }
 

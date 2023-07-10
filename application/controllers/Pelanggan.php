@@ -22,7 +22,7 @@ class Pelanggan extends CI_Controller
 	{
 		$data['pelanggan'] = $this->pelanggan_model->read()->result();
 		$data['label'] = "Data Pelanggan";
-		$this->load->view('laporan_pelanggan_pdf', $data);
+		$this->load->view('cetak_pelanggan_pdf', $data);
 	}
 
 	public function read()

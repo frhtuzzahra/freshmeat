@@ -29,7 +29,7 @@ class Laporan_penjualan extends CI_Controller
 			$data['label'] = $label;
 		}
 
-		$this->load->view('laporan_penjualan_pdf', $data);
+		$this->load->view('cetak_laporan_penjualan_pdf', $data);
 	}
 }
 

@@ -22,7 +22,7 @@ class Stok_keluar extends CI_Controller
 	{
 		$data['stok_keluar'] = $this->stok_keluar_model->read()->result();
 		$data['label'] = "Data Stok Keluar";
-		$this->load->view('laporan_stok_keluar_pdf', $data);
+		$this->load->view('cetak_laporan_stok_keluar_pdf', $data);
 	}
 
 	public function read()
