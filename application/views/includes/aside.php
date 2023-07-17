@@ -2,7 +2,7 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
   <a href="<?php echo site_url('') ?>" class="brand-link text-center">
-		<img src="<?= base_url('assets/images/logofreshmeatnavbar.png') ?>" class="brand-image img-circle elevation-2" style="opacity: .8" alt="Logo">
+    <img src="<?= base_url('assets/images/logofreshmeatnavbar.png') ?>" class="brand-image img-circle elevation-2" style="opacity: .8" alt="Logo">
     <span class="brand-text font-weight-light"><?php echo $this->session->userdata('toko')->nama ?></span>
   </a>
   <?php $uri = $this->uri->segment(1) ?>
@@ -75,8 +75,8 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item has-treeview <?php echo $uri == 'stok_masuk' || $uri == 'stok_keluar' ? 'menu-open' : 'no' ?>">
-          <a href="#" class="nav-link <?php echo $uri == 'stok_masuk' || $uri == 'stok_keluar' ? 'active' : 'no' ?>">
+        <li class="nav-item has-treeview <?php echo $uri == 'detail_stok_masuk' || $uri == 'stok_masuk' || $uri == 'stok_keluar' ? 'menu-open' : 'no' ?>">
+          <a href="#" class="nav-link <?php echo $uri == 'detail_stok_masuk' || $uri == 'stok_masuk' || $uri == 'stok_keluar' ? 'active' : 'no' ?>">
             <i class="fas fa-archive nav-icon"></i>
             <p>Stok</p>
             <i class="right fas fa-angle-right"></i>
@@ -92,6 +92,12 @@
               <a href="<?php echo site_url('stok_keluar') ?>" class="nav-link <?php echo $uri == 'stok_keluar' ? 'active' : 'no' ?>">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Stok Keluar</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="<?php echo site_url('detail_stok_masuk') ?>" class="nav-link <?php echo $uri == 'detail_stok_masuk' ? 'active' : 'no' ?>">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Detail Stok Masuk</p>
               </a>
             </li>
           </ul>
@@ -129,7 +135,7 @@
             </li>
           </ul>
         </li>
-        <?php if ($role === 'admin'): ?>
+        <?php if ($role === 'admin') : ?>
           <li class="nav-item">
             <a href="<?php echo site_url('pengaturan') ?>" class="nav-link <?php echo $uri == 'pengaturan' ? 'active' : 'no' ?>">
               <i class="fas fa-cog nav-icon"></i>
@@ -143,7 +149,7 @@
             </a>
           </li>
         <?php endif ?>
-       
+
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

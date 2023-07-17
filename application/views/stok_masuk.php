@@ -82,7 +82,7 @@
           <form id="form">
             <div class="form-group">
               <label>Tanggal</label>
-              <input id="tanggal" type="text" class="form-control" placeholder="Kategori" name="tanggal" required>
+              <input id="tanggal" type="text" class="form-control" placeholder="Tanggal" name="tanggal" required>
             </div>
             <div class="form-group">
               <label>Barcode</label>

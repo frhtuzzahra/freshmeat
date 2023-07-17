@@ -64,6 +64,28 @@ class Stok_masuk extends CI_Controller
 		echo json_encode($stok_masuk);
 	}
 
+	public function get_nama_statusDP()
+	{
+		$dp = $this->stok_masuk_model->readDP();
+		if ($dp->row()) {
+			echo json_encode($dp->row());
+		}
+	}
+
+	public function get_IdStokMasuk()
+	{
+		header('Content-type: application/json');
+		$id_stokmasuk = $this->input->post('id_stokmasuk');
+		$search = $this->stok_masuk_model->getIdStokMasuk($id_stokmasuk);
+		foreach ($search as $produk) {
+			$data[] = array(
+				'id' => $produk->id,
+				'text' => $produk->id,
+			);
+		}
+		echo json_encode($data);
+	}
+
 	public function add()
 	{
 		$id = $this->input->post('barcode');

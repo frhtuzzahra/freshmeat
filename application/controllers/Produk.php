@@ -117,8 +117,16 @@ class Produk extends CI_Controller
 	public function get_nama()
 	{
 		header('Content-type: application/json');
-		$id = $this->input->post('id');
+		$id = 6;
 		echo json_encode($this->produk_model->getNama($id));
+	}
+
+	public function get_namaDetail()
+	{
+		header('Content-type: application/json');
+		$id = $this->input->post('id');
+		// $id = 11;
+		echo json_encode($this->produk_model->getNamaDetail($id));
 	}
 
 	public function get_stok()

@@ -56,6 +56,15 @@ class Produk_model extends CI_Model
 		return $this->db->get($this->table)->row();
 	}
 
+	public function getNamaDetail($id)
+	{
+		$this->db->select('produk.nama_produk');
+		$this->db->from('stok_masuk');
+		$this->db->join('produk', 'stok_masuk.barcode = produk.id');
+		$this->db->where('stok_masuk.id', $id);
+		return $this->db->get()->row();
+	}
+
 	public function getStok($id)
 	{
 		$this->db->select('stok, nama_produk, harga_jual, barcode');
