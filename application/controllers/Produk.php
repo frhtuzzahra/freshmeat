@@ -35,7 +35,7 @@ class Produk extends CI_Controller
 					'nama' => $produk->nama_produk,
 					'kategori' => $produk->kategori,
 					'satuan' => $produk->satuan,
-					'harga_jual' => $produk->harga_jual,
+					'harga_jual' => "Rp. " . number_format($produk->harga_jual, 0, ',', '.'),
 					'stok' => $produk->stok,
 					'action' => '<button class="btn btn-sm btn-success" onclick="edit(' . $produk->id . ')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove(' . $produk->id . ')">Delete</button>'
 				);
@@ -117,7 +117,7 @@ class Produk extends CI_Controller
 	public function get_nama()
 	{
 		header('Content-type: application/json');
-		$id = 6;
+		$id = $this->input->post('id');
 		echo json_encode($this->produk_model->getNama($id));
 	}
 
@@ -125,7 +125,6 @@ class Produk extends CI_Controller
 	{
 		header('Content-type: application/json');
 		$id = $this->input->post('id');
-		// $id = 11;
 		echo json_encode($this->produk_model->getNamaDetail($id));
 	}
 

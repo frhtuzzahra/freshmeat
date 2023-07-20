@@ -86,7 +86,7 @@
     var readUrl = '<?php echo site_url('transaksi/read') ?>';
     var deleteUrl = '<?php echo site_url('transaksi/delete') ?>';
   </script>
-  <script src="<?php echo base_url('assets/js/laporan_penjualan.min.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/unminify/laporan_penjualan.js') ?>"></script>
 </body>
 
 </html>

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laporan Stok Keluar</title>
+    <title>Laporan Transaksi</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
@@ -21,38 +21,54 @@
             <div class="container">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h1 class="m-2 text-dark text-center">Laporan Stok Keluar</h1>
+                        <h1 class="m-2 text-dark text-center">Laporan Transaksi</h1>
                         <div class="my-3 text-center">
-                            <h3><?= $label ?></h3>
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
                             <p>Elang Freshmeat <br> Jln. Karang Anyar, Banjarbaru</p>
+                            <h4>Nota : <Strong><?= $nota ?></Strong> | Kasir : <?= $kasir ?></h4>
                         </div>
                     </div>
                     <div class="card-body">
                         <table class="table w-100 table-bordered table-hover" id="laporan_penjualan">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
-                                    <th>Tanggal</th>
-                                    <th>Barcode</th>
+                                    <th>No</th>
                                     <th>Nama Produk</th>
-                                    <th>Jumlah</th>
-                                    <th>Keterangan</th>
+                                    <th>Harga</th>
+                                    <th>Qty</th>
+                                    <th>Diskon</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php $i = 1;
-                                foreach ($stok_keluar as $sk) : ?>
+                                <?php
+                                $no = 1;
+                                foreach ($produk as $key) : ?>
+
                                     <tr>
-                                        <td><?php echo $i++ ?></td>
-                                        <td><?php echo $sk->tanggal ?></td>
-                                        <td><?php echo $sk->barcode ?></td>
-                                        <td><?php echo $sk->nama_produk ?></td>
-                                        <td><?php echo $sk->jumlah ?></td>
-                                        <td><?php echo $sk->keterangan ?></td>
+                                        <td><?= $no++ ?></td>
+                                        <td><?= $key->nama_produk ?></td>
+                                        <td>Rp. <?= number_format($key->harga_jual, 0, ',', '.') ?></td>
+                                        <td class="text-right"><?= $key->total ?></td>
+                                        <td class="text-right"><?= $diskon ?>%</td>
+                                        <td class="text-right">Rp. <?= number_format($key->harga_jual * $key->total, 0, ',', '.') ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td>Diskon</td>
+                                    <td class="text-right" colspan="5">
+                                        <h4>Rp. <?= number_format($total_diskon = $total * $diskon / 100, 0, ',', '.') ?></h4>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Total</td>
+                                    <td class="text-right" colspan="5">
+                                        <h4>Rp. <?= number_format($total - $total_diskon, 0, ',', '.') ?></h4>
+                                    </td>
+                                </tr>
+                            </tfoot>
                         </table>
                     </div>
                 </div>

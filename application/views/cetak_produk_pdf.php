@@ -19,7 +19,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container">
-                <div class="card">
+                <div class="card mt-5">
                     <div class="card-header">
                         <h1 class="m-2 text-dark text-center">Laporan Produk</h1>
                         <div class="my-3 text-center">
@@ -45,13 +45,13 @@
                                 <?php $i = 1;
                                 foreach ($produk as $p) : ?>
                                     <tr>
-                                        <td><?php echo $i++ ?></td>
-                                        <td><?php echo $p->barcode ?></td>
-                                        <td><?php echo $p->nama_produk ?></td>
-                                        <td><?php echo $p->satuan ?></td>
-                                        <td><?php echo $p->kategori ?></td>
-                                        <td><?php echo $p->harga_jual ?></td>
-                                        <td><?php echo $p->stok ?></td>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= $p->barcode ?></td>
+                                        <td><?= $p->nama_produk ?></td>
+                                        <td><?= $p->satuan ?></td>
+                                        <td><?= $p->kategori ?></td>
+                                        <td>Rp. <?= number_format($p->harga_jual, 0, ',', '.') ?></td>
+                                        <td><?= $p->stok ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>

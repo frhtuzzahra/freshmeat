@@ -74,7 +74,10 @@
                     <div class="mb-0">
                       <b class="mr-2">Nota</b> <span id="nota"></span>
                     </div>
-                    <span id="total" style="font-size: 80px; line-height: 1" class="text-danger">0</span>
+                    <p style="font-size: 80px; line-height: 1" class="text-danger">
+                      Rp.
+                      <span id="total">0</span>
+                    </p>
                   </div>
                 </div>
               </div>
@@ -126,7 +129,7 @@
             </div>
             <div class="form-group">
               <label>Diskon</label>
-              <input placeholder="Diskon" type="number" class="form-control" onkeyup="kembalian()" name="diskon">
+              <input placeholder="Diskon" type="number" class="form-control" onkeyup="kembalian()" name="diskon" value="0">
             </div>
             <div class="form-group">
               <b>Total Bayar:</b> <span class="total_bayar"></span>

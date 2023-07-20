@@ -102,7 +102,7 @@ class Transaksi_model extends CI_Model
 
 	public function getAll($id)
 	{
-		$this->db->select('transaksi.nota, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, pengguna.nama as kasir');
+		$this->db->select('transaksi.nota, transaksi.tanggal, transaksi.diskon, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, pengguna.nama as kasir');
 		$this->db->from('transaksi');
 		$this->db->join('pengguna', 'transaksi.kasir = pengguna.id');
 		$this->db->where('transaksi.id', $id);
@@ -112,7 +112,7 @@ class Transaksi_model extends CI_Model
 	public function getName($barcode)
 	{
 		foreach ($barcode as $b) {
-			$this->db->select('nama_produk, harga');
+			$this->db->select('nama_produk, harga_jual');
 			$this->db->where('id', $b);
 			$data[] = $this->db->get('produk')->row();
 		}

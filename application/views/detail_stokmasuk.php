@@ -49,11 +49,11 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>ID Stok Masuk</th>
+                                        <th>ID SM</th>
                                         <th>Nama Produk</th>
                                         <th>Tanggal</th>
                                         <th>Harga Jual</th>
-                                        <th>Jumlah</th>
+                                        <th>Qty</th>
                                         <th>DP</th>
                                         <th>Kekurangan</th>
                                         <th>Keterangan</th>
@@ -89,8 +89,8 @@
                             <input id="tanggal" type="text" class="form-control" placeholder="Tanggal" name="tanggal" required>
                         </div>
                         <div class="form-group">
-                            <label>DP</label>
-                            <input id="dp" type="text" class="form-control" placeholder="DP" name="dp" required>
+                            <label>Uang DP</label>
+                            <input id="dp" type="number" class="form-control" placeholder="Uang" name="dp" required>
                         </div>
                         <div class="form-group">
                             <label>Keterangan</label>

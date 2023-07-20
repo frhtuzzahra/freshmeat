@@ -60,11 +60,9 @@
                     <th>Tanggal</th>
                     <th>Barcode</th>
                     <th>Nama Produk</th>
-                    <th>Jumlah</th>
+                    <th>Qty</th>
                     <th>Harga</th>
                     <th>Total</th>
-                    <th>Status</th>
-                    <th>Keterangan</th>
                     <th>Supplier</th>
                   </tr>
                 </thead>

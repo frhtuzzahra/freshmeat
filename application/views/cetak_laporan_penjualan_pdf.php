@@ -19,7 +19,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container">
-                <div class="card">
+                <div class="card mt-5">
                     <div class="card-header">
                         <h1 class="m-2 text-dark text-center">Laporan Penjualan</h1>
                         <div class="my-3 text-center">
@@ -44,12 +44,12 @@
                                 <?php $i = 1;
                                 foreach ($laporan_penjualan as $penjualan) : ?>
                                     <tr>
-                                        <td><?php echo $i++ ?></td>
-                                        <td><?php echo $penjualan->tanggal ?></td>
-                                        <td><?php echo $penjualan->nota ?></td>
-                                        <td><?php echo $penjualan->nama_produk ?></td>
-                                        <td><?php echo $penjualan->nama ?></td>
-                                        <td class="text-right"><?php echo number_format($penjualan->total_bayar, 0, ',', '.') ?></td>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= $penjualan->tanggal ?></td>
+                                        <td><?= $penjualan->nota ?></td>
+                                        <td><?= $penjualan->nama_produk ?></td>
+                                        <td><?= $penjualan->nama ?></td>
+                                        <td class="text-right">Rp. <?= number_format($penjualan->total_bayar, 0, ',', '.') ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
@@ -59,7 +59,7 @@
                                         <h4>Total</h4>
                                     </td>
                                     <td colspan="5">
-                                        <h4 class="text-right"> Rp. <?php echo number_format($penjualan->bayar, 0, ',', '.') ?></h4>
+                                        <h4 class="text-right"> Rp. <?= number_format($penjualan->bayar, 0, ',', '.') ?></h4>
                                     </td>
                                 </tr>
                             </tfoot>

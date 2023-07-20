@@ -37,11 +37,11 @@ class Detail_stok_masuk extends CI_Controller
                 $data[] = array(
                     'id_stokmasuk' => $detail_stokmasuk->id_stokmasuk,
                     'nama_produk' => $detail_stokmasuk->nama_produk,
-                    'harga_jual' => $detail_stokmasuk->harga_jual,
+                    'harga_jual' => "Rp. " . number_format($detail_stokmasuk->harga_jual, 0, ',', '.'),
                     'tanggal' => $detail_stokmasuk->tanggal,
                     'jumlah' => $detail_stokmasuk->jumlah,
-                    'dp' => $detail_stokmasuk->dp,
-                    'kekurangan' => $detail_stokmasuk->kekurangan,
+                    'dp' => "Rp. " . number_format($detail_stokmasuk->dp, 0, ',', '.'),
+                    'kekurangan' => "Rp. " . number_format($detail_stokmasuk->kekurangan, 0, ',', '.'),
                     'keterangan' => $detail_stokmasuk->keterangan
                 );
             }

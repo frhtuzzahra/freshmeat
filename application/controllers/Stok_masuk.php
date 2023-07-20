@@ -39,8 +39,8 @@ class Stok_masuk extends CI_Controller
 					'tanggal' => $tanggal->format('d-m-Y H:i:s'),
 					'barcode' => $stok_masuk->barcode,
 					'nama_produk' => $stok_masuk->nama_produk,
-					'harga' => $stok_masuk->harga,
-					'total' => $stok_masuk->harga * $stok_masuk->jumlah,
+					'harga' => "Rp. " . number_format($stok_masuk->harga, 0, ',', '.'),
+					'total' => "Rp. " . number_format($stok_masuk->harga * $stok_masuk->jumlah, 0, ',', '.'),
 					'jumlah' => $stok_masuk->jumlah,
 					'status' => ($stok_masuk->status == 'Lunas') ? '<button type="button" class="btn btn-sm btn-success">' . $stok_masuk->status . '</button>' : '
 					<div class="btn-group">
@@ -149,8 +149,8 @@ class Stok_masuk extends CI_Controller
 					'barcode' => $stok_masuk->barcode,
 					'nama_produk' => $stok_masuk->nama_produk,
 					'jumlah' => $stok_masuk->jumlah,
-					'harga_jual' => $stok_masuk->harga_jual,
-					'total' => $stok_masuk->harga_jual * $stok_masuk->jumlah,
+					'harga_jual' => "Rp. " . number_format($stok_masuk->harga_jual, 0, ',', '.'),
+					'total' => "Rp. " . number_format($stok_masuk->harga_jual * $stok_masuk->jumlah, 0, ',', '.'),
 					'status' => $stok_masuk->status,
 					'keterangan' => $stok_masuk->keterangan,
 					'supplier' => $stok_masuk->supplier

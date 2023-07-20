@@ -19,7 +19,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container">
-                <div class="card">
+                <div class="card mt-5">
                     <div class="card-header">
                         <h1 class="m-2 text-dark text-center">Laporan Stok Masuk</h1>
                         <div class="my-3 text-center">
@@ -36,28 +36,24 @@
                                     <th>Tanggal</th>
                                     <th>Barcode</th>
                                     <th>Nama Produk</th>
-                                    <th>Jumlah</th>
+                                    <th>Qty</th>
                                     <th>Harga</th>
-                                    <th>Total</th>
-                                    <th>Status</th>
-                                    <th>Keterangan</th>
                                     <th>Suplier</th>
+                                    <th>Total</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1;
                                 foreach ($stok_masuk as $sm) : ?>
                                     <tr>
-                                        <td><?php echo $i++ ?></td>
-                                        <td><?php echo $sm->tanggal ?></td>
-                                        <td><?php echo $sm->barcode ?></td>
-                                        <td><?php echo $sm->nama_produk ?></td>
-                                        <td><?php echo $sm->jumlah ?></td>
-                                        <td><?php echo $sm->harga_jual ?></td>
-                                        <td><?php echo $sm->total ?></td>
-                                        <td><?php echo $sm->status ?></td>
-                                        <td><?php echo $sm->keterangan ?></td>
-                                        <td><?php echo $sm->supplier ?></td>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= $sm->tanggal ?></td>
+                                        <td><?= $sm->barcode ?></td>
+                                        <td><?= $sm->nama_produk ?></td>
+                                        <td><?= $sm->jumlah ?></td>
+                                        <td>Rp. <?= number_format($sm->harga_jual, 0, ',', '.') ?></td>
+                                        <td><?= $sm->supplier ?></td>
+                                        <td class="text-right">Rp. <?= number_format($sm->total, 0, ',', '.') ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
@@ -67,7 +63,7 @@
                                         <h4>Total</h4>
                                     </td>
                                     <td colspan="9">
-                                        <h4 class="text-right"> Rp. <?php echo number_format($sm->total_semua, 0, ',', '.') ?></h4>
+                                        <h4 class="text-right"> Rp. <?= number_format($sm->total_semua, 0, ',', '.') ?></h4>
                                     </td>
                                 </tr>
                             </tfoot>

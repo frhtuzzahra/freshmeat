@@ -1,9 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>Cetak</title>
 </head>
+
 <body>
 	<div style="width: 500px; margin: auto;">
 		<br>
@@ -24,7 +26,7 @@
 					<td width="10%" align="right"></td>
 					<td align="right" width="17%"><?php echo $kasir ?></td>
 				</tr>
-				<?php foreach ($produk as $key): ?>
+				<?php foreach ($produk as $key) : ?>
 					<tr>
 						<td><?php echo $key->nama_produk ?></td>
 						<td></td>
@@ -80,4 +82,5 @@
 		window.print()
 	</script>
 </body>
+
 </html>

@@ -78,7 +78,7 @@ function checkStok() {
                     transaksi.row.add([
                         dataBarcode,
                         nama_produk,
-                        harga,
+                        `Rp. ${harga}`,
                         jumlah,
                         `<button name="${barcode}" class="btn btn-sm btn-danger" onclick="remove('${barcode}')">Hapus</btn>`]).draw();
                     $("#total").html(total + harga * jumlah);
@@ -158,7 +158,7 @@ function add() {
         success: res => {
             if (isCetak) {
                 Swal.fire("Sukses", "Sukses Membayar", "success").
-                    then(() => window.location.href = `${cetakUrl}${res}`)
+                    then(() => window.location.href = `${cetakUrl}${res}`,'_blank')
             } else {
                 Swal.fire("Sukses", "Sukses Membayar", "success").
                     then(() => window.location.reload())
@@ -174,7 +174,8 @@ function kembalian() {
     let total = $("#total").html(),
         jumlah_uang = $('[name="jumlah_uang"').val(),
         diskon = $('[name="diskon"]').val();
-    $(".kembalian").html(jumlah_uang - total - diskon);
+        total_diskon = (total * diskon)/100;
+    $(".kembalian").html(jumlah_uang - total + total_diskon);
     checkUang()
 }
 $("#barcode").select2({

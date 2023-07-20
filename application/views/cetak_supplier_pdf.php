@@ -19,7 +19,7 @@
         <!-- Main content -->
         <section class="content">
             <div class="container">
-                <div class="card">
+                <div class="card mt-5">
                     <div class="card-header">
                         <h1 class="m-2 text-dark text-center">Laporan Supplier</h1>
                         <div class="my-3 text-center">
