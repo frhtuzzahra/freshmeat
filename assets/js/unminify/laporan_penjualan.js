@@ -8,7 +8,7 @@ let laporan_penjualan = $("#laporan_penjualan").DataTable( {
         targets: 0
     }],
     order:[
-        [1, "asc"]],
+        [1, "desc"]],
         columns:[ {
             data: null
         }

@@ -16,11 +16,12 @@ let detail_stokmasuk = $("#detail_stokmasuk").DataTable({
         { data: "id_stokmasuk" },
         { data: "nama_produk" },
         { data: "tanggal" },
-        { data: "harga_jual" },
+        { data: "harga" },
         { data: "jumlah" },
         { data: "dp" },
         { data: "kekurangan" },
-        { data: "keterangan" }
+        { data: "keterangan" },
+        { data: "action" }
     ]
 });
 
@@ -45,10 +46,62 @@ function addData() {
     })
 }
 
+function editData() {
+    $.ajax({
+        url: editUrl,
+        type: "post",
+        dataType: "json",
+        data: $("#form").serialize(),
+        success: () => {
+            $(".modal").modal("hide");
+            Swal.fire("Sukses", "Sukses Mengedit Data", "success");
+            reloadTable();
+        },
+        error: err => {
+            console.log(err)
+        }
+    })
+}
+
 function add() {
     url = "add";
     $(".modal-title").html("Add Data");
     $('.modal button[type="submit"]').html("Add");
+}
+
+function edit(id) {
+    $.ajax({
+        url: getIdDetailMasukUrl,
+        type: "post",
+        dataType: "json",
+        data: {
+            id: id
+        },
+        success: res => {
+            $('#isiStokMasuk').addClass('d-none');
+            $('#kekurangan').removeAttr('readonly');
+            $('#dp').attr('readonly', 'readonly');
+
+            $('[name="id_detailmasuk"]').val(res.id);
+            $('[name="id_stokmasuk"]').val(res.id_stokmasuk);
+            $('[name="id"]').val(res.id_stokmasuk);
+            $('[name="nama_produk"]').val(res.nama_produk);
+            $('[name="total"]').val(res.total);
+            $('[name="tanggal"]').val(res.tanggal);
+            $('[name="harga"]').val(res.harga);
+            $('[name="jumlah"]').val(res.jumlah);
+            $('[name="dp"]').val(res.dp);
+            $('[name="kekurangan"]').val(res.kekurangan);
+            $('[name="keterangan"]').val(res.keterangan);
+            $(".modal").modal("show");
+            $(".modal-title").html("Lunas");
+            $('.modal button[type="submit"]').html("Lunas");
+            url = "edit";
+        },
+        error: err => {
+            console.log(err)
+        }
+    });
 }
 
 function getNama() {
@@ -60,13 +113,18 @@ function getNama() {
             id: $("#id").val()
         },
         success: res => {
-            $("#nama_produk").html(res.nama_produk);
-            checkEmpty()
+            $("#nama_produk").val(res.nama_produk);
+            $("#total").val(res.total);
         },
         error: err => {
             console.log(err)
         }
     })
+}
+
+function kekurangan(){
+    let kekurangan = $("#total").val() - $('[name="dp"]').val();
+    $("#kekurangan").val(kekurangan);
 }
 
 detail_stokmasuk.on("order.dt search.dt", () => {
@@ -84,7 +142,7 @@ $("#form").validate({
         err.addClass("invalid-feedback"), el.closest(".form-group").append(err)
     },
     submitHandler: () => {
-        "edit" == url ? updateData() : addData()
+        "edit" == url ? editData() : addData()
     }
 });
 
@@ -109,6 +167,9 @@ $("#tanggal").datetimepicker({
 $(".modal").on("hidden.bs.modal", () => {
     $("#form")[0].reset();
     $("#form").validate().resetForm();
+    $('#isiStokMasuk').removeClass('d-none');
+    $('#kekurangan').attr('readonly', 'readonly');
+    $('#dp').removeAttr('readonly');
 });
 $(".modal").on("show.bs.modal", () => {
     let a = moment().format("D-MM-Y H:mm:ss");

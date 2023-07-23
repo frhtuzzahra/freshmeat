@@ -36,22 +36,13 @@ class Stok_masuk extends CI_Controller
 			foreach ($this->stok_masuk_model->read()->result() as $stok_masuk) {
 				$tanggal = new DateTime($stok_masuk->tanggal);
 				$data[] = array(
-					'tanggal' => $tanggal->format('d-m-Y H:i:s'),
+					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'barcode' => $stok_masuk->barcode,
 					'nama_produk' => $stok_masuk->nama_produk,
 					'harga' => "Rp. " . number_format($stok_masuk->harga, 0, ',', '.'),
 					'total' => "Rp. " . number_format($stok_masuk->harga * $stok_masuk->jumlah, 0, ',', '.'),
 					'jumlah' => $stok_masuk->jumlah,
-					'status' => ($stok_masuk->status == 'Lunas') ? '<button type="button" class="btn btn-sm btn-success">' . $stok_masuk->status . '</button>' : '
-					<div class="btn-group">
-					<button type="button" class="btn btn-sm btn-danger">' . $stok_masuk->status . '</button>
-                    <button type="button" class="btn btn-sm btn-danger dropdown-toggle dropdown-hover dropdown-icon" data-toggle="dropdown">
-                      <span class="sr-only">Toggle Dropdown</span>
-                    </button>
-                    <div class="dropdown-menu" role="menu">
-					<button class="dropdown-item" onclick="update(' . $stok_masuk->id . ')">Lunas</button>
-                    </div>
-					</div>',
+					'status' => ($stok_masuk->status == 'Lunas') ? '<span class="badge badge-success">' . $stok_masuk->status . '</span>' : '<span class="badge badge-danger">' . $stok_masuk->status . '</span>',
 					'keterangan' => $stok_masuk->keterangan,
 				);
 			}
@@ -120,15 +111,6 @@ class Stok_masuk extends CI_Controller
 		}
 	}
 
-	// public function get_barcode()
-	// {
-	// 	$barcode = $this->input->post('barcode');
-	// 	$kategori = $this->stok_masuk_model->getKategori($barcode);
-	// 	if ($kategori->row()) {
-	// 		echo json_encode($kategori->row());
-	// 	}
-	// }
-
 	public function get_stok_masuk()
 	{
 		$id = $this->input->post('id');
@@ -145,7 +127,7 @@ class Stok_masuk extends CI_Controller
 			foreach ($this->stok_masuk_model->laporan()->result() as $stok_masuk) {
 				$tanggal = new DateTime($stok_masuk->tanggal);
 				$data[] = array(
-					'tanggal' => $tanggal->format('d-m-Y H:i:s'),
+					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'barcode' => $stok_masuk->barcode,
 					'nama_produk' => $stok_masuk->nama_produk,
 					'jumlah' => $stok_masuk->jumlah,

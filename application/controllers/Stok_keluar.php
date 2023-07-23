@@ -32,7 +32,7 @@ class Stok_keluar extends CI_Controller
 			foreach ($this->stok_keluar_model->read()->result() as $stok_keluar) {
 				$tanggal = new DateTime($stok_keluar->tanggal);
 				$data[] = array(
-					'tanggal' => $tanggal->format('d-m-Y H:i:s'),
+					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'barcode' => $stok_keluar->barcode,
 					'nama_produk' => $stok_keluar->nama_produk,
 					'jumlah' => $stok_keluar->jumlah,

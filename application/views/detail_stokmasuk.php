@@ -42,7 +42,7 @@
                 <div class="container-fluid">
                     <div class="card">
                         <div class="card-header">
-                            <button class="btn btn-success" data-toggle="modal" data-target="#modal" onclick="add()">Add</button>
+                            <button class="btn btn-success" data-toggle="modal" data-target="#modal">Add</button>
                         </div>
                         <div class="card-body">
                             <table class="table w-100 table-bordered table-hover" id="detail_stokmasuk">
@@ -52,11 +52,12 @@
                                         <th>ID SM</th>
                                         <th>Nama Produk</th>
                                         <th>Tanggal</th>
-                                        <th>Harga Jual</th>
+                                        <th>Harga</th>
                                         <th>Qty</th>
                                         <th>DP</th>
                                         <th>Kekurangan</th>
                                         <th>Keterangan</th>
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                             </table>
@@ -80,9 +81,19 @@
                 </div>
                 <div class="modal-body">
                     <form id="form">
-                        <div class="form-group">
+                        <input type="hidden" name="id_detailmasuk">
+                        <input type="hidden" name="id_stokmasuk">
+                        <div class="form-group" id="isiStokMasuk">
                             <label for="id">ID Stok Masuk</label>
-                            <select name="id" id="id" class="form-control select2" required></select>
+                            <select name="id" id="id" class="form-control select2" required onchange="getNama()"></select>
+                        </div>
+                        <div class="form-group">
+                            <label>Nama Produk</label>
+                            <input id="nama_produk" name="nama_produk" type="text" class="form-control" placeholder="Nama Produk" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Total</label>
+                            <input id="total" name="total" type="text" class="form-control" placeholder="Total" readonly>
                         </div>
                         <div class="form-group">
                             <label>Tanggal</label>
@@ -90,7 +101,11 @@
                         </div>
                         <div class="form-group">
                             <label>Uang DP</label>
-                            <input id="dp" type="number" class="form-control" placeholder="Uang" name="dp" required>
+                            <input id="dp" type="number" class="form-control" placeholder="Uang" name="dp" onkeyup="kekurangan()">
+                        </div>
+                        <div class="form-group">
+                            <label>Kekurangan</label>
+                            <input id="kekurangan" type="number" class="form-control" value="0" name="kekurangan" readonly>
                         </div>
                         <div class="form-group">
                             <label>Keterangan</label>
@@ -103,6 +118,7 @@
             </div>
         </div>
     </div>
+
     <!-- ./wrapper -->
     <?php $this->load->view('includes/footer'); ?>
     <?php $this->load->view('partials/footer'); ?>
@@ -115,9 +131,11 @@
     <script src="<?php echo base_url('assets/vendor/adminlte/plugins/select2/js/select2.min.js') ?>"></script>
     <script>
         var readUrl = '<?php echo site_url('detail_stok_masuk/read') ?>';
+        var editUrl = '<?php echo site_url('detail_stok_masuk/edit') ?>';
         var addUrl = '<?php echo site_url('detail_stok_masuk/add') ?>';
         var getIdStokMasukUrl = '<?php echo site_url('stok_masuk/get_IdStokMasuk') ?>';
         var produkGetNamaUrl = '<?php echo site_url('produk/get_namaDetail') ?>';
+        var getIdDetailMasukUrl = '<?php echo site_url('detail_stok_masuk/getIdDetailMasuk') ?>';
     </script>
     <script src="<?php echo base_url('assets/js/unminify/detail_stokmasuk.js') ?>"></script>
 </body>

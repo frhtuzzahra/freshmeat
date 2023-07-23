@@ -20,13 +20,13 @@ class Transaksi extends CI_Controller
 
 	public function read()
 	{
-		// header('Content-type: application/json');
+		header('Content-type: application/json');
 		if ($this->transaksi_model->read()->num_rows() > 0) {
 			foreach ($this->transaksi_model->read()->result() as $transaksi) {
 				$barcode = explode(',', $transaksi->barcode);
 				$tanggal = new DateTime($transaksi->tanggal);
 				$data[] = array(
-					'tanggal' => $tanggal->format('d-m-Y H:i:s'),
+					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'nama_produk' => '<table>' . $this->transaksi_model->getProduk($barcode, $transaksi->qty) . '</table>',
 					'total_bayar' => "Rp. " . number_format($transaksi->total_bayar, 0, ',', '.'), // number_format($number, $decimals, $dec_point, $thousands_sep
 					'jumlah_uang' => "Rp. " . number_format($transaksi->jumlah_uang, 0, ',', '.'),

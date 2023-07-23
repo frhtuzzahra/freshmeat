@@ -8,7 +8,7 @@ let stok_keluar = $("#stok_keluar").DataTable({
         targets: 0
     }],
     order: [
-        [1, "asc"]
+        [1, "desc"]
     ],
     columns: [{
         data: null

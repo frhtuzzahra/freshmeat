@@ -8,7 +8,7 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
         targets: 0
     }],
     order: [
-        [1, "asc"]
+        [1, "desc"]
     ],
     columns: [{
         data: null

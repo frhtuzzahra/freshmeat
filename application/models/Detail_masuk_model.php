@@ -35,13 +35,14 @@ class Detail_masuk_model extends CI_Model
     public function read()
     {
         $this->db->select('
+        detail_stokmasuk.id,
         detail_stokmasuk.id_stokmasuk,
 	    produk.nama_produk,
-	    produk.harga_jual,
+	    produk.harga,
 	    detail_stokmasuk.tanggal,
         stok_masuk.jumlah,
 	    detail_stokmasuk.dp,
-	    ((produk.harga_jual * stok_masuk.jumlah) - detail_stokmasuk.dp) AS kekurangan,
+	    ((produk.harga * stok_masuk.jumlah) - detail_stokmasuk.dp) AS kekurangan,
 	    detail_stokmasuk.keterangan 
         ');
         $this->db->from($this->table);
@@ -75,12 +76,6 @@ class Detail_masuk_model extends CI_Model
 		where stok_masuk.status = 'lunas'";
 
         return $this->db->query($query);
-        // $this->db->select('stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan,(stok_masuk.jumlah * produk.harga) AS total, produk.barcode, produk.nama_produk, produk.harga_jual, supplier.nama as supplier');
-        // $this->db->from($this->table);
-        // $this->db->join('produk', 'produk.id = stok_masuk.barcode');
-        // $this->db->join('supplier', 'supplier.id = stok_masuk.supplier', 'left outer');
-        // $this->db->order_by('stok_masuk.tanggal', 'asc');
-        // return $this->db->get();
     }
 
     public function getStokMasukWithPeriode($tgl_awal, $tgl_akhir)
@@ -110,16 +105,6 @@ class Detail_masuk_model extends CI_Model
 		stok_masuk.tanggal ASC
 		";
 
-
-        // $this->db->select('stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, (stok_masuk.jumlah * produk.harga) AS total, produk.barcode, produk.nama_produk, produk.harga_jual, supplier.nama as supplier');
-        // $this->db->from($this->table);
-        // $this->db->join('produk', 'produk.id = stok_masuk.barcode');
-        // $this->db->join('supplier', 'supplier.id = stok_masuk.supplier', 'left outer');
-        // $this->db->where('stok_masuk.tanggal >=', $tgl_awal);
-        // $this->db->where('stok_masuk.tanggal <=', $tgl_akhir);
-        // $this->db->order_by('stok_masuk.tanggal', 'asc');
-        // return $this->db->get();
-
         return $this->db->query($query);
     }
 
@@ -130,6 +115,27 @@ class Detail_masuk_model extends CI_Model
         $this->db->join('produk', 'produk.id = stok_masuk.barcode');
         $this->db->join('supplier', 'supplier.id = stok_masuk.supplier', 'left outer');
         $this->db->order_by('stok_masuk.tanggal', 'asc');
+        return $this->db->get();
+    }
+
+    public function getIdDetailMasuk($id)
+    {
+        $this->db->select('
+        detail_stokmasuk.id,
+        detail_stokmasuk.id_stokmasuk,
+	    produk.nama_produk,
+        (stok_masuk.jumlah * produk.harga) AS total,
+	    produk.harga,
+	    detail_stokmasuk.tanggal,
+        stok_masuk.jumlah,
+	    detail_stokmasuk.dp,
+	    ((produk.harga * stok_masuk.jumlah) - detail_stokmasuk.dp) AS kekurangan,
+	    detail_stokmasuk.keterangan 
+        ');
+        $this->db->from($this->table);
+        $this->db->join('stok_masuk', 'stok_masuk.id = detail_stokmasuk.id_stokmasuk');
+        $this->db->join('produk', 'produk.id = stok_masuk.barcode');
+        $this->db->where('detail_stokmasuk.id', $id);
         return $this->db->get();
     }
 

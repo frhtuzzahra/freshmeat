@@ -58,7 +58,7 @@ class Produk_model extends CI_Model
 
 	public function getNamaDetail($id)
 	{
-		$this->db->select('produk.nama_produk');
+		$this->db->select('produk.nama_produk, (stok_masuk.jumlah * produk.harga) AS total');
 		$this->db->from('stok_masuk');
 		$this->db->join('produk', 'stok_masuk.barcode = produk.id');
 		$this->db->where('stok_masuk.id', $id);

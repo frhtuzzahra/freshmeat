@@ -37,12 +37,13 @@ class Detail_stok_masuk extends CI_Controller
                 $data[] = array(
                     'id_stokmasuk' => $detail_stokmasuk->id_stokmasuk,
                     'nama_produk' => $detail_stokmasuk->nama_produk,
-                    'harga_jual' => "Rp. " . number_format($detail_stokmasuk->harga_jual, 0, ',', '.'),
+                    'harga' => "Rp. " . number_format($detail_stokmasuk->harga, 0, ',', '.'),
                     'tanggal' => $detail_stokmasuk->tanggal,
                     'jumlah' => $detail_stokmasuk->jumlah,
                     'dp' => "Rp. " . number_format($detail_stokmasuk->dp, 0, ',', '.'),
                     'kekurangan' => "Rp. " . number_format($detail_stokmasuk->kekurangan, 0, ',', '.'),
-                    'keterangan' => $detail_stokmasuk->keterangan
+                    'keterangan' => $detail_stokmasuk->keterangan,
+                    'action' => '<button class="btn btn-danger btn-sm" onclick="edit(' . $detail_stokmasuk->id . ')">Lunas</button>'
                 );
             }
         } else {
@@ -52,6 +53,16 @@ class Detail_stok_masuk extends CI_Controller
             'data' => $data
         );
         echo json_encode($detail_stokmasuk);
+    }
+
+    public function getIdDetailMasuk()
+    {
+        header('Content-type: application/json');
+        $id = $this->input->post('id');
+        $detail_masuk = $this->detail_masuk_model->getIdDetailMasuk($id);
+        if ($detail_masuk->row()) {
+            echo json_encode($detail_masuk->row());
+        }
     }
 
     public function add()
@@ -79,14 +90,24 @@ class Detail_stok_masuk extends CI_Controller
         }
     }
 
-    // public function get_barcode()
-    // {
-    // 	$barcode = $this->input->post('barcode');
-    // 	$kategori = $this->stok_masuk_model->getKategori($barcode);
-    // 	if ($kategori->row()) {
-    // 		echo json_encode($kategori->row());
-    // 	}
-    // }
+    public function edit()
+    {
+        $this->load->model('stok_masuk_model');
+        $id = $this->input->post('id_detailmasuk');
+        $id_stokmasuk = $this->input->post('id_stokmasuk');
+        $data2 = array(
+            'status' => "Lunas",
+        );
+        $data = array(
+            'kekurangan' => $this->input->post('kekurangan'),
+            'keterangan' => $this->input->post('keterangan')
+        );
+        if ($this->stok_masuk_model->update($id_stokmasuk, $data2)) {
+            if ($this->detail_masuk_model->update($id, $data)) {
+                echo json_encode('sukses');
+            }
+        }
+    }
 
     public function get_stok_masuk()
     {
