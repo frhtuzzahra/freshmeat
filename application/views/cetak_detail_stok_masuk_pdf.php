@@ -70,7 +70,7 @@
     <script src="<?php echo base_url('assets/vendor/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
     <script>
-        // window.print();
+        window.print();
     </script>
 </body>
 

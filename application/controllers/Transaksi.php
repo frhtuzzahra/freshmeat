@@ -87,7 +87,7 @@ class Transaksi extends CI_Controller
 		$barcode = explode(',', $produk->barcode);
 		$qty = explode(',', $produk->qty);
 
-		$produk->tanggal = $tanggal->format('d m Y H:i:s');
+		$produk->tanggal = $tanggal->format('d-m-Y H:i:s');
 
 		$dataProduk = $this->transaksi_model->getName($barcode);
 		foreach ($dataProduk as $key => $value) {

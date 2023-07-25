@@ -26,6 +26,7 @@
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
                             <p>Elang Freshmeat <br> Jln. Karang Anyar, Banjarbaru</p>
                             <h4>Nota : <Strong><?= $nota ?></Strong> | Kasir : <?= $kasir ?></h4>
+                            <h4>Tanggal : <?= $tanggal ?></h4>
                         </div>
                     </div>
                     <div class="card-body">
