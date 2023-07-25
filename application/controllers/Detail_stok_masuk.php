@@ -13,6 +13,28 @@ class Detail_stok_masuk extends CI_Controller
         $this->load->model('detail_masuk_model');
     }
 
+    public function cetak()
+    {
+        $tgl_awal = $this->input->post('tgl_awal');
+        $tgl_akhir = $this->input->post('tgl_akhir');
+
+        // header('Content-type: application/json');
+        $this->load->model('detail_masuk_model', 'detail_masuk');
+        if (empty($tgl_awal) || empty($tgl_akhir)) {
+            $data['detail_masuk'] = $this->detail_masuk->laporan()->result();
+            $data['label'] = "Data Semua Detail Stok Masuk";
+        } else {
+            $data['detail_masuk'] = $this->detail_masuk->getDetailMasukWithPeriode($tgl_awal, $tgl_akhir)->result();
+            $tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+            $tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+            $label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
+            $data['label'] = $label;
+        }
+
+        // echo json_encode($data);
+        $this->load->view('cetak_detail_stok_masuk_pdf', $data);
+    }
+
     public function index()
     {
         $this->load->view('detail_stokmasuk');
