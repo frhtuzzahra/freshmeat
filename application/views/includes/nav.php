@@ -11,6 +11,7 @@
     <li class="nav-item">
       <a href="#" class="nav-link" data-toggle="dropdown">
         <i class="far fa-user"></i>
+        <span class="d-none d-md-inline"><?php echo $this->session->userdata('nama') ?></span>
       </a>
       <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg">
         <a href="<?php echo site_url('auth/logout') ?>" class="dropdown-item">
@@ -19,6 +20,6 @@
       </div>
     </li>
   </ul>
- 
+
 </nav>
 <!-- /.navbar -->

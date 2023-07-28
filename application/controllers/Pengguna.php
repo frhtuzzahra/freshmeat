@@ -1,12 +1,13 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pengguna extends CI_Controller {
+class Pengguna extends CI_Controller
+{
 
 	public function __construct()
 	{
 		parent::__construct();
-		if ($this->session->userdata('status') !== 'login' ) {
+		if ($this->session->userdata('status') !== 'login') {
 			redirect('/');
 		}
 		$this->load->model('pengguna_model');
@@ -25,7 +26,8 @@ class Pengguna extends CI_Controller {
 				$data[] = array(
 					'username' => $pengguna->username,
 					'nama' => $pengguna->nama,
-					'action' => '<button class="btn btn-sm btn-success" onclick="edit('.$pengguna->id.')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove('.$pengguna->id.')">Delete</button>'
+					'role' => ($pengguna->role == 2) ? 'Kasir' : 'Pelanggan',
+					'action' => '<button class="btn btn-sm btn-success" onclick="edit(' . $pengguna->id . ')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove(' . $pengguna->id . ')">Delete</button>'
 				);
 			}
 		} else {
@@ -43,7 +45,7 @@ class Pengguna extends CI_Controller {
 			'username' => $this->input->post('username'),
 			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 			'nama' => $this->input->post('nama'),
-			'role' => '2'
+			'role' => $this->input->post('role')
 		);
 		if ($this->pengguna_model->create($data)) {
 			echo json_encode('sukses');
@@ -66,7 +68,7 @@ class Pengguna extends CI_Controller {
 			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 			'nama' => $this->input->post('nama')
 		);
-		if ($this->pengguna_model->update($id,$data)) {
+		if ($this->pengguna_model->update($id, $data)) {
 			echo json_encode('sukses');
 		}
 	}
@@ -79,7 +81,6 @@ class Pengguna extends CI_Controller {
 			echo json_encode($pengguna->row());
 		}
 	}
-
 }
 
 /* End of file Pengguna.php */

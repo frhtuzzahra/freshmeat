@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Auth extends CI_Controller {
+class Auth extends CI_Controller
+{
 
 	public function __construct()
 	{
@@ -11,7 +12,7 @@ class Auth extends CI_Controller {
 
 	public function login()
 	{
-		if ($this->session->userdata('status') !== 'login' ) {
+		if ($this->session->userdata('status') !== 'login') {
 			if ($this->input->post('username')) {
 				$username = $this->input->post('username');
 				if ($this->auth_model->getUser($username)->num_rows() > 0) {
@@ -23,7 +24,7 @@ class Auth extends CI_Controller {
 							'username' => $data->username,
 							'password' => $data->password,
 							'nama' => $data->nama,
-							'role' => $data->role == '1' ? 'admin' : 'kasir',
+							'role' => $data->role,
 							'status' => 'login',
 							'toko' => $toko
 						);
@@ -48,7 +49,6 @@ class Auth extends CI_Controller {
 		$this->session->sess_destroy();
 		redirect('/');
 	}
-
 }
 
 /* End of file Auth.php */

@@ -1,7 +1,8 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 
-class Pengguna_model extends CI_Model {
+class Pengguna_model extends CI_Model
+{
 
 	private $table = 'pengguna';
 
@@ -12,7 +13,7 @@ class Pengguna_model extends CI_Model {
 
 	public function read()
 	{
-		$this->db->where('role', '2');
+		$this->db->where('role !=', 1);
 		return $this->db->get($this->table);
 	}
 
@@ -35,12 +36,11 @@ class Pengguna_model extends CI_Model {
 		return $this->db->get($this->table);
 	}
 
-	public function search($search="")
+	public function search($search = "")
 	{
 		$this->db->like('kategori', $search);
 		return $this->db->get($this->table)->result();
 	}
-
 }
 
 /* End of file Pengguna_model.php */
