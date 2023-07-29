@@ -1,7 +1,7 @@
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
   <!-- Brand Logo -->
-  <a href="<?php echo site_url('') ?>" class="brand-link text-center">
+  <a href="<?php echo site_url('') ?>" class="brand-link">
     <img src="<?= base_url('assets/images/logofreshmeatnavbar.png') ?>" class="brand-image img-circle elevation-2" style="opacity: .8" alt="Logo">
     <span class="brand-text font-weight-light"><?php echo $this->session->userdata('toko')->nama ?></span>
   </a>

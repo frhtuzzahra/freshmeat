@@ -24,8 +24,6 @@ class Booking extends CI_Controller
 		$tanggal = new DateTime($this->input->post('tanggal'));
 		$barcode = array();
 		foreach ($produk as $produk) {
-			$this->booking_model->removeStok($produk->id, $produk->stok);
-			$this->booking_model->addTerjual($produk->id, $produk->terjual);
 			array_push($barcode, $produk->id);
 		}
 		$pelanggan = $_SESSION['id'];

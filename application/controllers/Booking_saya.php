@@ -31,8 +31,8 @@ class Booking_saya extends CI_Controller
 					'nota' => $booking->nota,
 					'nama_produk' => '<table>' . $this->booking_model->getProduk($barcode, $booking->qty) . '</table>',
 					'total_bayar' => "Rp. " . number_format($booking->total_bayar, 0, ',', '.'),
-					// 'pelanggan' => $booking->pelanggan,
 					'status' => ($booking->status == 'belum') ? '<span class="badge badge-warning">Belum</span>' : '<span class="badge badge-success">Diambil</span>',
+					'action' => '<a class="btn btn-sm btn-success" href="' . site_url('booking_saya/cetak/') . $booking->id . '" target="_blank">Print</a>'
 				);
 			}
 		} else {
@@ -42,6 +42,33 @@ class Booking_saya extends CI_Controller
 			'data' => $data
 		);
 		echo json_encode($booking);
+	}
+
+	public function cetak($id)
+	{
+		$booking = $this->booking_model->getAll($id);
+
+		$tanggal = new DateTime($booking->tanggal);
+		$barcode = explode(',', $booking->barcode);
+		$qty = explode(',', $booking->qty);
+
+		$booking->tanggal = $tanggal->format('d-m-Y H:i:s');
+
+		$dataBooking = $this->booking_model->getName($barcode);
+		foreach ($dataBooking as $key => $value) {
+			$value->total = $qty[$key];
+			$value->harga_jual;
+		}
+
+		$data = array(
+			'produk' => $dataBooking,
+			'total' => $booking->total_bayar,
+			'tanggal' => $booking->tanggal,
+			'nota' => $booking->nota,
+			'status' => ($booking->status == 'belum') ? '<span class="badge badge-warning">Belum</span>' : '<span class="badge badge-success">Diambil</span>',
+		);
+		$this->load->view('cetak_booking_saya_pdf', $data);
+		// var_dump($data);
 	}
 }
 

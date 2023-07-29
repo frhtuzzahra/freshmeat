@@ -49,7 +49,8 @@
                     <th>Kode Booking</th>
                     <th>Nama Produk</th>
                     <th>Total</th>
-                    <th>Keterangan</th>
+                    <th>Status</th>
+                    <th>Action</th>
                   </tr>
                 </thead>
               </table>
@@ -72,7 +73,7 @@
   <script>
     var readUrl = '<?php echo site_url('booking_saya/read') ?>';
   </script>
-  <script src="<?php echo base_url('assets/js/unminify/data_booking.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/unminify/booking_saya.js') ?>"></script>
 </body>
 
 </html>

@@ -31,7 +31,7 @@ class Booking_model extends CI_Model
         $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pelanggan.nama as pelanggan');
         $this->db->from($this->table);
         $this->db->join('pelanggan', 'booking.pelanggan = pelanggan.id', 'left outer');
-
+        $this->db->where('booking.status', 'belum');
         return $this->db->get();
     }
 
@@ -68,36 +68,21 @@ class Booking_model extends CI_Model
         return $this->db->update($this->table, $data);
     }
 
-    public function penjualanBulan($date)
+    public function readById($id)
     {
-        $qty = $this->db->query("SELECT qty FROM transaksi WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$date'")->result();
-        $d = [];
-        $data = [];
-        foreach ($qty as $key) {
-            $d[] = explode(',', $key->qty);
-        }
-        foreach ($d as $key) {
-            $data[] = array_sum($key);
-        }
-        return $data;
-    }
+        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pelanggan.nama as pelanggan');
+        $this->db->from($this->table);
+        $this->db->join('pelanggan', 'booking.pelanggan = pelanggan.id', 'left outer');
+        $this->db->where('booking.id', $id);
 
-    public function transaksiHari($hari)
-    {
-        return $this->db->query("SELECT COUNT(*) AS total FROM transaksi WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$hari'")->row();
-    }
-
-    public function transaksiTerakhir($hari)
-    {
-        return $this->db->query("SELECT transaksi.qty FROM transaksi WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$hari' LIMIT 1")->row();
+        return $this->db->get();
     }
 
     public function getAll($id)
     {
-        $this->db->select('transaksi.nota, transaksi.tanggal, transaksi.diskon, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, pengguna.nama as kasir');
-        $this->db->from('transaksi');
-        $this->db->join('pengguna', 'transaksi.kasir = pengguna.id');
-        $this->db->where('transaksi.id', $id);
+        $this->db->select('booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status');
+        $this->db->from('booking');
+        $this->db->where('booking.id', $id);
         return $this->db->get()->row();
     }
 
@@ -112,5 +97,5 @@ class Booking_model extends CI_Model
     }
 }
 
-/* End of file Transaksi_model.php */
-/* Location: ./application/models/Transaksi_model.php */
+/* End of file booking_model.php */
+/* Location: ./application/models/booking_model.php */

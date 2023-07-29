@@ -49,7 +49,7 @@
                     <th>Kode Booking</th>
                     <th>Nama Produk</th>
                     <th>Total</th>
-                    <th>Keterangan</th>
+                    <th>Status</th>
                   </tr>
                 </thead>
               </table>
@@ -63,35 +63,7 @@
 
   </div>
 
-  <div class="modal fade" id="modaledit">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title">Lunas</h5>
-          <button class="close" data-dismiss="modal">
-            <span>&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form id="formUpdate">
-            <div class="form-group">
-              <p>
-                Ubah status menjadi lunas?
-              </p>
-              <input type="hidden" name="id" id="id">
-              <div class="form-group d-none">
-                <select name="status" class="form-control">
-                  <option value="lunas" selected disabled>Lunas</option>
-                </select>
-              </div>
-            </div>
-            <button class="btn btn-success" type="submit">Ya</button>
-            <button class="btn btn-danger" data-dismiss="modal">Close</button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
+
   <!-- ./wrapper -->
   <?php $this->load->view('includes/footer'); ?>
   <?php $this->load->view('partials/footer'); ?>
@@ -103,6 +75,7 @@
   <script>
     var readUrl = '<?php echo site_url('data_booking/read') ?>';
     var updateUrl = '<?php echo site_url('data_booking/update') ?>';
+    var deleteUrl = '<?php echo site_url('data_booking/delete') ?>';
   </script>
   <script src="<?php echo base_url('assets/js/unminify/data_booking.js') ?>"></script>
 </body>

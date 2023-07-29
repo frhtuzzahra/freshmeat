@@ -106,7 +106,6 @@ class Transaksi extends CI_Controller
 			'kasir' => $produk->kasir
 		);
 		$this->load->view('cetak_transaksi_pdf', $data);
-		// $this->load->view('cetak', $data);
 	}
 
 	public function penjualan_bulan()

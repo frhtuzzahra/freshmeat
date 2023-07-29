@@ -46,10 +46,11 @@ function updateData() {
 function update(id) {
     Swal.fire({
         title: "Update",
-        text: "Update data ini?",
+        text: "Update status booking?",
         type: "warning",
         showCancelButton: true
-    }).then(() => {
+    }).then((result) => {
+        if (result.value) {
         $.ajax({
             url: updateUrl,
             type: "post",
@@ -65,6 +66,10 @@ function update(id) {
                 console.log(a)
             }
         })
+    } else if (result.dismiss === Swal.DismissReason.cancel || result.dismiss === Swal.DismissReason.escape) {
+        console.log("Update data dibatalkan.");
+        return;
+    }
     })
 }
 
@@ -91,23 +96,28 @@ function remove(id) {
         text: "Hapus data ini?",
         type: "warning",
         showCancelButton: true
-    }).then(() => {
-        $.ajax({
-            url: deleteUrl,
-            type: "post",
-            dataType: "json",
-            data: {
-                id: id
-            },
-            success: () => {
-                Swal.fire("Sukses", "Sukses Menghapus Data", "success");
-                reloadTable();
-            },
-            error: () => {
-                console.log(a);
-            }
-        })
-    })
+    }).then((result) => {
+        if (result.value) {
+            $.ajax({
+                url: deleteUrl,
+                type: "post",
+                dataType: "json",
+                data: {
+                    id: id
+                },
+                success: () => {
+                    Swal.fire("Sukses", "Sukses Menghapus Data", "success");
+                    reloadTable();
+                },
+                error: () => {
+                    console.log(a);
+                }
+            })
+        } else if (result.dismiss === Swal.DismissReason.cancel || result.dismiss === Swal.DismissReason.escape) {
+            console.log("Hapus data dibatalkan.");
+            return; 
+        }
+    });
 }
 
 function editData() {

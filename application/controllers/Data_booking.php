@@ -38,8 +38,9 @@ class Data_booking extends CI_Controller
                     </button>
                     <div class="dropdown-menu" role="menu">
 					<button class="dropdown-item" onclick="update(' . $booking->id . ')">Diambil</button>
+					<button class="dropdown-item" onclick="remove(' . $booking->id . ')">Hapus</button>
                     </div>
-					</div>',
+					</div>'
 				);
 			}
 		} else {
@@ -58,6 +59,14 @@ class Data_booking extends CI_Controller
 			'status' => "diambil",
 		);
 		if ($this->booking_model->update($id, $data)) {
+			echo json_encode('sukses');
+		}
+	}
+
+	public function delete()
+	{
+		$id = $this->input->post('id');
+		if ($this->booking_model->delete($id)) {
 			echo json_encode('sukses');
 		}
 	}

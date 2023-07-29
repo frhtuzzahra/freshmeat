@@ -120,7 +120,6 @@
               <b>Total Bayar:</b> <span class="total_bayar"></span>
             </div>
             <button id="add" class="btn btn-success" type="submit" onclick="bayar()">Bayar</button>
-            <button id="cetak" class="btn btn-success" type="submit" onclick="bayarCetak()">Bayar Dan Cetak</button>
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
           </form>
         </div>
