@@ -66,7 +66,7 @@
                   </div>
                   <div class="form-group">
                     <button id="tambah" class="btn btn-success" onclick="checkStok()" disabled>Tambah</button>
-                    <button id="bayar" class="btn btn-success" data-toggle="modal" data-target="#modal" disabled>Bayar</button>
+                    <button id="bayar" class="btn btn-success" data-toggle="modal" data-target="#modal" disabled>Booking</button>
                   </div>
                 </div>
                 <div class="col-sm-6 d-flex justify-content-end text-right nota">
@@ -105,7 +105,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title">Bayar</h5>
+          <h5 class="modal-title">Booking</h5>
           <button class="close" data-dismiss="modal">
             <span>&times;</span>
           </button>
@@ -119,7 +119,7 @@
             <div class="form-group">
               <b>Total Bayar:</b> <span class="total_bayar"></span>
             </div>
-            <button id="add" class="btn btn-success" type="submit" onclick="bayar()">Bayar</button>
+            <button id="add" class="btn btn-success" type="submit" onclick="bayar()">Booking</button>
             <button class="btn btn-danger" data-dismiss="modal">Close</button>
           </form>
         </div>

@@ -157,39 +157,47 @@
             </a>
           </li>
         <?php endif ?>
-        <?php if ($role == 1 or $role == 2 or $role == 3) : ?>
-          <li class="nav-item has-treeview <?php echo $uri == 'booking' || $uri == 'data_booking' || $uri == 'booking_saya' ? 'menu-open' : 'no' ?>">
-            <a href="<?php echo site_url('booking') ?>" class="nav-link <?php echo $uri == 'booking' || $uri == 'data_booking' || $uri == 'booking_saya' ? 'active' : 'no' ?>">
-              <i class="fas fa-shopping-cart nav-icon"></i>
-              <p>Booking</p>
-              <i class="right fas fa-angle-right"></i>
+        <?php if ($role == 3) : ?>
+          <li class="nav-item">
+            <a href="<?php echo site_url('products') ?>" class="nav-link <?php echo $uri == 'products' ? 'active' : 'no' ?>">
+              <i class="nav-icon fas fa-box"></i>
+              <p>
+                Produk
+              </p>
             </a>
-            <ul class="nav-treeview">
-              <?php if ($role == 3) : ?>
-                <li class="nav-item">
-                  <a href="<?php echo site_url('booking') ?>" class="nav-link <?php echo $uri == 'booking' ? 'active' : 'no' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Tambah Booking</p>
-                  </a>
-                </li>
-                <li class="nav-item">
-                  <a href="<?php echo site_url('booking_saya') ?>" class="nav-link <?php echo $uri == 'booking_saya' ? 'active' : 'no' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Booking Saya</p>
-                  </a>
-                </li>
-              <?php endif ?>
-              <?php if ($role == 1 or $role == 2) : ?>
-                <li class="nav-item">
-                  <a href="<?php echo site_url('data_booking') ?>" class="nav-link <?php echo $uri == 'data_booking' ? 'active' : 'no' ?>">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Data Booking</p>
-                  </a>
-                </li>
-              <?php endif ?>
-            </ul>
           </li>
         <?php endif ?>
+        <li class="nav-item has-treeview <?php echo $uri == 'booking' || $uri == 'data_booking' || $uri == 'booking_saya' ? 'menu-open' : 'no' ?>">
+          <a href="<?php echo site_url('booking') ?>" class="nav-link <?php echo $uri == 'booking' || $uri == 'data_booking' || $uri == 'booking_saya' ? 'active' : 'no' ?>">
+            <i class="fas fa-shopping-cart nav-icon"></i>
+            <p>Booking</p>
+            <i class="right fas fa-angle-right"></i>
+          </a>
+          <ul class="nav-treeview">
+            <?php if ($role == 3) : ?>
+              <li class="nav-item">
+                <a href="<?php echo site_url('booking') ?>" class="nav-link <?php echo $uri == 'booking' ? 'active' : 'no' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Tambah Booking</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="<?php echo site_url('booking_saya') ?>" class="nav-link <?php echo $uri == 'booking_saya' ? 'active' : 'no' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Booking Saya</p>
+                </a>
+              </li>
+            <?php endif ?>
+            <?php if ($role == 1 or $role == 2) : ?>
+              <li class="nav-item">
+                <a href="<?php echo site_url('data_booking') ?>" class="nav-link <?php echo $uri == 'data_booking' ? 'active' : 'no' ?>">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Data Booking</p>
+                </a>
+              </li>
+            <?php endif ?>
+          </ul>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

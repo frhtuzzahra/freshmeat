@@ -31,6 +31,31 @@
 
     <!-- Favicons -->
     <link rel="shortcut icon" href="<?= base_url('landing/images/ico/favicon.ico') ?>">
+    <style>
+        /* styles.css */
+        #whatsapp-button {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            width: 50px;
+            height: 50px;
+            /* WhatsApp green color */
+            border-radius: 50%;
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        #whatsapp-button:hover {
+            box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        #whatsapp-button img {
+            display: block;
+            width: 40px;
+            height: 40px;
+            margin: 5px;
+            /* Center the WhatsApp icon inside the button */
+        }
+    </style>
 
     <!-- JavaScripts -->
     <script src="<?= base_url('landing/js/jquery-1.10.2.min.js') ?>"></script>
@@ -80,7 +105,7 @@
                                     <li><a href="#services">Pelayanan</a></li>
                                     <li><a href="#portfolio">Produk Terlaris</a></li>
                                     <li><a href="#about">Toko Kami</a></li>
-                                    <li><a href="#contact">Kontak</a></li>
+                                    <li><a href="#contact">Alamat</a></li>
                                 </ul>
                             </div> <!-- /.menu -->
                         </div> <!-- /.col-md-8 -->
@@ -93,7 +118,7 @@
                                 <li><a href="#services">Pelayanan</a></li>
                                 <li><a href="#portfolio">Produk Terlaris</a></li>
                                 <li><a href="#about">Toko Kami</a></li>
-                                <li><a href="#contact">Kontak Kami</a></li>
+                                <li><a href="#contact">Alamat</a></li>
                             </ul>
                         </div> <!-- /.menu -->
                     </div> <!-- /.responsive-menu -->
@@ -390,40 +415,18 @@
     <div id="contact" class="section-cotent">
         <div class="container">
             <div class="title-section text-center">
-                <h2>Kontak Kami</h2>
+                <h2>Alamat Kami</h2>
                 <span></span>
             </div> <!-- /.title-section -->
             <div class="row">
                 <div class="col-md-7 col-sm-6">
-                    <h4 class="widget-title">Send a message to us</h4>
-                    <div class="contact-form">
-                        <p class="full-row">
-                            <label for="name-id">Your Name:</label>
-                            <input type="text" id="name-id" name="name-id">
-                        </p>
-                        <p class="full-row">
-                            <label for="email-id">Email:</label>
-                            <input type="text" id="email-id" name="email-id">
-                        </p>
-                        <p class="full-row">
-                            <label for="subject-id">Subject:</label>
-                            <input type="text" id="subject-id" name="subject-id">
-                        </p>
-                        <p class="full-row">
-                            <label for="message">Message:</label>
-                            <textarea name="message" id="message" rows="6"></textarea>
-                        </p>
-                        <input class="mainBtn" type="submit" name="" value="Send Message">
-                    </div>
-                </div> <!-- /.col-md-3 -->
-                <div class="col-md-5 col-sm-6">
-                    <h4 class="widget-title">Alamat Kami</h4>
                     <div class="map-holder">
                         <div class="google-map-canvas" id="map-canvas" style="height: 250px;">
                         </div>
                     </div> <!-- /.map-holder -->
+                </div> <!-- /.col-md-3 -->
+                <div class="col-md-5 col-sm-6">
                     <div class="contact-info">
-                        <p>Kami tunggu kehadirannya menjadi salah satu konsumen produk kami!</p>
                         <span><i class="fa fa-map-marker"></i>Jl. Karang Anyar 1 No.2, RW.01, Loktabat Utara, Kec. Landasan Ulin, Kota Banjar Baru, Kalimantan Selatan 70714</span>
                         <span><i class="fa fa-phone"></i>0831-4240-4000</span>
                         <span><i class="fa fa-instagram"></i>elangfarm_freshmeat</span>
@@ -432,6 +435,12 @@
             </div> <!-- /.row -->
         </div> <!-- /.container -->
     </div> <!-- /#contact -->
+    <!-- Floating WhatsApp Button -->
+    <div id="whatsapp-button">
+        <a href="https://wa.me/6283142404000" target="_blank">
+            <img src="<?= base_url('assets/images/whatsapp.png') ?>" alt="Whatsapp">
+        </a>
+    </div>
 
     <div class="site-footer">
         <div class="container">
@@ -456,11 +465,23 @@
     <script src="<?= base_url('landing/js/jquery.lightbox.js') ?>"></script>
     <script src="<?= base_url('landing/js/custom.js') ?>"></script>
     <script type="text/javascript">
+        const whatsappButton = document.getElementById('whatsapp-button');
+
+        // Show the WhatsApp button after scrolling down a bit
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                whatsappButton.style.display = 'block';
+            } else {
+                whatsappButton.style.display = 'none';
+
+            }
+        });
+
         function initialize() {
             var mapOptions = {
                 scrollwheel: false,
-                zoom: 15,
-                center: new google.maps.LatLng(13.758468, 100.567481)
+                zoom: 25,
+                center: new google.maps.LatLng(-3.4342994, 114.8085662)
             };
 
             var map = new google.maps.Map(document.getElementById('map-canvas'),
