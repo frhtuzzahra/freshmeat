@@ -52,9 +52,9 @@ class Transaksi_model extends CI_Model
 
 	public function read()
 	{
-		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon, pelanggan.nama as pelanggan');
+		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon, pengguna.nama as pelanggan');
 		$this->db->from($this->table);
-		$this->db->join('pelanggan', 'transaksi.pelanggan = pelanggan.id', 'left outer');
+		$this->db->join('pengguna', 'transaksi.pelanggan = pengguna.id', 'left outer');
 		return $this->db->get();
 	}
 
@@ -75,7 +75,6 @@ class Transaksi_model extends CI_Model
 		return join($data);
 	}
 
-
 	public function penjualanBulan($date)
 	{
 		$qty = $this->db->query("SELECT qty FROM transaksi WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$date'")->result();
@@ -95,9 +94,19 @@ class Transaksi_model extends CI_Model
 		return $this->db->query("SELECT COUNT(*) AS total FROM transaksi WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$hari'")->row();
 	}
 
+	public function transaksiHariPelanggan($hari, $id)
+	{
+		return $this->db->query("SELECT COUNT(*) AS total FROM booking WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$hari' AND pelanggan = " . $id)->row();
+	}
+
 	public function transaksiTerakhir($hari)
 	{
 		return $this->db->query("SELECT transaksi.qty FROM transaksi WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$hari' LIMIT 1")->row();
+	}
+
+	public function bookingTerakhir($hari, $id)
+	{
+		return $this->db->query("SELECT booking.qty FROM booking WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$hari' AND pelanggan = " . $id . " order by id desc LIMIT 1")->row();
 	}
 
 	public function getAll($id)

@@ -106,7 +106,7 @@
             </div>
             <div class="form-group">
               <label>Harga Jual</label>
-              <input type="text" class="form-control" placeholder="Harga" name="harga_jual" required>
+              <input type="text" class="form-control" placeholder="Harga Jual" name="harga_jual" required>
             </div>
             <div class="form-group">
               <label>Stok</label>
@@ -136,7 +136,7 @@
     var kategoriSearchUrl = '<?php echo site_url('kategori_produk/search') ?>';
     var satuanSearchUrl = '<?php echo site_url('satuan_produk/search') ?>';
   </script>
-  <script src="<?php echo base_url('assets/js/produk.min.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/unminify/produk.js') ?>"></script>
 </body>
 
 </html>

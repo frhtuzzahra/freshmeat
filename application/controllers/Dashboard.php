@@ -9,7 +9,6 @@ class Dashboard extends CI_Controller
 		if ($this->session->userdata('status') == 'login') {
 			$this->load->view('dashboard');
 		} else {
-			// $this->load->view('login');
 			$this->load->view('landing');
 		}
 	}

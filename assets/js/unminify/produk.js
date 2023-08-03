@@ -17,7 +17,7 @@ let produk = $("#produk").DataTable({
         { data: "nama" },
         { data: "satuan" },
         { data: "kategori" },
-        { data: "harga" },
+        { data: "harga_jual" },
         { data: "stok" },
         { data: "action" }
     ]

@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <!-- Tell the browser to be responsive to screen width -->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laporan Kas</title>
+    <title>Laporan Data Booking</title>
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.css') ?>">
     <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
@@ -21,7 +21,7 @@
             <div class="container">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h1 class="m-2 text-dark text-center">Laporan Kas</h1>
+                        <h1 class="m-2 text-dark text-center">Laporan Data Booking</h1>
                         <div class="my-3 text-center">
                             <h3><?= $label ?></h3>
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
@@ -34,34 +34,25 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tanggal</th>
-                                    <th>Pemasukan</th>
-                                    <th>Pengeluaran</th>
+                                    <th>Kode Booking</th>
+                                    <th>Total Bayar</th>
+                                    <th>Pelanggan</th>
+                                    <th>Status</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1;
-                                foreach ($laporan_kas as $kas) : ?>
+                                foreach ($data_booking as $databooking) : ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
-                                        <td><?= $kas->tanggal ?></td>
-                                        <td class="text-right">Rp. <?= number_format($kas->total_masuk, 0, ',', '.') ?></td>
-                                        <td class="text-right">Rp. <?= number_format($kas->total_keluar, 0, ',', '.') ?></td>
+                                        <td><?= $databooking->tanggal ?></td>
+                                        <td><?= $databooking->nota ?></td>
+                                        <td class="text-right">Rp. <?= number_format($databooking->total_bayar, 0, ',', '.') ?></td>
+                                        <td><?= $databooking->nama ?></td>
+                                        <td><?= ($databooking->status == 'diambil') ? '<span class="badge badge-success">Diambil</span>' : '<span class="badge badge-warning">Belum</span>' ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>
-                            <tfoot>
-                                <tr>
-                                    <td>
-                                        <h4>Total</h4>
-                                    </td>
-                                    <td colspan="2">
-                                        <h4 class="text-right"> Rp. <?= number_format($kas->total_kas_masuk, 0, ',', '.') ?></h4>
-                                    </td>
-                                    <td>
-                                        <h4 class="text-right"> Rp. <?= number_format($kas->total_kas_keluar, 0, ',', '.') ?></h4>
-                                    </td>
-                                </tr>
-                            </tfoot>
                         </table>
                     </div>
                 </div>

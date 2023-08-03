@@ -19,11 +19,27 @@ $.ajax( {
     }
 });
 $.ajax( {
+    url:transaksi_hari_pelangganUrl,
+    type:"get",
+    dataType:"json",
+    success:(res)=> {
+        $("#booking_hari").html(res.total)
+    }
+});
+$.ajax( {
     url:transaksi_terakhirUrl,
     type:"get",
     dataType:"json",
     success:res=> {
         $("#transaksi_terakhir").html(res)
+    }
+});
+$.ajax( {
+    url:booking_terakhirUrl,
+    type:"get",
+    dataType:"json",
+    success:res=> {
+        $("#booking_terakhir").html(res)
     }
 });
 $.ajax( {
@@ -79,6 +95,55 @@ $.ajax( {
     dataType:"json",
     success:res=> {
         var el=$("#bulanIni").get(0).getContext("2d");
+        new Chart(el, {
+            type:"bar",
+            data: {
+                labels:getDays(),
+                datasets:[ {
+                    label: "Total",
+                    backgroundColor: "rgba(60,141,188,0.9)",
+                    borderColor: "rgba(60,141,188,0.8)",
+                    pointRadius: false,
+                    pointColor: "#3b8bba",
+                    pointStrokeColor: "rgba(60,141,188,1)",
+                    pointHighlightFill: "#fff",
+                    pointHighlightStroke: "rgba(60,141,188,1)",
+                    data: res
+                }],
+                options: {
+                    maintainAspectRatio:false, responsive:true, legend: {
+                        display: false
+                    },
+                    scales: {
+                        xAxes:[ {
+                            gridLines: {
+                                display: false
+                            }
+                        }],
+                        yAxes:[ {
+                            gridLines: {
+                                display: false
+                            }
+                        }]
+                    }
+                }
+            }
+        }
+        )
+    },
+    error:err=> {
+        console.log(err)
+    }
+});
+$.ajax( {
+    url:booking_bulanUrl,
+    type:"post",
+    data: {
+        day: getDays()
+    },
+    dataType:"json",
+    success:res=> {
+        var el=$("#bookingbulanIni").get(0).getContext("2d");
         new Chart(el, {
             type:"bar",
             data: {

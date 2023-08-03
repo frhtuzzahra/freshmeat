@@ -6,6 +6,22 @@ class Booking_model extends CI_Model
 
     private $table = 'booking';
 
+    public function readAll()
+    {
+        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status`");
+        $this->db->from($this->table);
+        $this->db->join("pengguna", "booking.pelanggan = pengguna.id");
+        return $this->db->get();
+    }
+
+    public function getBookingWithPeriode($tgl_awal, $tgl_akhir)
+    {
+        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status`");
+        $this->db->from($this->table);
+        $this->db->join("pengguna", "booking.pelanggan = pengguna.id");
+        $this->db->where("booking.tanggal BETWEEN '" . $tgl_awal . "' AND '" . $tgl_akhir . "'");
+        return $this->db->get();
+    }
 
     public function removeStok($id, $stok)
     {

@@ -131,11 +131,31 @@ class Transaksi extends CI_Controller
 		echo json_encode($total);
 	}
 
+	public function transaksi_hari_pelanggan()
+	{
+		header('Content-type: application/json');
+		$now = date('d m Y');
+		$id = $_SESSION['id'];
+		$total = $this->transaksi_model->transaksiHariPelanggan($now, $id);
+		echo json_encode($total);
+	}
+
 	public function transaksi_terakhir($value = '')
 	{
 		header('Content-type: application/json');
 		$now = date('d m Y');
 		foreach ($this->transaksi_model->transaksiTerakhir($now) as $key) {
+			$total = explode(',', $key);
+		}
+		echo json_encode($total);
+	}
+
+	public function booking_terakhir($value = '')
+	{
+		header('Content-type: application/json');
+		$now = date('d m Y');
+		$id = $_SESSION['id'];
+		foreach ($this->transaksi_model->bookingTerakhir($now, $id) as $key) {
 			$total = explode(',', $key);
 		}
 		echo json_encode($total);

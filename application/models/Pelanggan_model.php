@@ -5,6 +5,7 @@ class Pelanggan_model extends CI_Model
 {
 
 	private $table = 'pelanggan';
+	private $pengguna = 'pengguna';
 
 	public function create($data)
 	{
@@ -37,7 +38,8 @@ class Pelanggan_model extends CI_Model
 	public function search($search = "")
 	{
 		$this->db->like('nama', $search);
-		return $this->db->get($this->table)->result();
+		$this->db->where('role', 3);
+		return $this->db->get($this->pengguna)->result();
 	}
 }
 

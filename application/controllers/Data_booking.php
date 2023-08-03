@@ -70,7 +70,27 @@ class Data_booking extends CI_Controller
 			echo json_encode('sukses');
 		}
 	}
+
+	public function cetak()
+	{
+		$tgl_awal = $this->input->post('tgl_awal');
+		$tgl_akhir = $this->input->post('tgl_akhir');
+
+		$this->load->model('booking_model', 'booking');
+		if (empty($tgl_awal) || empty($tgl_akhir)) {
+			$data['data_booking'] = $this->booking->readAll()->result();
+			$data['label'] = "Data Semua Booking";
+		} else {
+			$data['data_booking'] = $this->booking->getBookingWithPeriode($tgl_awal, $tgl_akhir)->result();
+			$tgl_awal = date('d-m-Y', strtotime($tgl_awal)); // Ubah format tanggal jadi dd-mm-yyyy
+			$tgl_akhir = date('d-m-Y', strtotime($tgl_akhir)); // Ubah format tanggal jadi dd-mm-yyyy
+			$label = 'Periode Tanggal ' . $tgl_awal . ' s/d ' . $tgl_akhir;
+			$data['label'] = $label;
+		}
+
+		$this->load->view('cetak_laporan_data_booking_pdf', $data);
+	}
 }
 
-/* End of file Transaksi.php */
-/* Location: ./application/controllers/Transaksi.php */
+/* End of file booking.php */
+/* Location: ./application/controllers/booking.php */
