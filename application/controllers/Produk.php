@@ -32,6 +32,7 @@ class Produk extends CI_Controller
 			foreach ($this->produk_model->read()->result() as $produk) {
 				$data[] = array(
 					'barcode' => $produk->barcode,
+					'gambar' => '<img src="' . base_url('uploads/' . $produk->gambar) . '" class="img-thumbnail" width="100">',
 					'nama' => $produk->nama_produk,
 					'kategori' => $produk->kategori,
 					'satuan' => $produk->satuan,
@@ -51,17 +52,56 @@ class Produk extends CI_Controller
 
 	public function add()
 	{
-		$data = array(
-			'barcode' => $this->input->post('barcode'),
-			'nama_produk' => $this->input->post('nama_produk'),
-			'satuan' => $this->input->post('satuan'),
-			'kategori' => $this->input->post('kategori'),
-			'harga' => $this->input->post('harga'),
-			'harga_jual' => $this->input->post('harga_jual'),
-			'stok' => $this->input->post('stok')
-		);
-		if ($this->produk_model->create($data)) {
-			echo json_encode($data);
+		$config['upload_path'] = './uploads/'; // Ganti dengan path folder penyimpanan gambar
+		$config['allowed_types'] = 'gif|jpg|png';
+		$config['max_size'] = 2048; // Maksimal ukuran file dalam kilobyte (KB)
+		$config['encrypt_name'] = TRUE; // Enkripsi nama yang terupload
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('gambar')) {
+			$data = array(
+				'gambar' => $this->upload->data('file_name'),
+				'barcode' => $this->input->post('barcode'),
+				'nama_produk' => $this->input->post('nama_produk'),
+				'satuan' => $this->input->post('satuan'),
+				'kategori' => $this->input->post('kategori'),
+				'harga' => $this->input->post('harga'),
+				'harga_jual' => $this->input->post('harga_jual'),
+				'stok' => $this->input->post('stok')
+			);
+			if ($this->produk_model->create($data)) {
+				echo json_encode($data);
+			}
+		} else {
+			echo json_encode('error');
+		}
+	}
+
+	public function edit()
+	{
+		$config['upload_path'] = './uploads/'; // Ganti dengan path folder penyimpanan gambar
+		$config['allowed_types'] = 'jpg|png';
+		$config['max_size'] = 2048; // Maksimal ukuran file dalam kilobyte (KB)
+		$config['encrypt_name'] = TRUE; // Enkripsi nama yang terupload
+		$this->load->library('upload', $config);
+
+		if ($this->upload->do_upload('gambar')) {
+			$id = $this->input->post('id');
+			$data = array(
+				'gambar' => $this->upload->data('file_name'),
+				'barcode' => $this->input->post('barcode'),
+				'nama_produk' => $this->input->post('nama_produk'),
+				'satuan' => $this->input->post('satuan'),
+				'kategori' => $this->input->post('kategori'),
+				'harga' => $this->input->post('harga'),
+				'harga_jual' => $this->input->post('harga_jual'),
+				'stok' => $this->input->post('stok')
+			);
+			if ($this->produk_model->update($id, $data)) {
+				echo json_encode('sukses');
+			}
+		} else {
+			echo json_encode('error');
 		}
 	}
 
@@ -69,23 +109,6 @@ class Produk extends CI_Controller
 	{
 		$id = $this->input->post('id');
 		if ($this->produk_model->delete($id)) {
-			echo json_encode('sukses');
-		}
-	}
-
-	public function edit()
-	{
-		$id = $this->input->post('id');
-		$data = array(
-			'barcode' => $this->input->post('barcode'),
-			'nama_produk' => $this->input->post('nama_produk'),
-			'satuan' => $this->input->post('satuan'),
-			'kategori' => $this->input->post('kategori'),
-			'harga' => $this->input->post('harga'),
-			'harga_jual' => $this->input->post('harga_jual'),
-			'stok' => $this->input->post('stok')
-		);
-		if ($this->produk_model->update($id, $data)) {
 			echo json_encode('sukses');
 		}
 	}

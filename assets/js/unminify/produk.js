@@ -14,6 +14,7 @@ let produk = $("#produk").DataTable({
     columns: [
         { data: null }, 
         { data: "barcode" },
+        { data: "gambar" },
         { data: "nama" },
         { data: "satuan" },
         { data: "kategori" },
@@ -28,20 +29,27 @@ function reloadTable() {
 }
 
 function addData() {
-    $.ajax({
-        url: addUrl,
-        type: "post",
-        dataType: "json",
-        data: $("#form").serialize(),
-        success: res => {
-            $(".modal").modal("hide");
-            Swal.fire("Sukses", "Sukses Menambahkan Data", "success");
-            reloadTable();
-        },
-        error: res => {
-            console.log(res);
-        }
-    })
+
+    $("#form").submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+  
+        $.ajax({
+            url: addUrl,
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: res => {
+                $(".modal").modal("hide");
+                Swal.fire("Sukses", "Sukses Menambahkan Data", "success");
+                reloadTable();
+            },
+            error: res => {
+                console.log(res)
+            }
+        });
+    });    
 }
 
 function remove(id) {
@@ -70,20 +78,27 @@ function remove(id) {
 }
 
 function editData() {
-    $.ajax({
-        url: editUrl,
-        type: "post",
-        dataType: "json",
-        data: $("#form").serialize(),
-        success: () => {
-            $(".modal").modal("hide");
-            Swal.fire("Sukses", "Sukses Mengedit Data", "success");
-            reloadTable();
-        },
-        error: err => {
-            console.log(err)
-        }
-    })
+
+    $("#form").submit(function(e) {
+        e.preventDefault();
+        var formData = new FormData(this);
+  
+        $.ajax({
+            url: editUrl,
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: () => {
+                $(".modal").modal("hide");
+                Swal.fire("Sukses", "Sukses Mengedit Data", "success");
+                reloadTable();
+            },
+            error: err => {
+                console.log(err)
+            }
+        });
+    });
 }
 
 function add() {

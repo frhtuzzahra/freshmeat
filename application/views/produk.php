@@ -53,6 +53,7 @@
                   <tr>
                     <th>No</th>
                     <th>Barcode</th>
+                    <th>Gambar</th>
                     <th>Nama</th>
                     <th>Satuan</th>
                     <th>Kategori</th>
@@ -85,8 +86,15 @@
           <form id="form">
             <input type="hidden" name="id">
             <div class="form-group">
+              <label for="gambar">Pilih Gambar:</label>
+              <input type="file" name="gambar" id="gambar" required>
+              <br>
+              <small class="text-danger">*maks 2MB, format .jpg / .png</small>
+            </div>
+
+            <div class="form-group">
               <label>Barcode</label>
-              <input type="text" class="form-control" placeholder="Barcode" name="barcode" required>
+              <input type="text" class="form-control" placeholder="Barcode" name="barcode" required style="text-transform: uppercase;">
             </div>
             <div class="form-group">
               <label>Nama</label>
