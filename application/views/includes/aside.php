@@ -147,7 +147,7 @@
           <li class="nav-item">
             <a href="<?php echo site_url('pengaturan') ?>" class="nav-link <?php echo $uri == 'pengaturan' ? 'active' : 'no' ?>">
               <i class="fas fa-cog nav-icon"></i>
-              <p>Pengaturan</p>
+              <p>Toko</p>
             </a>
           </li>
           <li class="nav-item">

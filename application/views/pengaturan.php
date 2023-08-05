@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Pengaturan</title>
+  <title>Toko</title>
   <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.css') ?>">
   <link rel="stylesheet" href="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css') ?>">
   <?php $this->load->view('partials/head'); ?>
@@ -22,7 +22,7 @@
         <div class="container-fluid">
           <div class="row mb-2">
             <div class="col">
-              <h1 class="m-0 text-dark">Pengaturan</h1>
+              <h1 class="m-0 text-dark">Toko</h1>
             </div><!-- /.col -->
           </div><!-- /.row -->
         </div><!-- /.container-fluid -->
