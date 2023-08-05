@@ -21,11 +21,13 @@
             <div class="container">
                 <div class="card mt-5">
                     <div class="card-header">
-                        <h1 class="m-2 text-dark text-center">Laporan Stok Masuk</h1>
+					<h1 class="m-2 text-dark text-center">Laporan <?= $label ?></h1>
                         <div class="my-3 text-center">
-                            <h3><?= $label ?></h3>
+						<h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
-                            <p>Elang Freshmeat <br> Jln. Karang Anyar, Banjarbaru</p>
+                            <p>Jl. Karang Anyar 1 RT.43 RW.8 <br> Loktabat Utara Banjarbaru Utara <br>
+							(Seberang Pasar Tradisional Balitan) <br> IG : elangfarm_freshmeat | WA : 083142404000
+						</p>
                         </div>
                     </div>
                     <div class="card-body">

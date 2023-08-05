@@ -132,36 +132,16 @@
             <li>
                 <img src="<?= base_url('landing/images/banner01.jpg"') ?> alt="">
                 <div class=" flex-caption">
-                <h2>SEGERA HADIR!!!</h2>
-                <span></span>
-                <p>di Elang Fresh Meat!! <br />
-                    - Brokoli <br />
-                    - Kembang Kol <br />
-                    - Kacang Polong <br />
-                    - Jamur Shitake <br />
-                    - Jagung Manis <br />
-                </p>
     </div>
     </li>
     <li>
         <img src="<?= base_url('landing/images/banner02.jpg"') ?> alt="">
                 <div class=" flex-caption">
-        <h2>NEW PRODUCT!!!</h2>
-        <span></span>
-        <p>di Elang Fresh Meat!! <br />
-            - Ginjal Sapi <br />
-            - Tulang Sumsum <br />
-            - Limpa Sapi <br />
-        </p>
         </div>
     </li>
     <li>
         <img src="<?= base_url('landing/images/banner03.jpg"') ?> alt="">
                 <div class=" flex-caption">
-        <h2><br />Welcoming Muharram!</h2>
-        <span></span>
-        <p>Elang Fresh Meat mengucapkan Selamat Hari Raya Tahun Baru Islam 1455 H
-        </p>
         </div>
     </li>
     </ul>
