@@ -24,6 +24,7 @@ class Products extends CI_Controller
 			foreach ($this->produk_model->read()->result() as $produk) {
 				$data[] = array(
 					'barcode' => $produk->barcode,
+					'gambar' => '<img src="' . base_url('assets/images/' . $produk->gambar) . '" class="img-fluid" width="100">',
 					'nama' => $produk->nama_produk,
 					'kategori' => $produk->kategori,
 					'satuan' => $produk->satuan,

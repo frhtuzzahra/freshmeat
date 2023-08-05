@@ -318,17 +318,17 @@
                         Usaha bisnis ini didirikan dari tahun 2020. Penjualan daging di toko ini menjamin kesegaran dan keaslian dari daging serta frozen food kepada konsumen.
                         Saat ini Elang Fresh Meat beralamat di Jl. Karang Anyar 1 No.2, RW.01, Loktabat Utara, Kec. Landasan Ulin, Kota Banjar Baru, Kalimantan Selatan 70714</p>
                 </div> <!-- /.col-md-3 -->
-                <div class="col-md-4 our-skills">
+                <div class="col-md-4">
                     <h4 class="widget-title">Rating Toko</h4>
                     <!--bintang 4,5 toko-->
-                    <ul class="progess-bars">
-
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star"></i>
-                        <i class="fa fa-star-half-full"></i> 4.5
-                    </ul>
+                    <div class="contact-info">
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star"></i></span>
+                        <span><i class="fa fa-star-half-full"></i> 4,7</span>
+                    </div>
+                    <p><a href="https://www.google.com/maps/place/Elang+Fresh+Meat+Store+Banjarbaru/@-3.4342994,114.8085662,15z/data=!4m6!3m5!1s0x2de68103f0e848f3:0xb6dadfa70313ad7c!8m2!3d-3.4342994!4d114.8085662!16s%2Fg%2F11mvr1051_?hl=in-ID&entry=ttu" target="_blank">Google Maps (22 Ulasan)</a></p>
                 </div> <!-- /.col-md-3 -->
             </div> <!-- /.row -->
             <div class="row">
@@ -336,13 +336,8 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="team-member">
                             <div class="member-img">
-                                <img src="<?= base_url('landing/images/team/toko-1.jpg') ?>" alt="Tracy">
+                                <img src="<?= base_url('landing/images/team/toko-1.jpg') ?>" alt="Toko 1">
                                 <div class="overlay">
-                                    <ul class="social">
-                                        <li><a href="#" class="fa fa-facebook"></a></li>
-                                        <li><a href="#" class="fa fa-twitter"></a></li>
-                                        <li><a href="#" class="fa fa-instagram"></a></li>
-                                    </ul>
                                 </div> <!-- /.overlay -->
                             </div>
                             <div class="inner-content">
@@ -354,13 +349,8 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="team-member">
                             <div class="member-img">
-                                <img src="<?= base_url('landing/images/team/toko-2.jpg') ?>" alt="Mary">
+                                <img src="<?= base_url('landing/images/team/toko-2.jpg') ?>" alt="Toko 2">
                                 <div class="overlay">
-                                    <ul class="social">
-                                        <li><a href="#" class="fa fa-facebook"></a></li>
-                                        <li><a href="#" class="fa fa-twitter"></a></li>
-                                        <li><a href="#" class="fa fa-instagram"></a></li>
-                                    </ul>
                                 </div> <!-- /.overlay -->
                             </div>
                             <div class="inner-content">
@@ -372,13 +362,8 @@
                     <div class="col-md-4 col-sm-6">
                         <div class="team-member">
                             <div class="member-img">
-                                <img src="<?= base_url('landing/images/team/toko-3.jpg') ?>" alt="Julia">
+                                <img src="<?= base_url('landing/images/team/toko-3.jpg') ?>" alt="Toko 3">
                                 <div class="overlay">
-                                    <ul class="social">
-                                        <li><a href="#" class="fa fa-facebook"></a></li>
-                                        <li><a href="#" class="fa fa-twitter"></a></li>
-                                        <li><a href="#" class="fa fa-instagram"></a></li>
-                                    </ul>
                                 </div> <!-- /.overlay -->
                             </div>
                             <div class="inner-content">

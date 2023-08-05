@@ -46,6 +46,7 @@
                   <tr>
                     <th>No</th>
                     <th>Barcode</th>
+                    <th>Gambar</th>
                     <th>Nama</th>
                     <th>Satuan</th>
                     <th>Kategori</th>
