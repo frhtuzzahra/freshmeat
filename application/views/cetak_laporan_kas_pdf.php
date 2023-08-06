@@ -36,8 +36,8 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tanggal</th>
-                                    <th>Pemasukan</th>
                                     <th>Pengeluaran</th>
+                                    <th>Pemasukan</th>
                                 </tr>
                             </thead>
                             <tbody>

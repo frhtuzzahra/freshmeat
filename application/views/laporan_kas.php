@@ -58,8 +58,8 @@
                                     <tr>
                                         <th>No</th>
                                         <th>Tanggal</th>
-                                        <th>Pemasukan</th>
                                         <th>Pengeluaran</th>
+                                        <th>Pemasukan</th>
                                     </tr>
                                 </thead>
                             </table>
