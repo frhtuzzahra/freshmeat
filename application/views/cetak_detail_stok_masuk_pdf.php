@@ -21,7 +21,8 @@
             <div class="container">
                 <div class="card mt-5">
                     <div class="card-header">
-					<h1 class="m-2 text-dark text-center">Laporan <?= $label ?></h1>
+					<h1 class="m-2 text-dark text-center">Laporan Detail Stok Masuk</h1>
+                    <h2 class="m-2 text-dark text-center"> <?= $label ?></h2>
                         <div class="my-3 text-center">
 						<h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
