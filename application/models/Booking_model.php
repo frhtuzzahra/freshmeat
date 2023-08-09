@@ -44,18 +44,18 @@ class Booking_model extends CI_Model
 
     public function read()
     {
-        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pelanggan.nama as pelanggan');
+        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan');
         $this->db->from($this->table);
-        $this->db->join('pelanggan', 'booking.pelanggan = pelanggan.id', 'left outer');
+        $this->db->join('pengguna', 'booking.pelanggan = pengguna.id', 'left outer');
         $this->db->where('booking.status', 'belum');
         return $this->db->get();
     }
 
     public function readByIdPelanggan($id)
     {
-        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pelanggan.nama as pelanggan');
+        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan');
         $this->db->from($this->table);
-        $this->db->join('pelanggan', 'booking.pelanggan = pelanggan.id', 'left outer');
+        $this->db->join('pengguna', 'booking.pelanggan = pengguna.id', 'left outer');
         $this->db->where('booking.pelanggan', $id);
 
         return $this->db->get();

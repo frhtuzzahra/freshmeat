@@ -68,7 +68,7 @@ class Booking_saya extends CI_Controller
 			'status' => ($booking->status == 'belum') ? '<span class="badge badge-warning">Belum</span>' : '<span class="badge badge-success">Diambil</span>'
 		);
 		$this->load->view('cetak_booking_saya_pdf', $data);
-		var_dump($qty);
+		// var_dump($qty);
 	}
 }
 
