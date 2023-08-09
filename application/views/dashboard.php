@@ -194,7 +194,7 @@
   <script src="<?php echo base_url('assets/vendor/adminlte/plugins/chart.js/Chart.min.js') ?>"></script>
 
   <script>
-    let transaksi_hariUrl = '<?php echo site_url('transaksi/transaksi_hari_pelanggan') ?>'
+    let transaksi_hariUrl = '<?php echo site_url('transaksi/transaksi_hari') ?>'
     let transaksi_hari_pelangganUrl = '<?php echo site_url('transaksi/transaksi_hari_pelanggan') ?>'
     var transaksi_terakhirUrl = '<?php echo site_url('transaksi/transaksi_terakhir') ?>';
     var booking_terakhirUrl = '<?php echo site_url('transaksi/booking_terakhir') ?>';

@@ -48,6 +48,9 @@
                     <th>No</th>
                     <th>Username</th>
                     <th>Nama</th>
+                    <th>Jenis Kelamin</th>
+                    <th>Alamat</th>
+                    <th>Telepon</th>
                     <th>Role</th>
                     <th>Actions</th>
                   </tr>
@@ -87,6 +90,22 @@
               <label>Password</label>
               <input type="password" class="form-control" placeholder="Password" name="password" required>
             </div>
+            <div class="form-group">
+              <label>Jenis Kelamin</label>
+              <select name="jenis_kelamin" class="form-control">
+                <option selected disabled>--- Pilih Jenis Kelamin ---</option>
+                <option value="Pria">Pria</option>
+                <option value="Wanita">Wanita</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Alamat</label>
+              <input type="text" class="form-control" placeholder="Alamat" name="alamat" required>
+            </div>
+            <div class="form-group">
+              <label>Telepon</label>
+              <input type="number" class="form-control" placeholder="Telepon" name="telepon" required>
+            </div>
             <div class="form-group" id="role">
               <label>Role</label>
               <select class="form-control" name="role" required>
@@ -116,7 +135,7 @@
     var editUrl = '<?php echo site_url('pengguna/edit') ?>';
     var getPenggunaUrl = '<?php echo site_url('pengguna/get_pengguna') ?>';
   </script>
-  <script src="<?php echo base_url('assets/js/pengguna.min.js') ?>"></script>
+  <script src="<?php echo base_url('assets/js/unminify/pengguna.js') ?>"></script>
 </body>
 
 </html>

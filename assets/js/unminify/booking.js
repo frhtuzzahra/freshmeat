@@ -132,11 +132,8 @@ function add() {
             total_bayar: $("#total").html()
         },
         success: res => {
-            if (isCetak) {
-                Swal.fire("Sukses", "Sukses Membayar", "success").
-                    then(() => window.location.href = `${cetakUrl}${res}`,'_blank')
-            } else {
-                Swal.fire("Sukses", "Sukses Membayar", "success").
+            if (res) {
+                Swal.fire("Sukses", "Sukses Booking", "success").
                     then(() => window.location.reload())
             }
         },

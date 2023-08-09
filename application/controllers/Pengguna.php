@@ -26,6 +26,9 @@ class Pengguna extends CI_Controller
 				$data[] = array(
 					'username' => $pengguna->username,
 					'nama' => $pengguna->nama,
+					'jenis_kelamin' => $pengguna->jenis_kelamin,
+					'alamat' => $pengguna->alamat,
+					'telepon' => $pengguna->telepon,
 					'role' => ($pengguna->role == 2) ? 'Kasir' : 'Pelanggan',
 					'action' => '<button class="btn btn-sm btn-success" onclick="edit(' . $pengguna->id . ')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove(' . $pengguna->id . ')">Delete</button>'
 				);
@@ -45,7 +48,10 @@ class Pengguna extends CI_Controller
 			'username' => $this->input->post('username'),
 			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
 			'nama' => $this->input->post('nama'),
-			'role' => $this->input->post('role')
+			'role' => $this->input->post('role'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+			'alamat' => $this->input->post('alamat'),
+			'telepon' => $this->input->post('telepon')
 		);
 		if ($this->pengguna_model->create($data)) {
 			echo json_encode('sukses');
@@ -66,7 +72,11 @@ class Pengguna extends CI_Controller
 		$data = array(
 			'username' => $this->input->post('username'),
 			'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
-			'nama' => $this->input->post('nama')
+			'nama' => $this->input->post('nama'),
+			'role' => $this->input->post('role'),
+			'jenis_kelamin' => $this->input->post('jenis_kelamin'),
+			'alamat' => $this->input->post('alamat'),
+			'telepon' => $this->input->post('telepon')
 		);
 		if ($this->pengguna_model->update($id, $data)) {
 			echo json_encode('sukses');

@@ -65,10 +65,10 @@ class Booking_saya extends CI_Controller
 			'total' => $booking->total_bayar,
 			'tanggal' => $booking->tanggal,
 			'nota' => $booking->nota,
-			'status' => ($booking->status == 'belum') ? '<span class="badge badge-warning">Belum</span>' : '<span class="badge badge-success">Diambil</span>',
+			'status' => ($booking->status == 'belum') ? '<span class="badge badge-warning">Belum</span>' : '<span class="badge badge-success">Diambil</span>'
 		);
 		$this->load->view('cetak_booking_saya_pdf', $data);
-		// var_dump($data);
+		var_dump($qty);
 	}
 }
 

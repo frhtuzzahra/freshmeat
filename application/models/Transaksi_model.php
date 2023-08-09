@@ -8,11 +8,11 @@ class Transaksi_model extends CI_Model
 
 	public function readAll()
 	{
-		$this->db->select('transaksi.tanggal, transaksi.nota, produk.nama_produk, pelanggan.nama, transaksi.total_bayar');
+		$this->db->select('transaksi.tanggal, transaksi.nota, produk.nama_produk, pengguna.nama, transaksi.total_bayar');
 		$this->db->select('(SELECT SUM(total_bayar) FROM transaksi) as bayar', FALSE);
 		$this->db->from('transaksi');
 		$this->db->join('produk', 'transaksi.barcode = produk.id');
-		$this->db->join('pelanggan', 'transaksi.pelanggan = pelanggan.id', 'left outer');
+		$this->db->join('pengguna', 'transaksi.pelanggan = pengguna.id', 'left outer');
 		$this->db->order_by('transaksi.tanggal', 'ASC');
 
 		return $this->db->get();

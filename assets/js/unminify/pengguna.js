@@ -10,15 +10,16 @@ let url, pengguna = $("#pengguna").DataTable({
     order: [
         [1, "asc"]
     ],
-    columns: [{
-        data: null
-    }, {
-        data: "username"
-    }, {
-        data: "nama"
-    }, {
-        data: "action"
-    }]
+    columns: [
+        {data: null},
+        {data: "username"},
+        {data: "nama"},
+        {data: "jenis_kelamin"},
+        {data: "alamat"},
+        {data: "telepon"},
+        {data: "role"},
+        {data: "action"}
+    ]
 });
 
 function reloadTable() {
@@ -101,6 +102,10 @@ function edit(id) {
             $('[name="id"]').val(res.id);
             $('[name="username"]').val(res.username);
             $('[name="nama"]').val(res.nama);
+            $('[name="jenis_kelamin"]').val(res.jenis_kelamin);
+            $('[name="alamat"]').val(res.alamat);
+            $('[name="telepon"]').val(res.telepon);
+            $('[name="role"]').val(res.role);
             $(".modal").modal("show");
             $(".modal-title").html("Edit Data");
             $('.modal button[type="submit"]').html("Edit");

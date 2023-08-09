@@ -23,11 +23,11 @@
                     <div class="card-header">
                         <h1 class="m-2 text-dark text-center">Booking Saya</h1>
                         <div class="my-3 text-center">
-						<h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
+                            <h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
                             <p>Jl. Karang Anyar 1 RT.43 RW.8 <br> Loktabat Utara Banjarbaru Utara <br>
-							(Seberang Pasar Tradisional Balitan) <br> IG : elangfarm_freshmeat | WA : 083142404000
-						</p>
+                                (Seberang Pasar Tradisional Balitan) <br> IG : elangfarm_freshmeat | WA : 083142404000
+                            </p>
                             <h4>Tanggal : <strong><?= $tanggal ?></strong> | Kode Booking : <strong><?= $nota ?></strong> | Status : <?= $status ?></h4>
                         </div>
                     </div>
@@ -73,7 +73,7 @@
     <script src="<?php echo base_url('assets/vendor/adminlte/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js') ?>"></script>
     <script src="<?php echo base_url('assets/vendor/adminlte/plugins/sweetalert2/sweetalert2.min.js') ?>"></script>
     <script>
-        window.print();
+        // window.print();
     </script>
 </body>
 

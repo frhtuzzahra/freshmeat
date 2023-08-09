@@ -20,22 +20,23 @@ class Pelanggan extends CI_Controller
 
 	public function cetak()
 	{
-		$data['pelanggan'] = $this->pelanggan_model->read()->result();
+		$this->load->model('pengguna_model');
+		$data['pelanggan'] = $this->pengguna_model->readPelanggan()->result();
 		$data['label'] = "Data Pelanggan";
 		$this->load->view('cetak_pelanggan_pdf', $data);
 	}
 
 	public function read()
 	{
+		$this->load->model('pengguna_model');
 		header('Content-type: application/json');
-		if ($this->pelanggan_model->read()->num_rows() > 0) {
-			foreach ($this->pelanggan_model->read()->result() as $pelanggan) {
+		if ($this->pengguna_model->readPelanggan()->num_rows() > 0) {
+			foreach ($this->pengguna_model->readPelanggan()->result() as $pelanggan) {
 				$data[] = array(
 					'nama' => $pelanggan->nama,
 					'jenis_kelamin' => $pelanggan->jenis_kelamin,
 					'alamat' => $pelanggan->alamat,
-					'telepon' => $pelanggan->telepon,
-					'action' => '<button class="btn btn-sm btn-success" onclick="edit(' . $pelanggan->id . ')">Edit</button> <button class="btn btn-sm btn-danger" onclick="remove(' . $pelanggan->id . ')">Delete</button>'
+					'telepon' => $pelanggan->telepon
 				);
 			}
 		} else {

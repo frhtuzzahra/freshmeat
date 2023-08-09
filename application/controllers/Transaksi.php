@@ -146,6 +146,7 @@ class Transaksi extends CI_Controller
 		$now = date('d m Y');
 		foreach ($this->transaksi_model->transaksiTerakhir($now) as $key) {
 			$total = explode(',', $key);
+			$total = array_sum($total);
 		}
 		echo json_encode($total);
 	}
@@ -157,6 +158,7 @@ class Transaksi extends CI_Controller
 		$id = $_SESSION['id'];
 		foreach ($this->transaksi_model->bookingTerakhir($now, $id) as $key) {
 			$total = explode(',', $key);
+			$total = array_sum($total);
 		}
 		echo json_encode($total);
 	}

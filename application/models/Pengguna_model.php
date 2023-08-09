@@ -31,8 +31,14 @@ class Pengguna_model extends CI_Model
 
 	public function getPengguna($id)
 	{
-		$this->db->select('id, username, nama');
+		$this->db->select('id, username, nama, role, jenis_kelamin, alamat, telepon');
 		$this->db->where('id', $id);
+		return $this->db->get($this->table);
+	}
+
+	public function readPelanggan()
+	{
+		$this->db->where('role', 3);
 		return $this->db->get($this->table);
 	}
 
