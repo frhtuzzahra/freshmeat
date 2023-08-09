@@ -21,14 +21,14 @@
             <div class="container">
                 <div class="card mt-5">
                     <div class="card-header">
-					<h1 class="m-2 text-dark text-center">Laporan Penjualan</h1>
-                    <h2 class="m-2 text-dark text-center"> <?= $label ?></h2>
+                        <h1 class="m-2 text-dark text-center">Laporan Penjualan</h1>
+                        <h2 class="m-2 text-dark text-center"> <?= $label ?></h2>
                         <div class="my-3 text-center">
-						<h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
+                            <h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
                             <p>Jl. Karang Anyar 1 RT.43 RW.8 <br> Loktabat Utara Banjarbaru Utara <br>
-							(Seberang Pasar Tradisional Balitan) <br> IG : elangfarm_freshmeat | WA : 083142404000
-						</p>
+                                (Seberang Pasar Tradisional Balitan) <br> IG : elangfarm_freshmeat | WA : 083142404000
+                            </p>
                         </div>
                     </div>
                     <div class="card-body">
@@ -38,7 +38,6 @@
                                     <th>ID</th>
                                     <th>Tanggal</th>
                                     <th>Nota</th>
-                                    <th>Nama Produk</th>
                                     <th>Pelanggan</th>
                                     <th>Total Bayar</th>
                                 </tr>
@@ -50,7 +49,6 @@
                                         <td><?= $i++ ?></td>
                                         <td><?= $penjualan->tanggal ?></td>
                                         <td><?= $penjualan->nota ?></td>
-                                        <td><?= $penjualan->nama_produk ?></td>
                                         <td><?= $penjualan->nama ?></td>
                                         <td class="text-right">Rp. <?= number_format($penjualan->total_bayar, 0, ',', '.') ?></td>
                                     </tr>

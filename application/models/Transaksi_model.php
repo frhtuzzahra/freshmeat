@@ -20,10 +20,10 @@ class Transaksi_model extends CI_Model
 
 	public function getTransaksiWithPeriode($tanggal_awal, $tanggal_akhir)
 	{
-		$query = "SELECT transaksi.tanggal, transaksi.nota, produk.nama_produk, pelanggan.nama, transaksi.total_bayar,
+		$query = "SELECT transaksi.tanggal, transaksi.nota, produk.nama_produk, pengguna.nama, transaksi.total_bayar,
           (SELECT SUM(total_bayar) FROM transaksi WHERE tanggal >= '" . $tanggal_awal . "' AND tanggal <= '" . $tanggal_akhir . "') AS bayar
           FROM transaksi JOIN produk ON transaksi.barcode = produk.id
-          LEFT OUTER JOIN pelanggan ON transaksi.pelanggan = pelanggan.id
+          LEFT OUTER JOIN pengguna ON transaksi.pelanggan = pengguna.id
           WHERE transaksi.tanggal >= '" . $tanggal_awal . "' AND transaksi.tanggal <= '" . $tanggal_akhir . "'
           ORDER BY transaksi.tanggal ASC";
 

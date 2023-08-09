@@ -62,9 +62,6 @@
                   </a>
                 </div>
               </div>
-              <div class="col-12">
-                <h1 class="mt-2 mb-3 h2 text-dark">Grafik</h1>
-              </div>
               <div class="col-md-6">
                 <div class="card card-primary">
                   <div class="card-header">
