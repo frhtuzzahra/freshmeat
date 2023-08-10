@@ -14,6 +14,7 @@ class Laporan_penjualan extends CI_Controller
 
 	public function read()
 	{
+		$this->load->model('transaksi_model');
 		header('Content-type: application/json');
 		if ($this->transaksi_model->read()->num_rows() > 0) {
 			foreach ($this->transaksi_model->read()->result() as $transaksi) {

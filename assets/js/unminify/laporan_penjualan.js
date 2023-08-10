@@ -16,6 +16,9 @@ let laporan_penjualan = $("#laporan_penjualan").DataTable( {
             data: "tanggal"
         }
         , {
+            data: "nama_produk"
+        }
+        , {
             data: "total_bayar"
         }
         , {
