@@ -40,6 +40,7 @@
                                     <th>Barcode</th>
                                     <th>Nama Produk</th>
                                     <th>Qty</th>
+                                    <th>Satuan</th>
                                     <th>Harga</th>
                                     <th>Suplier</th>
                                     <th>Total</th>
@@ -48,12 +49,17 @@
                             <tbody>
                                 <?php $i = 1;
                                 foreach ($stok_masuk as $sm) : ?>
+                                    <?php
+                                       $this->load->model('satuan_produk_model');
+                                       $satuan = $this->db->where('id', $sm->satuan)->get('satuan_produk')->result();
+                                    ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
                                         <td><?= $sm->tanggal ?></td>
                                         <td><?= $sm->barcode ?></td>
                                         <td><?= $sm->nama_produk ?></td>
                                         <td><?= $sm->jumlah ?></td>
+                                        <td><?= $satuan[0]->satuan ?></td>
                                         <td>Rp. <?= number_format($sm->harga_jual, 0, ',', '.') ?></td>
                                         <td><?= $sm->supplier ?></td>
                                         <td class="text-right">Rp. <?= number_format($sm->total, 0, ',', '.') ?></td>

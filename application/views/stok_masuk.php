@@ -49,14 +49,16 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tanggal</th>
-                    <th>Barcode</th>
+                    <th>Tab</th>
+                    <th>Kode Barang</th>
                     <th>Nama Produk</th>
                     <th>Jumlah</th>
+                    <th>Satuan</th>
                     <th>Harga</th>
                     <th>Total</th>
                     <th>Status</th>
-                    <th>Keterangan</th>
+                    <th>Expired</th>
+                    
                   </tr>
                 </thead>
               </table>
@@ -81,11 +83,15 @@
         <div class="modal-body">
           <form id="form">
             <div class="form-group">
-              <label>Tanggal</label>
-              <input id="tanggal" type="text" class="form-control" placeholder="Tanggal" name="tanggal" required>
+              <label>Tanggal Masuk Freezer</label>
+              <input id="freezer" type="text" class="form-control" placeholder="Tanggal" name="freezer" required>
             </div>
             <div class="form-group">
-              <label>Barcode</label>
+              <label>Tanggal Expired</label>
+              <input id="expired" type="text" class="form-control" placeholder="Tanggal" name="expired" required>
+            </div>
+            <div class="form-group">
+              <label>Kode Batang</label>
               <select name="barcode" id="barcode" class="form-control select2" required></select>
             </div>
             <div class="form-group">

@@ -52,7 +52,7 @@ class Transaksi_model extends CI_Model
 
 	public function read()
 	{
-		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon, pengguna.nama as pelanggan');
+		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon, pengguna.nama as pelanggan , qty');
 		$this->db->from($this->table);
 		$this->db->join('pengguna', 'transaksi.pelanggan = pengguna.id', 'left outer');
 		return $this->db->get();
@@ -70,7 +70,7 @@ class Transaksi_model extends CI_Model
 		foreach ($barcode as $key => $value) {
 			$this->db->select('nama_produk');
 			$this->db->where('id', $value);
-			$data[] = '<tr><td>' . $this->db->get('produk')->row()->nama_produk . ' (' . $total[$key] . ')</td></tr>';
+			$data[] = '<tr><td>' . $this->db->get('produk')->row()->nama_produk . ' ( Qty : ' . $total[$key] . ')</td></tr>';
 		}
 		return join($data);
 	}
@@ -121,7 +121,7 @@ class Transaksi_model extends CI_Model
 	public function getName($barcode)
 	{
 		foreach ($barcode as $b) {
-			$this->db->select('nama_produk, harga_jual');
+			$this->db->select('nama_produk, harga_jual, satuan');
 			$this->db->where('id', $b);
 			$data[] = $this->db->get('produk')->row();
 		}

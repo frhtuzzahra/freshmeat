@@ -31,6 +31,7 @@ class Transaksi extends CI_Controller
 					'total_bayar' => "Rp. " . number_format($transaksi->total_bayar, 0, ',', '.'), // number_format($number, $decimals, $dec_point, $thousands_sep
 					'jumlah_uang' => "Rp. " . number_format($transaksi->jumlah_uang, 0, ',', '.'),
 					'diskon' => $transaksi->diskon . "%",
+					'qty' => $transaksi->qty,
 					'pelanggan' => $transaksi->pelanggan,
 					'action' => '<a class="btn btn-sm btn-success" href="' . site_url('transaksi/cetak/') . $transaksi->id . '" target="_blank">Print</a> <button class="btn btn-sm btn-danger" onclick="remove(' . $transaksi->id . ')">Delete</button>'
 				);
@@ -54,6 +55,14 @@ class Transaksi extends CI_Controller
 			$this->transaksi_model->addTerjual($produk->id, $produk->terjual);
 			array_push($barcode, $produk->id);
 		}
+
+		$pelanggan_baru = $this->input->post('pelanggan_baru');
+
+		if ($pelanggan_baru === '1') {
+			$pelanggan = null;
+		} else {
+			$pelanggan =$this->input->post('pelanggan');
+		}
 		$data = array(
 			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 			'barcode' => implode(',', $barcode),
@@ -61,7 +70,7 @@ class Transaksi extends CI_Controller
 			'total_bayar' => $this->input->post('total_bayar'),
 			'jumlah_uang' => $this->input->post('jumlah_uang'),
 			'diskon' => $this->input->post('diskon'),
-			'pelanggan' => $this->input->post('pelanggan'),
+			'pelanggan' => $pelanggan,
 			'nota' => $this->input->post('nota'),
 			'kasir' => $this->session->userdata('id')
 		);
@@ -93,7 +102,11 @@ class Transaksi extends CI_Controller
 		foreach ($dataProduk as $key => $value) {
 			$value->total = $qty[$key];
 			$value->harga_jual;
+			$value->satuan;
 		}
+
+		
+		
 
 		$data = array(
 			'nota' => $produk->nota,
@@ -103,7 +116,7 @@ class Transaksi extends CI_Controller
 			'diskon' => $produk->diskon,
 			'bayar' => $produk->jumlah_uang,
 			'kembalian' => $produk->jumlah_uang - $produk->total_bayar,
-			'kasir' => $produk->kasir
+			'kasir' => $produk->kasir,
 		);
 		$this->load->view('cetak_transaksi_pdf', $data);
 	}

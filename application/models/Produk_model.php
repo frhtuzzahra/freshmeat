@@ -42,6 +42,18 @@ class Produk_model extends CI_Model
 		return $this->db->get();
 	}
 
+	public function getBarcodeWithName($search = '')
+	{
+		$this->db->select('produk.id, produk.barcode, produk.nama_produk, kategori_produk.kategori, satuan_produk.satuan');
+		$this->db->from($this->table);
+		$this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
+		$this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');
+		$this->db->like('barcode', $search);
+
+		return $this->db->get()->result();
+	}
+
+
 	public function getBarcode($search = '')
 	{
 		$this->db->select('produk.id, produk.barcode');
@@ -51,7 +63,7 @@ class Produk_model extends CI_Model
 
 	public function getNama($id)
 	{
-		$this->db->select('nama_produk, stok');
+		$this->db->select('nama_produk, stok , barcode , satuan');
 		$this->db->where('id', $id);
 		return $this->db->get($this->table)->row();
 	}
@@ -67,9 +79,9 @@ class Produk_model extends CI_Model
 
 	public function getStok($id)
 	{
-		$this->db->select('stok, nama_produk, harga_jual, barcode');
+		$this->db->select('stok, nama_produk, harga_jual, barcode ,satuan');
 		$this->db->where('id', $id);
-		return $this->db->get($this->table)->row();
+		return $this->db->get($this->table);
 	}
 
 	public function produkTerlaris()

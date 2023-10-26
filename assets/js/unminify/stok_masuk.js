@@ -13,7 +13,13 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
     columns: [{
         data: null
     }, {
-        data: "tanggal"
+        data: function(row) {
+            return `
+                <div><strong>Tanggal Input :</strong> ${row.tanggal}</div>
+                <div><strong>Tanggal Masuk Frezer:</strong> ${row.tanggal_frezer}</div>
+                <div><strong>Tanggal Expired:</strong> ${row.tanggal_expired}</div>
+            `;
+        }
     }, {
         data: "barcode"
     }, {
@@ -21,14 +27,24 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
     }, {
         data: "jumlah"
     }, {
+        data: "satuan", 
+    },{
         data: "harga"
     }, {
         data: "total"
     }, {
         data: "status",
     }, {
-        data: "keterangan", 
-    }]
+        data: function(row) {
+            const tanggalExpired = new Date(row.tanggal_expired);
+            const today = new Date();
+            const sisaHari = Math.ceil((tanggalExpired - today) / (1000 * 60 * 60 * 24));
+
+            return `${sisaHari} Hari`;
+        }
+    },
+
+]
 });
 
 function reloadTable() {
@@ -128,6 +144,16 @@ $("#form").validate({
 $("#tanggal").datetimepicker({
     format: "dd-mm-yyyy h:ii:ss"
 });
+
+$("#expired").datetimepicker({
+    format: "dd-mm-yyyy h:ii:ss"
+});
+
+
+$("#freezer").datetimepicker({
+    format: "dd-mm-yyyy h:ii:ss"
+});
+
 $("#barcode").select2({
     placeholder: "Barcode",
     ajax: {

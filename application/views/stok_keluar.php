@@ -48,10 +48,12 @@
                 <tr>
                   <th>No</th>
                   <th>Tanggal</th>
-                  <th>Barcode</th>
+                  <th>Kode Barang</th>
                   <th>Nama Produk</th>
                   <th>Jumlah</th>
+                  <th>Satuan</th>
                   <th>Keterangan</th>
+                 
                 </tr>
               </thead>
             </table>
@@ -81,7 +83,7 @@
         <input id="tanggal" type="text" class="form-control" placeholder="Kategori" name="tanggal" required>
       </div>
       <div class="form-group">
-        <label>Barcode</label>
+        <label>Kode Batang</label>
         <select name="barcode" id="barcode" class="form-control select2" required></select>
       </div>
       <div class="form-group">

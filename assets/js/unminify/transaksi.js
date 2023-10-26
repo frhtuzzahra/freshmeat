@@ -28,7 +28,7 @@ function getNama() {
             id: $("#barcode").val()
         },
         success: res => {
-            $("#nama_produk").html(res.nama_produk);
+            $("#nama_produk").html(res.barcode);
             $("#sisa").html(`Sisa ${res.stok}`);
             checkEmpty()
         },
@@ -53,7 +53,9 @@ function checkStok() {
                 stok = parseInt(res.stok),
                 harga = parseInt(res.harga_jual),
                 dataBarcode = res.barcode,
+                satuan = res.satuan,
                 total = parseInt($("#total").html());
+
             if (stok < jumlah) Swal.fire("Gagal", "Stok Tidak Cukup", "warning");
             else {
                 let a = transaksi.rows().indexes().filter((a, t) => dataBarcode === transaksi.row(a).data()[0]);
@@ -79,6 +81,7 @@ function checkStok() {
                         dataBarcode,
                         nama_produk,
                         `Rp. ${harga}`,
+                        satuan,
                         jumlah,
                         `<button name="${barcode}" class="btn btn-sm btn-danger" onclick="remove('${barcode}')">Hapus</btn>`]).draw();
                     $("#total").html(total + harga * jumlah);
@@ -139,7 +142,8 @@ function add() {
     let data = transaksi.rows().data(),
         qty = [];
     $.each(data, (index, value) => {
-        qty.push(value[3])
+        console.log(value);
+        qty.push(value[4])
     });
     $.ajax({
         url: addUrl,
@@ -153,6 +157,7 @@ function add() {
             jumlah_uang: $('[name="jumlah_uang"]').val(),
             diskon: $('[name="diskon"]').val(),
             pelanggan: $("#pelanggan").val(),
+            pelanggan_baru: $("#pelanggan_baru").is(":checked") ? 1 : 0,
             nota: $("#nota").html()
         },
         success: res => {
@@ -179,7 +184,7 @@ function kembalian() {
     checkUang()
 }
 $("#barcode").select2({
-    placeholder: "Barcode",
+    placeholder: "Nama Produk",
     ajax: {
         url: getBarcodeUrl,
         type: "post",
@@ -188,11 +193,14 @@ $("#barcode").select2({
             barcode: params.term
         }),
         processResults: res => ({
-            results: res
-        }),
-        cache: true
+            results: res.map(item => ({
+                id: item.id,
+                text: item.nama_produk  // Menampilkan nama_produk sebagai teks
+            }))
+        })
     }
 });
+
 $("#pelanggan").select2({
     placeholder: "Pelanggan",
     ajax: {

@@ -16,6 +16,7 @@ let data_booking = $("#data_booking").DataTable({
         { data: "tanggal" },
         { data: "nota" },
         { data: "nama_produk" },
+        { data: "nama_satuan" },
         { data: "total_bayar" },
         { data: "status" }
     ]

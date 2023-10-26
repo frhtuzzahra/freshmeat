@@ -53,7 +53,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Barcode</label>
+                    <label>Nama Produk</label>
                     <div class="form-inline">
                       <select id="barcode" class="form-control select2 col-sm-6" onchange="getNama()"></select>
                       <span class="ml-3 text-muted" id="nama_produk"></span>
@@ -89,6 +89,7 @@
                     <th>Barcode</th>
                     <th>Nama</th>
                     <th>Harga</th>
+                    <th>Satuan</th>
                     <th>Jumlah</th>
                     <th>Actions</th>
                   </tr>
@@ -119,9 +120,13 @@
               <label>Tanggal</label>
               <input type="text" class="form-control" name="tanggal" id="tanggal" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="select_pelanggan">
               <label>Pelanggan</label>
               <select name="pelannggan" id="pelanggan" class="form-control select2"></select>
+            </div>
+            <div class="form-group">
+              <label for="pelanggan_baru">Pelanggan Baru</label>
+              <input type="checkbox" name="pelanggan_baru" id="pelanggan_baru">
             </div>
             <div class="form-group">
               <label>Jumlah Uang</label>
@@ -159,10 +164,23 @@
     var produkGetNamaUrl = '<?php echo site_url('produk/get_nama') ?>';
     var produkGetStokUrl = '<?php echo site_url('produk/get_stok') ?>';
     var addUrl = '<?php echo site_url('transaksi/add') ?>';
-    var getBarcodeUrl = '<?php echo site_url('produk/get_barcode') ?>';
+    var getBarcodeUrl = '<?php echo site_url('produk/get_barcodeWithName') ?>';
     var pelangganSearchUrl = '<?php echo site_url('pelanggan/search') ?>';
     var cetakUrl = '<?php echo site_url('transaksi/cetak/') ?>';
   </script>
+
+  <script>
+    $(document).ready(function() {
+      $("#pelanggan_baru").change(function() {
+        if ($(this).is(":checked")) {
+          $("#select_pelanggan").hide();
+        } else {
+          $("#select_pelanggan").show();
+        }
+      });
+    });
+  </script>
+
   <script src="<?php echo base_url('assets/js/unminify/transaksi.js') ?>"></script>
 </body>
 
