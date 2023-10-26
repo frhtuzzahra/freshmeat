@@ -29,7 +29,7 @@ class Booking extends CI_Controller
 		$pelanggan = $_SESSION['id'];
 		$data = array(
 			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
-			'barcode' => implode(',', $barcode),
+			'kode_barang' => implode(',', $barcode),
 			'qty' => implode(',', $this->input->post('qty')),
 			'total_bayar' => $this->input->post('total_bayar'),
 			'pelanggan' => $pelanggan,

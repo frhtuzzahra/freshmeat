@@ -28,7 +28,7 @@ class Detail_masuk_model extends CI_Model
         detail_stokmasuk.keterangan');
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'stok_masuk.id = detail_stokmasuk.id_stokmasuk');
-        $this->db->join('produk', 'produk.id = stok_masuk.barcode');
+        $this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
         return $this->db->get();
     }
 
@@ -47,7 +47,7 @@ class Detail_masuk_model extends CI_Model
         ');
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'stok_masuk.id = detail_stokmasuk.id_stokmasuk');
-        $this->db->join('produk', 'produk.id = stok_masuk.barcode');
+        $this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
         $this->db->where('stok_masuk.status', 'DP');
         return $this->db->get();
     }
@@ -67,11 +67,11 @@ class Detail_masuk_model extends CI_Model
 		(
 			SELECT SUM(stok_masuk.jumlah * produk.harga)
 			FROM stok_masuk
-			JOIN produk ON produk.id = stok_masuk.barcode
+			JOIN produk ON produk.id = stok_masuk.kode_barang
 			WHERE stok_masuk.status = 'lunas'
 		) AS total_semua
         FROM stok_masuk
-        JOIN produk ON produk.id = stok_masuk.barcode
+        JOIN produk ON produk.id = stok_masuk.kode_barang
 		JOIN supplier ON supplier.id = stok_masuk.supplier
 		where stok_masuk.status = 'lunas'";
 
@@ -89,7 +89,7 @@ class Detail_masuk_model extends CI_Model
         ( produk.harga * stok_masuk.jumlah - dp ) AS kekurangan ');
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'detail_stokmasuk.id_stokmasuk = stok_masuk.id');
-        $this->db->join('produk', 'stok_masuk.barcode = produk.id');
+        $this->db->join('produk', 'stok_masuk.kode_barang = produk.id');
         $this->db->where('stok_masuk.status', 'DP');
         $this->db->where('detail_stokmasuk.tanggal >=', $tgl_awal);
         $this->db->where('detail_stokmasuk.tanggal <=', $tgl_akhir);
@@ -108,7 +108,7 @@ class Detail_masuk_model extends CI_Model
         ( produk.harga * stok_masuk.jumlah - dp ) AS kekurangan ');
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'detail_stokmasuk.id_stokmasuk = stok_masuk.id');
-        $this->db->join('produk', 'stok_masuk.barcode = produk.id');
+        $this->db->join('produk', 'stok_masuk.kode_barang = produk.id');
         $this->db->where('stok_masuk.status', 'DP');
         $this->db->order_by('detail_stokmasuk.tanggal', 'ASC');
         return $this->db->get();
@@ -130,7 +130,7 @@ class Detail_masuk_model extends CI_Model
         ');
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'stok_masuk.id = detail_stokmasuk.id_stokmasuk');
-        $this->db->join('produk', 'produk.id = stok_masuk.barcode');
+        $this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
         $this->db->where('detail_stokmasuk.id', $id);
         return $this->db->get();
     }

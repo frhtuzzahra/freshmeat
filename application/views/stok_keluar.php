@@ -84,7 +84,7 @@
       </div>
       <div class="form-group">
         <label>Kode Barang</label>
-        <select name="barcode" id="barcode" class="form-control select2" required></select>
+        <select name="kode_barang" id="kode_barang" class="form-control select2" required></select>
       </div>
       <div class="form-group">
         <label>Jumlah</label>

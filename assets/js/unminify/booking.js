@@ -20,7 +20,8 @@ function getNama() {
             id: $("#barcode").val()
         },
         success: res => {
-            $("#nama_produk").html(res.nama_produk);
+            console.log(res);
+            $("#gambar_produk").html("<img style='width: 100px; height: 100px;' src='uploads/" + res.img + "'>");
             $("#sisa").html(`Sisa ${res.stok}`);
             checkEmpty()
         },
@@ -44,7 +45,7 @@ function checkStok() {
                 jumlah = parseInt($("#jumlah").val()),
                 stok = parseInt(res.stok),
                 harga = parseInt(res.harga_jual),
-                dataBarcode = res.barcode,
+                dataBarcode = res.kode_barang,
                 satuan = res.satuan,
                 total = parseInt($("#total").html());
             if (stok < jumlah) Swal.fire("Gagal", "Stok Tidak Cukup", "warning");

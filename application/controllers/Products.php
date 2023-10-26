@@ -23,7 +23,7 @@ class Products extends CI_Controller
 		if ($this->produk_model->read()->num_rows() > 0) {
 			foreach ($this->produk_model->read()->result() as $produk) {
 				$data[] = array(
-					'barcode' => $produk->barcode,
+					'kode_barang' => $produk->kode_barang,
 					'gambar' => '<img src="' . base_url('assets/images/' . $produk->gambar) . '" class="img-fluid" width="100">',
 					'nama' => $produk->nama_produk,
 					'kategori' => $produk->kategori,

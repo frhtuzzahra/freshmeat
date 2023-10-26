@@ -23,7 +23,7 @@ class Data_booking extends CI_Controller
 		header('Content-type: application/json');
 		if ($this->booking_model->read()->num_rows() > 0) {
 			foreach ($this->booking_model->read()->result() as $booking) {
-				$barcode = explode(',', $booking->barcode);
+				$barcode = explode(',', $booking->kode_barang);
 				$tanggal = new DateTime($booking->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),

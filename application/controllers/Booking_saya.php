@@ -25,7 +25,7 @@ class Booking_saya extends CI_Controller
 		$id = $_SESSION['id'];
 		if ($this->booking_model->readByIdPelanggan($id)->num_rows() > 0) {
 			foreach ($this->booking_model->readByIdPelanggan($id)->result() as $booking) {
-				$barcode = explode(',', $booking->barcode);
+				$barcode = explode(',', $booking->kode_barang);
 				$tanggal = new DateTime($booking->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
@@ -51,7 +51,7 @@ class Booking_saya extends CI_Controller
 		$booking = $this->booking_model->getAll($id);
 
 		$tanggal = new DateTime($booking->tanggal);
-		$barcode = explode(',', $booking->barcode);
+		$barcode = explode(',', $booking->kode_barang);
 		$qty = explode(',', $booking->qty);
 
 		$booking->tanggal = $tanggal->format('d-m-Y H:i:s');

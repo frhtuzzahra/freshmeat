@@ -15,9 +15,9 @@ class Stok_keluar_model extends CI_Model {
 	{
 		$this->db->trans_begin(); // Memulai transaksi database
 
-		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga, tanggal_expired, tanggal_frezer, satuan');
+		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.kode_barang, produk.nama_produk, produk.harga, tanggal_expired, tanggal_frezer, satuan');
 		$this->db->from('stok_masuk');
-		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
+		$this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
 		$this->db->where('tanggal_expired <', date('Y-m-d'));
 		$this->db->order_by('stok_masuk.tanggal', 'desc');
 		$expired_products = $this->db->get()->result();
@@ -26,7 +26,7 @@ class Stok_keluar_model extends CI_Model {
 		foreach ($expired_products as $product) {
 			$data = array(
 				'tanggal' => date('Y-m-d H:i:s'),
-				'barcode' => $product->id,
+				'kode_barang' => $product->id,
 				'jumlah' => $product->jumlah,
 				'Keterangan' => 'kadaluarsa'
 			);
@@ -50,9 +50,9 @@ class Stok_keluar_model extends CI_Model {
 		//pindah stock masuk ke stock keluar karena kadaluarsa
 		$this->MoveStockFromIntoOut();
 
-		$this->db->select('stok_keluar.tanggal, stok_keluar.jumlah, stok_keluar.keterangan, produk.barcode, produk.nama_produk , produk.satuan');
+		$this->db->select('stok_keluar.tanggal, stok_keluar.jumlah, stok_keluar.keterangan, produk.kode_barang, produk.nama_produk , produk.satuan');
 		$this->db->from($this->table);
-		$this->db->join('produk', 'produk.id = stok_keluar.barcode');
+		$this->db->join('produk', 'produk.id = stok_keluar.kode_barang');
 		return $this->db->get();
 	}
 

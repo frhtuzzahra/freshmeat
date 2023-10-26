@@ -21,7 +21,7 @@ class Laporan_kas_model extends CI_Model
                     0 AS total_keluar
                 FROM
                     stok_masuk
-                JOIN produk ON stok_masuk.barcode = produk.id
+                JOIN produk ON stok_masuk.kode_barang = produk.id
             ) AS subquery_masuk
         ) AS total_kas_masuk,
         (
@@ -42,7 +42,7 @@ class Laporan_kas_model extends CI_Model
             0 AS total_keluar
         FROM
             stok_masuk
-        JOIN produk ON stok_masuk.barcode = produk.id
+        JOIN produk ON stok_masuk.kode_barang = produk.id
         UNION ALL
         SELECT
             transaksi.tanggal,
@@ -72,7 +72,7 @@ class Laporan_kas_model extends CI_Model
                     0 AS total_keluar
                 FROM
                     stok_masuk
-                JOIN produk ON stok_masuk.barcode = produk.id
+                JOIN produk ON stok_masuk.kode_barang = produk.id
                 WHERE
                     stok_masuk.tanggal BETWEEN '" . $tanggal_awal . "' AND '" . $tanggal_akhir . "'
             ) AS subquery_masuk
@@ -97,7 +97,7 @@ class Laporan_kas_model extends CI_Model
             0 AS total_keluar
         FROM
             stok_masuk
-        JOIN produk ON stok_masuk.barcode = produk.id
+        JOIN produk ON stok_masuk.kode_barang = produk.id
         WHERE
             stok_masuk.tanggal BETWEEN '" . $tanggal_awal . "' AND '" . $tanggal_akhir . "'
         UNION ALL
