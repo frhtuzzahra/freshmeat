@@ -14,7 +14,6 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
         data: null
     }, {
         data: function(row) {
-            // Memisahkan tanggal ke tiga baris dengan judul
             return `
                 <div><strong>Tanggal Input :</strong> ${row.tanggal}</div>
                 <div><strong>Tanggal Masuk Frezer:</strong> ${row.tanggal_frezer}</div>
@@ -36,8 +35,14 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
     }, {
         data: "status",
     }, {
-        data: "keterangan", 
-    }, 
+        data: function(row) {
+            const tanggalExpired = new Date(row.tanggal_expired);
+            const today = new Date();
+            const sisaHari = Math.ceil((tanggalExpired - today) / (1000 * 60 * 60 * 24));
+
+            return `${sisaHari} Hari`;
+        }
+    },
 
 ]
 });

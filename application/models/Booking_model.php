@@ -8,7 +8,7 @@ class Booking_model extends CI_Model
 
     public function readAll()
     {
-        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status`");
+        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status` , booking.barcode ,booking.qty");
         $this->db->from($this->table);
         $this->db->join("pengguna", "booking.pelanggan = pengguna.id");
         return $this->db->get();
@@ -44,7 +44,7 @@ class Booking_model extends CI_Model
 
     public function read()
     {
-        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan');
+        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan,qty');
         $this->db->from($this->table);
         $this->db->join('pengguna', 'booking.pelanggan = pengguna.id', 'left outer');
         $this->db->where('booking.status', 'belum');
@@ -71,9 +71,32 @@ class Booking_model extends CI_Model
     {
         $total = explode(',', $qty);
         foreach ($barcode as $key => $value) {
-            $this->db->select('nama_produk');
+            $this->db->select('nama_produk,barcode,id');
             $this->db->where('id', $value);
-            $data[] = '<tr><td>' . $this->db->get('produk')->row()->nama_produk . ' (' . $total[$key] . ')</td></tr>';
+            $produk = $this->db->get('produk')->row();
+
+            $this->db->where('id', $produk->id);
+		    $satuan = $this->db->get('satuan_produk')->result();
+
+           
+            $data[] = '<tr><td>' . $produk->nama_produk . ' (Qty : ' . $total[$key] . ')</td></tr>';
+        }
+        return join($data);
+    }
+
+    public function getSatuan($barcode, $qty)
+    {
+        $total = explode(',', $qty);
+        foreach ($barcode as $key => $value) {
+            $this->db->select('nama_produk,barcode,id');
+            $this->db->where('id', $value);
+            $produk = $this->db->get('produk')->row();
+
+            $this->db->where('id', $produk->id);
+		    $satuan = $this->db->get('satuan_produk')->result();
+
+           
+            $data[] = '<tr><td>' . $satuan[0]->satuan . '</td></tr>';
         }
         return join($data);
     }

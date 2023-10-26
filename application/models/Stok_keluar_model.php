@@ -33,9 +33,9 @@ class Stok_keluar_model extends CI_Model {
 			$this->db->insert('stok_keluar', $data);
 		}
 
-		// Menghapus data dari tabel stok_masuk yang telah dipindahkan
-		$this->db->where('tanggal_expired <', date('Y-m-d'));
-		$this->db->delete('stok_masuk');
+		// // Menghapus data dari tabel stok_masuk yang telah dipindahkan
+		// $this->db->where('tanggal_expired <', date('Y-m-d'));
+		// $this->db->delete('stok_masuk');
 
 		// Memeriksa apakah transaksi berhasil atau gagal
 		if ($this->db->trans_status() === FALSE) {

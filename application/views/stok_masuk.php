@@ -57,7 +57,7 @@
                     <th>Harga</th>
                     <th>Total</th>
                     <th>Status</th>
-                    <th>Keterangan</th>
+                    <th>Expired</th>
                     
                   </tr>
                 </thead>
@@ -91,7 +91,7 @@
               <input id="expired" type="text" class="form-control" placeholder="Tanggal" name="expired" required>
             </div>
             <div class="form-group">
-              <label>Barcode</label>
+              <label>Kode Batang</label>
               <select name="barcode" id="barcode" class="form-control select2" required></select>
             </div>
             <div class="form-group">

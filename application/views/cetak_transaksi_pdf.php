@@ -49,13 +49,16 @@
                                 <?php
                                 $no = 1;
                                 foreach ($produk as $key) : ?>
-
+                                    <?php
+                                       $this->load->model('satuan_produk_model');
+                                       $satuan = $this->db->where('id', $key->satuan)->get('satuan_produk')->result();
+                                    ?>
                                     <tr>
                                         <td><?= $no++ ?></td>
                                         <td><?= $key->nama_produk ?></td>
                                         <td>Rp. <?= number_format($key->harga_jual, 0, ',', '.') ?></td>
                                         <td class="text-right"><?= $key->total ?></td>
-                                        <td class="text-right"><?= $key->satuan ?></td>
+                                        <td class="text-right"><?= $satuan[0]->satuan ?></td>
                                         <td class="text-right"><?= $diskon ?>%</td>
                                         <td class="text-right">Rp. <?= number_format($key->harga_jual * $key->total, 0, ',', '.') ?></td>
                                     </tr>

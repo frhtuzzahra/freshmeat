@@ -142,7 +142,8 @@ function add() {
     let data = transaksi.rows().data(),
         qty = [];
     $.each(data, (index, value) => {
-        qty.push(value[3])
+        console.log(value);
+        qty.push(value[4])
     });
     $.ajax({
         url: addUrl,
@@ -156,6 +157,7 @@ function add() {
             jumlah_uang: $('[name="jumlah_uang"]').val(),
             diskon: $('[name="diskon"]').val(),
             pelanggan: $("#pelanggan").val(),
+            pelanggan_baru: $("#pelanggan_baru").is(":checked") ? 1 : 0,
             nota: $("#nota").html()
         },
         success: res => {

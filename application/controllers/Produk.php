@@ -11,6 +11,7 @@ class Produk extends CI_Controller
 			redirect('/');
 		}
 		$this->load->model('produk_model');
+		$this->load->model('satuan_produk_model');
 	}
 
 	public function index()
@@ -170,7 +171,19 @@ class Produk extends CI_Controller
 	{
 		header('Content-type: application/json');
 		$id = $this->input->post('id');
-		echo json_encode($this->produk_model->getStok($id));
+		$produk = $this->produk_model->getStok($id)->result();
+
+		foreach ($produk as $barcode) {
+			$satuan = $this->satuan_produk_model->getKategori($barcode->satuan)->result();
+			$data = array(
+				'nama_produk' => $barcode->nama_produk,
+				'satuan' => $satuan[0]->satuan,
+				'barcode' => $barcode->barcode,
+				'stok' => $barcode->stok,
+				'harga_jual' => $barcode->harga_jual
+			);
+		}
+		echo json_encode($data);
 	}
 
 	public function produk_terlaris()

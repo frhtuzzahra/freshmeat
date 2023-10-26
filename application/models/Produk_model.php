@@ -81,7 +81,7 @@ class Produk_model extends CI_Model
 	{
 		$this->db->select('stok, nama_produk, harga_jual, barcode ,satuan');
 		$this->db->where('id', $id);
-		return $this->db->get($this->table)->row();
+		return $this->db->get($this->table);
 	}
 
 	public function produkTerlaris()

@@ -70,7 +70,7 @@ class Transaksi_model extends CI_Model
 		foreach ($barcode as $key => $value) {
 			$this->db->select('nama_produk');
 			$this->db->where('id', $value);
-			$data[] = '<tr><td>' . $this->db->get('produk')->row()->nama_produk . ' (' . $total[$key] . ')</td></tr>';
+			$data[] = '<tr><td>' . $this->db->get('produk')->row()->nama_produk . ' ( Qty : ' . $total[$key] . ')</td></tr>';
 		}
 		return join($data);
 	}

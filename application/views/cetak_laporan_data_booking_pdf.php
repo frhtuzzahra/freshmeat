@@ -21,14 +21,14 @@
             <div class="container">
                 <div class="card mt-5">
                     <div class="card-header">
-					<h1 class="m-2 text-dark text-center">Laporan Data Booking</h1>
-                    <h2 class="m-2 text-dark text-center"> <?= $label ?></h2>
+                        <h1 class="m-2 text-dark text-center">Laporan Data Booking</h1>
+                        <h2 class="m-2 text-dark text-center"> <?= $label ?></h2>
                         <div class="my-3 text-center">
-						<h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
+                            <h3 class="m-2 text-dark text-center">Elang Fresh Meat</h3>
                             <img src="<?php echo base_url('assets/images/logofreshmeatnavbar.png') ?>" alt="logo" width="80px">
                             <p>Jl. Karang Anyar 1 RT.43 RW.8 <br> Loktabat Utara Banjarbaru Utara <br>
-							(Seberang Pasar Tradisional Balitan) <br> IG : elangfarm_freshmeat | WA : 083142404000
-						</p>
+                                (Seberang Pasar Tradisional Balitan) <br> IG : elangfarm_freshmeat | WA : 083142404000
+                            </p>
                         </div>
                     </div>
                     <div class="card-body">
@@ -38,6 +38,7 @@
                                     <th>ID</th>
                                     <th>Tanggal</th>
                                     <th>Kode Booking</th>
+                                    <th>Qty</th>
                                     <th>Total Bayar</th>
                                     <th>Pelanggan</th>
                                     <th>Status</th>
@@ -46,10 +47,43 @@
                             <tbody>
                                 <?php $i = 1;
                                 foreach ($data_booking as $databooking) : ?>
+                                    <?php
+                                    $barcode = explode(',', $databooking->barcode);
+                                    $qty = explode(',', $databooking->qty);
+                                    
+                                    ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
                                         <td><?= $databooking->tanggal ?></td>
                                         <td><?= $databooking->nota ?></td>
+                                        <td>
+                                            <table>
+                                                <tr>
+                                                    <th>Product</th>
+                                                    <th>Qty</th>
+                                                    <th>Satuan</th>
+                                                </tr>
+                                                <?php $i=0; foreach ($barcode as $item) : ?>
+                                                    <?php
+                                                    $this->db->select('produk.id, produk.barcode, produk.nama_produk, produk.harga, produk.harga_jual, produk.stok, kategori_produk.id as kategori_id, kategori_produk.kategori, satuan_produk.id as satuan_id, satuan_produk.satuan');
+                                                    $this->db->from('produk');
+                                                    $this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
+                                                    $this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');
+                                                    $this->db->where('produk.id', $item);
+                                                    $produk = $this->db->get()->result();
+                                                    ?>
+                                                    
+
+                                                    <tr>
+                                                        <td><?= $produk[0]->nama_produk ?></td>
+                                                        <td><?= $qty[$i] ?></td>
+                                                        <td><?= $produk[0]->satuan ?></td>
+                                                    </tr>
+
+                                                    <?$i++?>
+                                                <?php endforeach ?>
+                                            </table>
+                                        </td>
                                         <td class="text-right">Rp. <?= number_format($databooking->total_bayar, 0, ',', '.') ?></td>
                                         <td><?= $databooking->nama ?></td>
                                         <td><?= ($databooking->status == 'diambil') ? '<span class="badge badge-success">Diambil</span>' : '<span class="badge badge-warning">Belum</span>' ?></td>

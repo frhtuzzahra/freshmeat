@@ -83,7 +83,7 @@
         <input id="tanggal" type="text" class="form-control" placeholder="Kategori" name="tanggal" required>
       </div>
       <div class="form-group">
-        <label>Barcode</label>
+        <label>Kode Batang</label>
         <select name="barcode" id="barcode" class="form-control select2" required></select>
       </div>
       <div class="form-group">

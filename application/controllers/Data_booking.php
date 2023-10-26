@@ -29,6 +29,7 @@ class Data_booking extends CI_Controller
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'nota' => $booking->nota,
 					'nama_produk' => '<table>' . $this->booking_model->getProduk($barcode, $booking->qty) . '</table>',
+					'nama_satuan' => '<table>' . $this->booking_model->getSatuan($barcode, $booking->qty) . '</table>',
 					'total_bayar' => "Rp. " . number_format($booking->total_bayar, 0, ',', '.'),
 					'status' => ($booking->status == 'diambil') ? '<button type="button" class="btn btn-sm btn-success">' . ucfirst($booking->status) . '</button>' : '
 					<div class="btn-group">

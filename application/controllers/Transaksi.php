@@ -55,6 +55,14 @@ class Transaksi extends CI_Controller
 			$this->transaksi_model->addTerjual($produk->id, $produk->terjual);
 			array_push($barcode, $produk->id);
 		}
+
+		$pelanggan_baru = $this->input->post('pelanggan_baru');
+
+		if ($pelanggan_baru === '1') {
+			$pelanggan = null;
+		} else {
+			$pelanggan =$this->input->post('pelanggan');
+		}
 		$data = array(
 			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 			'barcode' => implode(',', $barcode),
@@ -62,7 +70,7 @@ class Transaksi extends CI_Controller
 			'total_bayar' => $this->input->post('total_bayar'),
 			'jumlah_uang' => $this->input->post('jumlah_uang'),
 			'diskon' => $this->input->post('diskon'),
-			'pelanggan' => $this->input->post('pelanggan'),
+			'pelanggan' => $pelanggan,
 			'nota' => $this->input->post('nota'),
 			'kasir' => $this->session->userdata('id')
 		);
@@ -96,6 +104,8 @@ class Transaksi extends CI_Controller
 			$value->harga_jual;
 			$value->satuan;
 		}
+
+		
 		
 
 		$data = array(

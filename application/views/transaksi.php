@@ -89,8 +89,8 @@
                     <th>Barcode</th>
                     <th>Nama</th>
                     <th>Harga</th>
-                    <th>Jumlah</th>
                     <th>Satuan</th>
+                    <th>Jumlah</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -120,7 +120,7 @@
               <label>Tanggal</label>
               <input type="text" class="form-control" name="tanggal" id="tanggal" required>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="select_pelanggan">
               <label>Pelanggan</label>
               <select name="pelannggan" id="pelanggan" class="form-control select2"></select>
             </div>
@@ -167,19 +167,20 @@
     var getBarcodeUrl = '<?php echo site_url('produk/get_barcodeWithName') ?>';
     var pelangganSearchUrl = '<?php echo site_url('pelanggan/search') ?>';
     var cetakUrl = '<?php echo site_url('transaksi/cetak/') ?>';
+  </script>
 
-    // Menangani perubahan status checkbox "Pelanggan Baru"
-    const pelangganBaruCheckbox = document.getElementById("pelanggan_baru");
-    const pelangganDropdown = document.getElementById("pelanggan");
-
-    pelangganBaruCheckbox.addEventListener("change", function() {
-      if (pelangganBaruCheckbox.checked) {
-        pelangganDropdown.style.display = "none"; // Menghilangkan dropdown jika checkbox dicentang
-      } else {
-        pelangganDropdown.style.display = "block"; // Menampilkan dropdown jika checkbox tidak dicentang
-      }
+  <script>
+    $(document).ready(function() {
+      $("#pelanggan_baru").change(function() {
+        if ($(this).is(":checked")) {
+          $("#select_pelanggan").hide();
+        } else {
+          $("#select_pelanggan").show();
+        }
+      });
     });
   </script>
+
   <script src="<?php echo base_url('assets/js/unminify/transaksi.js') ?>"></script>
 </body>
 

@@ -11,6 +11,7 @@ class Stok_masuk extends CI_Controller
 			redirect('/');
 		}
 		$this->load->model('stok_masuk_model');
+		$this->load->model('satuan_produk_model');
 	}
 
 	public function index()
@@ -35,6 +36,7 @@ class Stok_masuk extends CI_Controller
 		if ($this->stok_masuk_model->read()->num_rows() > 0) {
 			foreach ($this->stok_masuk_model->read()->result() as $stok_masuk) {
 				$tanggal = new DateTime($stok_masuk->tanggal);
+				$satuan = $this->satuan_produk_model->getKategori($stok_masuk->satuan)->result();
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'barcode' => $stok_masuk->barcode,
@@ -46,7 +48,7 @@ class Stok_masuk extends CI_Controller
 					'keterangan' => $stok_masuk->keterangan,
 					'tanggal_expired' => $stok_masuk->tanggal_expired,
 					'tanggal_frezer' => $stok_masuk->tanggal_frezer,
-					'satuan' => $stok_masuk->satuan,
+					'satuan' => $satuan[0]->satuan,
 				);
 			}
 		} else {
@@ -141,6 +143,7 @@ class Stok_masuk extends CI_Controller
 		header('Content-type: application/json');
 		if ($this->stok_masuk_model->laporan()->num_rows() > 0) {
 			foreach ($this->stok_masuk_model->laporan()->result() as $stok_masuk) {
+				$satuan = $this->satuan_produk_model->getKategori($stok_masuk->satuan)->result();
 				$tanggal = new DateTime($stok_masuk->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
@@ -152,7 +155,7 @@ class Stok_masuk extends CI_Controller
 					'status' => $stok_masuk->status,
 					'keterangan' => $stok_masuk->keterangan,
 					'supplier' => $stok_masuk->supplier,
-					'satuan' => $stok_masuk->satuan,
+					'satuan' => $satuan[0]->satuan,
 				);
 			}
 		} else {

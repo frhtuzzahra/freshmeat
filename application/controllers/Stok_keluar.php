@@ -11,6 +11,7 @@ class Stok_keluar extends CI_Controller
 			redirect('/');
 		}
 		$this->load->model('stok_keluar_model');
+		$this->load->model('satuan_produk_model');
 	}
 
 	public function index()
@@ -30,6 +31,7 @@ class Stok_keluar extends CI_Controller
 		header('Content-type: application/json');
 		if ($this->stok_keluar_model->read()->num_rows() > 0) {
 			foreach ($this->stok_keluar_model->read()->result() as $stok_keluar) {
+				$satuan = $this->satuan_produk_model->getKategori($stok_keluar->satuan)->result();
 				$tanggal = new DateTime($stok_keluar->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
@@ -37,7 +39,7 @@ class Stok_keluar extends CI_Controller
 					'nama_produk' => $stok_keluar->nama_produk,
 					'jumlah' => $stok_keluar->jumlah,
 					'keterangan' => $stok_keluar->keterangan,
-					'satuan' => $stok_keluar->satuan,
+					'satuan' => $satuan[0]->satuan,
 				);
 			}
 		} else {
