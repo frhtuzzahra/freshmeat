@@ -17,11 +17,51 @@ class Stok_masuk_model extends CI_Model
 		return $this->db->update($this->table, $data);
 	}
 
-	public function read()
+	public function MoveStockFromIntoOut()
 	{
-		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga');
+		$this->db->trans_begin(); // Memulai transaksi database
+
+		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga, tanggal_expired, tanggal_frezer, satuan');
 		$this->db->from($this->table);
 		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
+		$this->db->where('tanggal_expired <', date('Y-m-d'));
+		$this->db->order_by('stok_masuk.tanggal', 'desc');
+		$expired_products = $this->db->get()->result();
+
+		// Memindahkan data ke tabel stock_keluar dengan mengubah keterangan menjadi "kadaluarsa"
+		foreach ($expired_products as $product) {
+			$data = array(
+				'tanggal' => date('Y-m-d H:i:s'),
+				'barcode' => $product->id,
+				'jumlah' => $product->jumlah,
+				'Keterangan' => 'kadaluarsa'
+			);
+			$this->db->insert('stok_keluar', $data);
+		}
+
+		// Menghapus data dari tabel stok_masuk yang telah dipindahkan
+		$this->db->where('tanggal_expired <', date('Y-m-d'));
+		$this->db->delete($this->table);
+
+		// Memeriksa apakah transaksi berhasil atau gagal
+		if ($this->db->trans_status() === FALSE) {
+			$this->db->trans_rollback(); // Transaksi gagal, rollback
+		} else {
+			$this->db->trans_commit(); // Transaksi berhasil, commit
+		}
+	}
+
+
+	public function read()
+	{
+		//pindah stock masuk ke stock keluar karena kadaluarsa
+		$this->MoveStockFromIntoOut();
+
+
+		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga ,tanggal_expired ,tanggal_frezer ,satuan');
+		$this->db->from($this->table);
+		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
+		$this->db->where('tanggal_expired >', date('Y-m-d'));
 		$this->db->order_by('stok_masuk.tanggal', 'desc');
 		return $this->db->get();
 	}
@@ -120,7 +160,7 @@ class Stok_masuk_model extends CI_Model
 
 	public function laporan()
 	{
-		$this->db->select('stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga_jual, supplier.nama as supplier');
+		$this->db->select('stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga_jual, supplier.nama as supplier ,satuan');
 		$this->db->from($this->table);
 		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
 		$this->db->join('supplier', 'supplier.id = stok_masuk.supplier', 'left outer');

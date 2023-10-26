@@ -13,7 +13,14 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
     columns: [{
         data: null
     }, {
-        data: "tanggal"
+        data: function(row) {
+            // Memisahkan tanggal ke tiga baris dengan judul
+            return `
+                <div><strong>Tanggal Input :</strong> ${row.tanggal}</div>
+                <div><strong>Tanggal Masuk Frezer:</strong> ${row.tanggal_frezer}</div>
+                <div><strong>Tanggal Expired:</strong> ${row.tanggal_expired}</div>
+            `;
+        }
     }, {
         data: "barcode"
     }, {
@@ -21,6 +28,8 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
     }, {
         data: "jumlah"
     }, {
+        data: "satuan", 
+    },{
         data: "harga"
     }, {
         data: "total"
@@ -28,7 +37,9 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
         data: "status",
     }, {
         data: "keterangan", 
-    }]
+    }, 
+
+]
 });
 
 function reloadTable() {
@@ -128,6 +139,16 @@ $("#form").validate({
 $("#tanggal").datetimepicker({
     format: "dd-mm-yyyy h:ii:ss"
 });
+
+$("#expired").datetimepicker({
+    format: "dd-mm-yyyy h:ii:ss"
+});
+
+
+$("#freezer").datetimepicker({
+    format: "dd-mm-yyyy h:ii:ss"
+});
+
 $("#barcode").select2({
     placeholder: "Barcode",
     ajax: {

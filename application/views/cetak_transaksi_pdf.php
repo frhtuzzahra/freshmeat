@@ -40,6 +40,7 @@
                                     <th>Nama Produk</th>
                                     <th>Harga</th>
                                     <th>Qty</th>
+                                    <th>Satuan</th>
                                     <th>Diskon</th>
                                     <th>Total</th>
                                 </tr>
@@ -54,6 +55,7 @@
                                         <td><?= $key->nama_produk ?></td>
                                         <td>Rp. <?= number_format($key->harga_jual, 0, ',', '.') ?></td>
                                         <td class="text-right"><?= $key->total ?></td>
+                                        <td class="text-right"><?= $key->satuan ?></td>
                                         <td class="text-right"><?= $diskon ?>%</td>
                                         <td class="text-right">Rp. <?= number_format($key->harga_jual * $key->total, 0, ',', '.') ?></td>
                                     </tr>

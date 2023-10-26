@@ -31,6 +31,7 @@ class Transaksi extends CI_Controller
 					'total_bayar' => "Rp. " . number_format($transaksi->total_bayar, 0, ',', '.'), // number_format($number, $decimals, $dec_point, $thousands_sep
 					'jumlah_uang' => "Rp. " . number_format($transaksi->jumlah_uang, 0, ',', '.'),
 					'diskon' => $transaksi->diskon . "%",
+					'qty' => $transaksi->qty,
 					'pelanggan' => $transaksi->pelanggan,
 					'action' => '<a class="btn btn-sm btn-success" href="' . site_url('transaksi/cetak/') . $transaksi->id . '" target="_blank">Print</a> <button class="btn btn-sm btn-danger" onclick="remove(' . $transaksi->id . ')">Delete</button>'
 				);
@@ -93,7 +94,9 @@ class Transaksi extends CI_Controller
 		foreach ($dataProduk as $key => $value) {
 			$value->total = $qty[$key];
 			$value->harga_jual;
+			$value->satuan;
 		}
+		
 
 		$data = array(
 			'nota' => $produk->nota,
@@ -103,7 +106,7 @@ class Transaksi extends CI_Controller
 			'diskon' => $produk->diskon,
 			'bayar' => $produk->jumlah_uang,
 			'kembalian' => $produk->jumlah_uang - $produk->total_bayar,
-			'kasir' => $produk->kasir
+			'kasir' => $produk->kasir,
 		);
 		$this->load->view('cetak_transaksi_pdf', $data);
 	}

@@ -53,7 +53,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Barcode</label>
+                    <label>Nama Produk</label>
                     <div class="form-inline">
                       <select id="barcode" class="form-control select2 col-sm-6" onchange="getNama()"></select>
                       <span class="ml-3 text-muted" id="nama_produk"></span>
@@ -90,6 +90,7 @@
                     <th>Nama</th>
                     <th>Harga</th>
                     <th>Jumlah</th>
+                    <th>Satuan</th>
                     <th>Actions</th>
                   </tr>
                 </thead>
@@ -122,6 +123,10 @@
             <div class="form-group">
               <label>Pelanggan</label>
               <select name="pelannggan" id="pelanggan" class="form-control select2"></select>
+            </div>
+            <div class="form-group">
+              <label for="pelanggan_baru">Pelanggan Baru</label>
+              <input type="checkbox" name="pelanggan_baru" id="pelanggan_baru">
             </div>
             <div class="form-group">
               <label>Jumlah Uang</label>
@@ -159,9 +164,21 @@
     var produkGetNamaUrl = '<?php echo site_url('produk/get_nama') ?>';
     var produkGetStokUrl = '<?php echo site_url('produk/get_stok') ?>';
     var addUrl = '<?php echo site_url('transaksi/add') ?>';
-    var getBarcodeUrl = '<?php echo site_url('produk/get_barcode') ?>';
+    var getBarcodeUrl = '<?php echo site_url('produk/get_barcodeWithName') ?>';
     var pelangganSearchUrl = '<?php echo site_url('pelanggan/search') ?>';
     var cetakUrl = '<?php echo site_url('transaksi/cetak/') ?>';
+
+    // Menangani perubahan status checkbox "Pelanggan Baru"
+    const pelangganBaruCheckbox = document.getElementById("pelanggan_baru");
+    const pelangganDropdown = document.getElementById("pelanggan");
+
+    pelangganBaruCheckbox.addEventListener("change", function() {
+      if (pelangganBaruCheckbox.checked) {
+        pelangganDropdown.style.display = "none"; // Menghilangkan dropdown jika checkbox dicentang
+      } else {
+        pelangganDropdown.style.display = "block"; // Menampilkan dropdown jika checkbox tidak dicentang
+      }
+    });
   </script>
   <script src="<?php echo base_url('assets/js/unminify/transaksi.js') ?>"></script>
 </body>

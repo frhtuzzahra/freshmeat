@@ -48,9 +48,9 @@
                   <tr>
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Barcode</th>
+                    <th>Kode Barang</th>
                     <th>Nama Produk</th>
-                    <th>Jumlah</th>
+                    <th>Qty</th>
                     <th>Keterangan</th>
                   </tr>
                 </thead>

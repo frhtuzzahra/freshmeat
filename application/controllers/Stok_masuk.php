@@ -44,6 +44,9 @@ class Stok_masuk extends CI_Controller
 					'jumlah' => $stok_masuk->jumlah,
 					'status' => ($stok_masuk->status == 'Lunas') ? '<span class="badge badge-success">' . $stok_masuk->status . '</span>' : '<span class="badge badge-danger">' . $stok_masuk->status . '</span>',
 					'keterangan' => $stok_masuk->keterangan,
+					'tanggal_expired' => $stok_masuk->tanggal_expired,
+					'tanggal_frezer' => $stok_masuk->tanggal_frezer,
+					'satuan' => $stok_masuk->satuan,
 				);
 			}
 		} else {
@@ -85,15 +88,28 @@ class Stok_masuk extends CI_Controller
 		$rumus = max($stok + $jumlah, 0);
 		$addStok = $this->stok_masuk_model->addStok($id, $rumus);
 		if ($addStok) {
-			$tanggal = new DateTime($this->input->post('tanggal'));
+			$tanggal_frezer_input = $this->input->post('freezer');
+			$tanggal_expired_input = $this->input->post('expired');
+			
+			// Mengonversi tanggal frezer ke format datetime MySQL
+			$timestamp_frezer = strtotime($tanggal_frezer_input);
+			$tanggal_frezer_mysql = date("Y-m-d H:i:s", $timestamp_frezer);
+			
+			// Mengonversi tanggal expired ke format datetime MySQL
+			$timestamp_expired = strtotime($tanggal_expired_input);
+			$tanggal_expired_mysql = date("Y-m-d H:i:s", $timestamp_expired);
+			
+			// Membuat array data yang akan disimpan ke dalam database
 			$data = array(
-				'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 				'barcode' => $id,
 				'jumlah' => $jumlah,
 				'status' => $this->input->post('status'),
 				'keterangan' => $this->input->post('keterangan'),
-				'supplier' => $this->input->post('supplier')
+				'supplier' => $this->input->post('supplier'),
+				'tanggal_frezer' => $tanggal_frezer_mysql, // Format datetime MySQL
+				'tanggal_expired' => $tanggal_expired_mysql, // Format datetime MySQL
 			);
+			
 			if ($this->stok_masuk_model->create($data)) {
 				echo json_encode('sukses');
 			}
@@ -135,7 +151,8 @@ class Stok_masuk extends CI_Controller
 					'total' => "Rp. " . number_format($stok_masuk->harga_jual * $stok_masuk->jumlah, 0, ',', '.'),
 					'status' => $stok_masuk->status,
 					'keterangan' => $stok_masuk->keterangan,
-					'supplier' => $stok_masuk->supplier
+					'supplier' => $stok_masuk->supplier,
+					'satuan' => $stok_masuk->satuan,
 				);
 			}
 		} else {

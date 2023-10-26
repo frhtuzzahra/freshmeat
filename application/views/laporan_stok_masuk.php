@@ -58,9 +58,10 @@
                   <tr>
                     <th>No</th>
                     <th>Tanggal</th>
-                    <th>Barcode</th>
+                    <th>Kode Barang</th>
                     <th>Nama Produk</th>
                     <th>Qty</th>
+                    <th>Satuan</th>
                     <th>Harga</th>
                     <th>Total</th>
                     <th>Supplier</th>
