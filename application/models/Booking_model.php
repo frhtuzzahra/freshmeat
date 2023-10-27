@@ -88,11 +88,11 @@ class Booking_model extends CI_Model
     {
         $total = explode(',', $qty);
         foreach ($barcode as $key => $value) {
-            $this->db->select('nama_produk,barcode,id');
+            $this->db->select('nama_produk,barcode,id,satuan');
             $this->db->where('id', $value);
             $produk = $this->db->get('produk')->row();
 
-            $this->db->where('id', $produk->id);
+            $this->db->where('id', $produk->satuan);
 		    $satuan = $this->db->get('satuan_produk')->result();
 
            
