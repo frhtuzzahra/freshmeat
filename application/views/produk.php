@@ -93,7 +93,7 @@
             </div>
 
             <div class="form-group">
-              <label>Barcode</label>
+              <label>Kode Produk</label>
               <input type="text" class="form-control" placeholder="Barcode" name="barcode" required style="text-transform: uppercase;">
             </div>
             <div class="form-group">

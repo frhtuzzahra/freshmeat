@@ -155,7 +155,7 @@ $("#freezer").datetimepicker({
 });
 
 $("#barcode").select2({
-    placeholder: "Barcode",
+    placeholder: "Kode Barang",
     ajax: {
         url: getBarcodeUrl,
         type: "post",

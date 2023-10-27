@@ -53,7 +53,7 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label>Barcode</label>
+                    <label>Kode Barang</label>
                     <div class="form-inline">
                       <select id="barcode" class="form-control select2 col-sm-6" onchange="getNama()"></select>
                       <span class="ml-3 text-muted" id="nama_produk"></span>
@@ -86,6 +86,7 @@
                     <th>Barcode</th>
                     <th>Nama</th>
                     <th>Harga</th>
+                    <th>Satuan</th>
                     <th>Jumlah</th>
                     <th>Actions</th>
                   </tr>

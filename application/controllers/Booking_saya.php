@@ -11,6 +11,7 @@ class Booking_saya extends CI_Controller
 			redirect('/');
 		}
 		$this->load->model('booking_model');
+		
 	}
 
 	public function index()
@@ -30,6 +31,7 @@ class Booking_saya extends CI_Controller
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'nota' => $booking->nota,
 					'nama_produk' => '<table>' . $this->booking_model->getProduk($barcode, $booking->qty) . '</table>',
+					'nama_satuan' => '<table>' . $this->booking_model->getSatuan($barcode, $booking->qty) . '</table>',
 					'total_bayar' => "Rp. " . number_format($booking->total_bayar, 0, ',', '.'),
 					'status' => ($booking->status == 'belum') ? '<span class="badge badge-warning">Belum</span>' : '<span class="badge badge-success">Diambil</span>',
 					'action' => '<a class="btn btn-sm btn-success" href="' . site_url('booking_saya/cetak/') . $booking->id . '" target="_blank">Print</a>'
