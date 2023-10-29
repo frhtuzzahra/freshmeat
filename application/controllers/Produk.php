@@ -32,7 +32,7 @@ class Produk extends CI_Controller
 		if ($this->produk_model->read()->num_rows() > 0) {
 			foreach ($this->produk_model->read()->result() as $produk) {
 				$data[] = array(
-					'barcode' => $produk->barcode,
+					'kode_barang' => $produk->kode_barang,
 					'gambar' => '<img src="' . base_url('uploads/' . $produk->gambar) . '" class="img-thumbnail" width="100">',
 					'nama' => $produk->nama_produk,
 					'kategori' => $produk->kategori,
@@ -62,7 +62,7 @@ class Produk extends CI_Controller
 		if ($this->upload->do_upload('gambar')) {
 			$data = array(
 				'gambar' => $this->upload->data('file_name'),
-				'barcode' => $this->input->post('barcode'),
+				'kode_barang' => $this->input->post('kode_barang'),
 				'nama_produk' => $this->input->post('nama_produk'),
 				'satuan' => $this->input->post('satuan'),
 				'kategori' => $this->input->post('kategori'),
@@ -90,7 +90,7 @@ class Produk extends CI_Controller
 			$id = $this->input->post('id');
 			$data = array(
 				'gambar' => $this->upload->data('file_name'),
-				'barcode' => $this->input->post('barcode'),
+				'kode_barang' => $this->input->post('kode_barang'),
 				'nama_produk' => $this->input->post('nama_produk'),
 				'satuan' => $this->input->post('satuan'),
 				'kategori' => $this->input->post('kategori'),
@@ -127,12 +127,12 @@ class Produk extends CI_Controller
 	public function get_barcode()
 	{
 		header('Content-type: application/json');
-		$barcode = $this->input->post('barcode');
+		$barcode = $this->input->post('kode_barang');
 		$search = $this->produk_model->getBarcode($barcode);
 		foreach ($search as $barcode) {
 			$data[] = array(
 				'id' => $barcode->id,
-				'text' => $barcode->barcode,
+				'text' => $barcode->kode_barang,
 				'nama_produk' => $barcode->nama_produk
 			);
 		}
@@ -142,12 +142,12 @@ class Produk extends CI_Controller
 	public function get_barcodeWithName()
 	{
 		header('Content-type: application/json');
-		$barcode = $this->input->post('barcode');
+		$barcode = $this->input->post('kode_barang');
 		$search = $this->produk_model->getBarcodeWithName($barcode);
 		foreach ($search as $barcode) {
 			$data[] = array(
 				'id' => $barcode->id,
-				'text' => $barcode->barcode,
+				'text' => $barcode->kode_barang,
 				'nama_produk' => $barcode->nama_produk
 			);
 		}
@@ -165,9 +165,10 @@ class Produk extends CI_Controller
 			$data = array(
 				'nama_produk' => $barcode->nama_produk,
 				'satuan' => $satuan[0]->satuan,
-				'barcode' => $barcode->barcode,
+				'kode_barang' => $barcode->kode_barang,
 				'stok' => $barcode->stok,
-				'harga_jual' => $barcode->harga_jual
+				'harga_jual' => $barcode->harga_jual,
+				"img" => $barcode->gambar
 			);
 		}
 		echo json_encode($data);
@@ -191,7 +192,7 @@ class Produk extends CI_Controller
 			$data = array(
 				'nama_produk' => $barcode->nama_produk,
 				'satuan' => $satuan[0]->satuan,
-				'barcode' => $barcode->barcode,
+				'kode_barang' => $barcode->kode_barang,
 				'stok' => $barcode->stok,
 				'harga_jual' => $barcode->harga_jual
 			);

@@ -36,7 +36,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Tanggal</th>
-                                    <th>Barcode</th>
+                                    <th>Kode Barang</th>
                                     <th>Nama Produk</th>
                                     <th>Jumlah</th>
                                     <th>Keterangan</th>
@@ -48,7 +48,7 @@
                                     <tr>
                                         <td><?php echo $i++ ?></td>
                                         <td><?php echo $sk->tanggal ?></td>
-                                        <td><?php echo $sk->barcode ?></td>
+                                        <td><?php echo $sk->kode_barang ?></td>
                                         <td><?php echo $sk->nama_produk ?></td>
                                         <td><?php echo $sk->jumlah ?></td>
                                         <td><?php echo $sk->keterangan ?></td>
