@@ -23,7 +23,7 @@ class Transaksi extends CI_Controller
 		header('Content-type: application/json');
 		if ($this->transaksi_model->read()->num_rows() > 0) {
 			foreach ($this->transaksi_model->read()->result() as $transaksi) {
-				$barcode = explode(',', $transaksi->barcode);
+				$barcode = explode(',', $transaksi->kode_barang);
 				$tanggal = new DateTime($transaksi->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),

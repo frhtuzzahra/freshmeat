@@ -84,11 +84,7 @@
       </div>
       <div class="form-group">
         <label>Kode Barang</label>
-<<<<<<< HEAD
-        <select name="barcode" id="barcode" class="form-control select2" required></select>
-=======
         <select name="kode_barang" id="kode_barang" class="form-control select2" required></select>
->>>>>>> abf7a76d816843b01281e6d955dbf8c075cb1ca1
       </div>
       <div class="form-group">
         <label>Jumlah</label>

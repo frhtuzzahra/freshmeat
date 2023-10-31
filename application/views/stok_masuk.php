@@ -49,7 +49,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tab</th>
+                    <th>Detail Tanggal</th>
                     <th>Kode Barang</th>
                     <th>Nama Produk</th>
                     <th>Jumlah</th>

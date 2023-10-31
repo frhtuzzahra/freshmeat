@@ -11,7 +11,7 @@ class Transaksi_model extends CI_Model
 		$this->db->select('transaksi.tanggal, transaksi.nota, produk.nama_produk, pengguna.nama, transaksi.total_bayar');
 		$this->db->select('(SELECT SUM(total_bayar) FROM transaksi) as bayar', FALSE);
 		$this->db->from('transaksi');
-		$this->db->join('produk', 'transaksi.barcode = produk.id');
+		$this->db->join('produk', 'transaksi.kode_barang = produk.id');
 		$this->db->join('pengguna', 'transaksi.pelanggan = pengguna.id', 'left outer');
 		$this->db->order_by('transaksi.tanggal', 'ASC');
 
@@ -22,7 +22,7 @@ class Transaksi_model extends CI_Model
 	{
 		$query = "SELECT transaksi.tanggal, transaksi.nota, produk.nama_produk, pengguna.nama, transaksi.total_bayar,
           (SELECT SUM(total_bayar) FROM transaksi WHERE tanggal >= '" . $tanggal_awal . "' AND tanggal <= '" . $tanggal_akhir . "') AS bayar
-          FROM transaksi JOIN produk ON transaksi.barcode = produk.id
+          FROM transaksi JOIN produk ON transaksi.kode_barang = produk.id
           LEFT OUTER JOIN pengguna ON transaksi.pelanggan = pengguna.id
           WHERE transaksi.tanggal >= '" . $tanggal_awal . "' AND transaksi.tanggal <= '" . $tanggal_akhir . "'
           ORDER BY transaksi.tanggal ASC";
@@ -52,7 +52,7 @@ class Transaksi_model extends CI_Model
 
 	public function read()
 	{
-		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon, pengguna.nama as pelanggan , qty');
+		$this->db->select('transaksi.id, transaksi.tanggal, transaksi.kode_barang, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, transaksi.diskon, pengguna.nama as pelanggan , qty');
 		$this->db->from($this->table);
 		$this->db->join('pengguna', 'transaksi.pelanggan = pengguna.id', 'left outer');
 		return $this->db->get();
@@ -111,7 +111,7 @@ class Transaksi_model extends CI_Model
 
 	public function getAll($id)
 	{
-		$this->db->select('transaksi.nota, transaksi.tanggal, transaksi.diskon, transaksi.barcode, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, pengguna.nama as kasir');
+		$this->db->select('transaksi.nota, transaksi.tanggal, transaksi.diskon, transaksi.kode_barang, transaksi.qty, transaksi.total_bayar, transaksi.jumlah_uang, pengguna.nama as kasir');
 		$this->db->from('transaksi');
 		$this->db->join('pengguna', 'transaksi.kasir = pengguna.id');
 		$this->db->where('transaksi.id', $id);
