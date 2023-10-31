@@ -35,7 +35,7 @@
                             <thead>
                                 <tr>
                                     <th>No</th>
-                                    <th>Barcode</th>
+                                    <th>Kode Barang</th>
                                     <th>Gambar</th>
                                     <th>Nama Produk</th>
                                     <th>Satuan</th>
@@ -49,7 +49,7 @@
                                 foreach ($produk as $p) : ?>
                                     <tr>
                                         <td><?= $i++ ?></td>
-                                        <td><?= $p->barcode ?></td>
+                                        <td><?= $p->kode_barang ?></td>
                                         <td> <img src="<?= base_url('uploads/' . $p->gambar) ?>" alt="gambar" width="60px"></td>
                                         <td><?= $p->nama_produk ?></td>
                                         <td><?= $p->satuan ?></td>
