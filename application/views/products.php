@@ -45,7 +45,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Barcode</th>
+                    <th>Kode Barang</th>
                     <th>Gambar</th>
                     <th>Nama</th>
                     <th>Satuan</th>

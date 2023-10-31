@@ -13,7 +13,7 @@ class Produk_model extends CI_Model
 
 	public function read()
 	{
-		$this->db->select('produk.id, produk.barcode, produk.nama_produk, produk.harga_jual, produk.stok,produk.gambar, kategori_produk.kategori, satuan_produk.satuan');
+		$this->db->select('produk.id, produk.kode_barang, produk.nama_produk, produk.harga_jual, produk.stok,produk.gambar, kategori_produk.kategori, satuan_produk.satuan');
 		$this->db->from($this->table);
 		$this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
 		$this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');
@@ -34,7 +34,7 @@ class Produk_model extends CI_Model
 
 	public function getProduk($id)
 	{
-		$this->db->select('produk.id, produk.barcode, produk.nama_produk, produk.harga, produk.harga_jual, produk.stok, kategori_produk.id as kategori_id, kategori_produk.kategori, satuan_produk.id as satuan_id, satuan_produk.satuan');
+		$this->db->select('produk.id, produk.kode_barang, produk.nama_produk, produk.harga, produk.harga_jual, produk.stok, kategori_produk.id as kategori_id, kategori_produk.kategori, satuan_produk.id as satuan_id, satuan_produk.satuan');
 		$this->db->from($this->table);
 		$this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
 		$this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');
@@ -44,11 +44,11 @@ class Produk_model extends CI_Model
 
 	public function getBarcodeWithName($search = '')
 	{
-		$this->db->select('produk.id, produk.barcode, produk.nama_produk, kategori_produk.kategori, satuan_produk.satuan');
+		$this->db->select('produk.id, produk.kode_barang, produk.nama_produk, kategori_produk.kategori, satuan_produk.satuan');
 		$this->db->from($this->table);
 		$this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
 		$this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');
-		$this->db->like('barcode', $search);
+		$this->db->like('kode_barang', $search);
 
 		return $this->db->get()->result();
 	}
@@ -56,14 +56,14 @@ class Produk_model extends CI_Model
 
 	public function getBarcode($search = '')
 	{
-		$this->db->select('produk.id, produk.barcode');
-		$this->db->like('barcode', $search);
+		$this->db->select('produk.id, produk.kode_barang , produk.nama_produk');
+		$this->db->like('kode_barang', $search);
 		return $this->db->get($this->table)->result();
 	}
 
 	public function getNama($id)
 	{
-		$this->db->select('nama_produk, stok , barcode , satuan');
+		$this->db->select('nama_produk, stok , kode_barang , satuan');
 		$this->db->where('id', $id);
 		return $this->db->get($this->table)->row();
 	}
@@ -72,14 +72,14 @@ class Produk_model extends CI_Model
 	{
 		$this->db->select('produk.nama_produk, (stok_masuk.jumlah * produk.harga) AS total');
 		$this->db->from('stok_masuk');
-		$this->db->join('produk', 'stok_masuk.barcode = produk.id');
+		$this->db->join('produk', 'stok_masuk.kode_barang = produk.id');
 		$this->db->where('stok_masuk.id', $id);
 		return $this->db->get()->row();
 	}
 
 	public function getStok($id)
 	{
-		$this->db->select('stok, nama_produk, harga_jual, barcode ,satuan');
+		$this->db->select('stok, nama_produk, harga_jual, kode_barang ,satuan, gambar');
 		$this->db->where('id', $id);
 		return $this->db->get($this->table);
 	}

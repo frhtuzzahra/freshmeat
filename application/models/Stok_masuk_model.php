@@ -21,9 +21,10 @@ class Stok_masuk_model extends CI_Model
 	{
 		$this->db->trans_begin(); // Memulai transaksi database
 
-		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga, tanggal_expired, tanggal_frezer, satuan');
+		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.kode_barang, produk.nama_produk, produk.harga, tanggal_expired, tanggal_frezer, satuan_produk.satuan');
 		$this->db->from($this->table);
-		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
+		$this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
+		$this->db->join("satuan_produk", "satuan_produk.id = produk.satuan");
 		$this->db->where('tanggal_expired <', date('Y-m-d'));
 		$this->db->order_by('stok_masuk.tanggal', 'desc');
 		$expired_products = $this->db->get()->result();
@@ -32,7 +33,7 @@ class Stok_masuk_model extends CI_Model
 		foreach ($expired_products as $product) {
 			$data = array(
 				'tanggal' => date('Y-m-d H:i:s'),
-				'barcode' => $product->id,
+				'kode_barang' => $product->id,
 				'jumlah' => $product->jumlah,
 				'Keterangan' => 'kadaluarsa'
 			);
@@ -58,9 +59,10 @@ class Stok_masuk_model extends CI_Model
 		$this->MoveStockFromIntoOut();
 
 
-		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga ,tanggal_expired ,tanggal_frezer ,satuan');
+		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.kode_barang, produk.nama_produk, produk.harga ,tanggal_expired ,tanggal_frezer ,satuan_produk.satuan');
 		$this->db->from($this->table);
-		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
+		$this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
+		$this->db->join('satuan_produk', 'satuan_produk.id = produk.satuan');
 		$this->db->where('tanggal_expired >', date('Y-m-d'));
 		$this->db->order_by('stok_masuk.tanggal', 'desc');
 		return $this->db->get();
@@ -68,9 +70,9 @@ class Stok_masuk_model extends CI_Model
 
 	public function readDP()
 	{
-		$this->db->select('stok_masuk.id, stok_masuk.status, produk.barcode, produk.nama_produk');
+		$this->db->select('stok_masuk.id, stok_masuk.status, produk.kode_barang, produk.nama_produk');
 		$this->db->from($this->table);
-		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
+		$this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
 		$this->db->where('stok_masuk.status', 'DP');
 		return $this->db->get();
 	}
@@ -79,7 +81,7 @@ class Stok_masuk_model extends CI_Model
 	{
 		$query = "SELECT
 		stok_masuk.tanggal,
-		produk.barcode,
+		produk.kode_barang,
 		produk.satuan,
 		produk.nama_produk,
 		stok_masuk.jumlah,
@@ -91,13 +93,13 @@ class Stok_masuk_model extends CI_Model
 		(
 			SELECT SUM(stok_masuk.jumlah * produk.harga)
 			FROM stok_masuk
-			JOIN produk ON produk.id = stok_masuk.barcode
+			JOIN produk ON produk.id = stok_masuk.kode_barang
 			WHERE stok_masuk.status = 'lunas'
 		) AS total_semua
 	FROM
 		stok_masuk
 	JOIN
-		produk ON produk.id = stok_masuk.barcode
+		produk ON produk.id = stok_masuk.kode_barang
 		JOIN supplier ON supplier.id = stok_masuk.supplier
 		where stok_masuk.status = 'lunas'";
 
@@ -106,14 +108,19 @@ class Stok_masuk_model extends CI_Model
 
 	public function getIdStokMasuk()
 	{
+		// $query = "SELECT stok_masuk.id 
+		// FROM stok_masuk
+		// JOIN produk ON stok_masuk.kode_barang = produk.id
+		// WHERE stok_masuk.status = 'DP'
+		// AND stok_masuk.id NOT IN (
+		// 	SELECT id_stokmasuk 
+		// 	FROM detail_stokmasuk
+		// )";
+
 		$query = "SELECT stok_masuk.id 
 		FROM stok_masuk
-		JOIN produk ON stok_masuk.barcode = produk.id
-		WHERE stok_masuk.`status` = 'DP'
-		AND stok_masuk.id NOT IN (
-			SELECT id_stokmasuk 
-			FROM detail_stokmasuk
-		)";
+		JOIN produk ON stok_masuk.kode_barang = produk.id
+		WHERE stok_masuk.status = 'DP'";
 		return $this->db->query($query)->result();
 	}
 
@@ -121,7 +128,7 @@ class Stok_masuk_model extends CI_Model
 	{
 		$query = "SELECT
 		stok_masuk.tanggal,
-		produk.barcode,
+		produk.kode_barang,
 		produk.nama_produk,
 		stok_masuk.jumlah,
 		produk.harga_jual,
@@ -132,13 +139,13 @@ class Stok_masuk_model extends CI_Model
 		(
 			SELECT SUM(stok_masuk.jumlah * produk.harga)
 			FROM stok_masuk
-			JOIN produk ON produk.id = stok_masuk.barcode
+			JOIN produk ON produk.id = stok_masuk.kode_barang
 			WHERE stok_masuk.tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'
 		) AS total_semua
 	FROM
 		stok_masuk
 	JOIN
-		produk ON produk.id = stok_masuk.barcode
+		produk ON produk.id = stok_masuk.kode_barang
 		join supplier on supplier.id = stok_masuk.supplier
 		WHERE
 		stok_masuk.tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'
@@ -153,7 +160,7 @@ class Stok_masuk_model extends CI_Model
 	{
 		$this->db->select('stok_masuk.id, stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, produk.nama_produk, produk.harga_jual, stok_masuk.jumlah, (stok_masuk.jumlah * produk.harga_jual) AS total_bayar');
 		$this->db->from('stok_masuk');
-		$this->db->join('produk', 'stok_masuk.barcode = produk.id');
+		$this->db->join('produk', 'stok_masuk.kode_barang = produk.id');
 		$this->db->where('stok_masuk.status', 'DP');
 		$this->db->like('stok_masuk.id', $search);
 		return $this->db->get()->result();
@@ -161,9 +168,9 @@ class Stok_masuk_model extends CI_Model
 
 	public function laporan()
 	{
-		$this->db->select('stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.barcode, produk.nama_produk, produk.harga_jual, supplier.nama as supplier ,satuan');
+		$this->db->select('stok_masuk.tanggal, stok_masuk.jumlah, stok_masuk.status, stok_masuk.keterangan, produk.kode_barang, produk.nama_produk, produk.harga_jual, supplier.nama as supplier ,satuan');
 		$this->db->from($this->table);
-		$this->db->join('produk', 'produk.id = stok_masuk.barcode');
+		$this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
 		$this->db->join('supplier', 'supplier.id = stok_masuk.supplier', 'left outer');
 		$this->db->order_by('stok_masuk.tanggal', 'asc');
 		return $this->db->get();

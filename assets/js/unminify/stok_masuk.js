@@ -21,7 +21,7 @@ let url, stok_masuk = $("#stok_masuk").DataTable({
             `;
         }
     }, {
-        data: "barcode"
+        data: "kode_barang"
     }, {
         data: "nama_produk"
     }, {
@@ -131,6 +131,10 @@ stok_masuk.on("order.dt search.dt", () => {
     })
 });
 
+$("#kode_barang").on("click", function() {
+    console.log("Ada");
+});
+
 $("#form").validate({
     errorElement: "span",
     errorPlacement: (err, el) => {
@@ -154,14 +158,14 @@ $("#freezer").datetimepicker({
     format: "dd-mm-yyyy h:ii:ss"
 });
 
-$("#barcode").select2({
-    placeholder: "Barcode",
+$("#kode_barang").select2({
+    placeholder: "Kode Barang",
     ajax: {
         url: getBarcodeUrl,
         type: "post",
         dataType: "json",
         data: params => ({
-            barcode: params.term
+            kode_barang: params.term
         }),
         processResults: res => ({
             results: res

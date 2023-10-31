@@ -20,7 +20,8 @@ function getNama() {
             id: $("#barcode").val()
         },
         success: res => {
-            $("#nama_produk").html(res.nama_produk);
+            console.log(res);
+            $("#gambar_produk").html("<img style='width: 100px; height: 100px;' src='uploads/" + res.img + "'>");
             $("#sisa").html(`Sisa ${res.stok}`);
             checkEmpty()
         },
@@ -44,7 +45,8 @@ function checkStok() {
                 jumlah = parseInt($("#jumlah").val()),
                 stok = parseInt(res.stok),
                 harga = parseInt(res.harga_jual),
-                dataBarcode = res.barcode,
+                dataBarcode = res.kode_barang,
+                satuan = res.satuan,
                 total = parseInt($("#total").html());
             if (stok < jumlah) Swal.fire("Gagal", "Stok Tidak Cukup", "warning");
             else {
@@ -71,6 +73,7 @@ function checkStok() {
                         dataBarcode,
                         nama_produk,
                         `Rp. ${harga}`,
+                        satuan,
                         jumlah,
                         `<button name="${barcode}" class="btn btn-sm btn-danger" onclick="remove('${barcode}')">Hapus</btn>`]).draw();
                     $("#total").html(total + harga * jumlah);
@@ -119,7 +122,7 @@ function add() {
     let data = transaksi.rows().data(),
         qty = [];
     $.each(data, (index, value) => {
-        qty.push(value[3])
+        qty.push(value[4])
     });
     $.ajax({
         url: addUrl,
@@ -143,7 +146,7 @@ function add() {
     })
 }
 $("#barcode").select2({
-    placeholder: "Barcode",
+    placeholder: "Nama Produk",
     ajax: {
         url: getBarcodeUrl,
         type: "post",
@@ -152,11 +155,14 @@ $("#barcode").select2({
             barcode: params.term
         }),
         processResults: res => ({
-            results: res
-        }),
-        cache: true
+            results: res.map(item => ({
+                id: item.id,
+                text: item.nama_produk  // Menampilkan nama_produk sebagai teks
+            }))
+        })
     }
 });
+
 $("#tanggal").datetimepicker({
     format: "dd-mm-yyyy h:ii:ss"
 });

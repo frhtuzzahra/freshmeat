@@ -48,6 +48,7 @@
                     <th>Tanggal</th>
                     <th>Kode Booking</th>
                     <th>Nama Produk</th>
+                    <th>Satuan</th>
                     <th>Total</th>
                     <th>Status</th>
                     <th>Action</th>

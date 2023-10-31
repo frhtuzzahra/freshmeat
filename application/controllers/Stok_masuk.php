@@ -39,7 +39,7 @@ class Stok_masuk extends CI_Controller
 				$satuan = $this->satuan_produk_model->getKategori($stok_masuk->satuan)->result();
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
-					'barcode' => $stok_masuk->barcode,
+					'kode_barang' => $stok_masuk->kode_barang,
 					'nama_produk' => $stok_masuk->nama_produk,
 					'harga' => "Rp. " . number_format($stok_masuk->harga, 0, ',', '.'),
 					'total' => "Rp. " . number_format($stok_masuk->harga * $stok_masuk->jumlah, 0, ',', '.'),
@@ -48,7 +48,7 @@ class Stok_masuk extends CI_Controller
 					'keterangan' => $stok_masuk->keterangan,
 					'tanggal_expired' => $stok_masuk->tanggal_expired,
 					'tanggal_frezer' => $stok_masuk->tanggal_frezer,
-					'satuan' => $satuan[0]->satuan,
+					'satuan' => $stok_masuk->satuan,
 				);
 			}
 		} else {
@@ -73,6 +73,7 @@ class Stok_masuk extends CI_Controller
 		header('Content-type: application/json');
 		$id_stokmasuk = $this->input->post('id_stokmasuk');
 		$search = $this->stok_masuk_model->getIdStokMasuk($id_stokmasuk);
+		$data = [];
 		foreach ($search as $produk) {
 			$data[] = array(
 				'id' => $produk->id,
@@ -84,7 +85,7 @@ class Stok_masuk extends CI_Controller
 
 	public function add()
 	{
-		$id = $this->input->post('barcode');
+		$id = $this->input->post('kode_barang');
 		$jumlah = $this->input->post('jumlah');
 		$stok = $this->stok_masuk_model->getStok($id)->stok;
 		$rumus = max($stok + $jumlah, 0);
@@ -103,7 +104,7 @@ class Stok_masuk extends CI_Controller
 			
 			// Membuat array data yang akan disimpan ke dalam database
 			$data = array(
-				'barcode' => $id,
+				'kode_barang' => $id,
 				'jumlah' => $jumlah,
 				'status' => $this->input->post('status'),
 				'keterangan' => $this->input->post('keterangan'),
@@ -147,7 +148,7 @@ class Stok_masuk extends CI_Controller
 				$tanggal = new DateTime($stok_masuk->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
-					'barcode' => $stok_masuk->barcode,
+					'kode_barang' => $stok_masuk->kode_barang,
 					'nama_produk' => $stok_masuk->nama_produk,
 					'jumlah' => $stok_masuk->jumlah,
 					'harga_jual' => "Rp. " . number_format($stok_masuk->harga_jual, 0, ',', '.'),

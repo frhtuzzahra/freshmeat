@@ -8,7 +8,7 @@ class Booking_model extends CI_Model
 
     public function readAll()
     {
-        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status` , booking.barcode ,booking.qty");
+        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status` , booking.kode_barang ,booking.qty");
         $this->db->from($this->table);
         $this->db->join("pengguna", "booking.pelanggan = pengguna.id");
         return $this->db->get();
@@ -44,7 +44,7 @@ class Booking_model extends CI_Model
 
     public function read()
     {
-        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan,qty');
+        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.kode_barang, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan,qty');
         $this->db->from($this->table);
         $this->db->join('pengguna', 'booking.pelanggan = pengguna.id', 'left outer');
         $this->db->where('booking.status', 'belum');
@@ -53,7 +53,7 @@ class Booking_model extends CI_Model
 
     public function readByIdPelanggan($id)
     {
-        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan');
+        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.kode_barang, booking.qty, booking.total_bayar, booking.status, pengguna.nama as pelanggan');
         $this->db->from($this->table);
         $this->db->join('pengguna', 'booking.pelanggan = pengguna.id', 'left outer');
         $this->db->where('booking.pelanggan', $id);
@@ -71,7 +71,7 @@ class Booking_model extends CI_Model
     {
         $total = explode(',', $qty);
         foreach ($barcode as $key => $value) {
-            $this->db->select('nama_produk,barcode,id');
+            $this->db->select('nama_produk,kode_barang,id');
             $this->db->where('id', $value);
             $produk = $this->db->get('produk')->row();
 
@@ -88,11 +88,11 @@ class Booking_model extends CI_Model
     {
         $total = explode(',', $qty);
         foreach ($barcode as $key => $value) {
-            $this->db->select('nama_produk,barcode,id');
+            $this->db->select('nama_produk,kode_barang,id,satuan');
             $this->db->where('id', $value);
             $produk = $this->db->get('produk')->row();
 
-            $this->db->where('id', $produk->id);
+            $this->db->where('id', $produk->satuan);
 		    $satuan = $this->db->get('satuan_produk')->result();
 
            
@@ -109,7 +109,7 @@ class Booking_model extends CI_Model
 
     public function readById($id)
     {
-        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status, pelanggan.nama as pelanggan');
+        $this->db->select('booking.id, booking.nota, booking.tanggal, booking.kode_barang, booking.qty, booking.total_bayar, booking.status, pelanggan.nama as pelanggan');
         $this->db->from($this->table);
         $this->db->join('pelanggan', 'booking.pelanggan = pelanggan.id', 'left outer');
         $this->db->where('booking.id', $id);
@@ -119,7 +119,7 @@ class Booking_model extends CI_Model
 
     public function getAll($id)
     {
-        $this->db->select('booking.nota, booking.tanggal, booking.barcode, booking.qty, booking.total_bayar, booking.status');
+        $this->db->select('booking.nota, booking.tanggal, booking.kode_barang, booking.qty, booking.total_bayar, booking.status');
         $this->db->from('booking');
         $this->db->where('booking.id', $id);
         return $this->db->get()->row();

@@ -11,6 +11,7 @@ class Booking_saya extends CI_Controller
 			redirect('/');
 		}
 		$this->load->model('booking_model');
+		
 	}
 
 	public function index()
@@ -24,12 +25,13 @@ class Booking_saya extends CI_Controller
 		$id = $_SESSION['id'];
 		if ($this->booking_model->readByIdPelanggan($id)->num_rows() > 0) {
 			foreach ($this->booking_model->readByIdPelanggan($id)->result() as $booking) {
-				$barcode = explode(',', $booking->barcode);
+				$barcode = explode(',', $booking->kode_barang);
 				$tanggal = new DateTime($booking->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'nota' => $booking->nota,
 					'nama_produk' => '<table>' . $this->booking_model->getProduk($barcode, $booking->qty) . '</table>',
+					'nama_satuan' => '<table>' . $this->booking_model->getSatuan($barcode, $booking->qty) . '</table>',
 					'total_bayar' => "Rp. " . number_format($booking->total_bayar, 0, ',', '.'),
 					'status' => ($booking->status == 'belum') ? '<span class="badge badge-warning">Belum</span>' : '<span class="badge badge-success">Diambil</span>',
 					'action' => '<a class="btn btn-sm btn-success" href="' . site_url('booking_saya/cetak/') . $booking->id . '" target="_blank">Print</a>'
@@ -49,7 +51,7 @@ class Booking_saya extends CI_Controller
 		$booking = $this->booking_model->getAll($id);
 
 		$tanggal = new DateTime($booking->tanggal);
-		$barcode = explode(',', $booking->barcode);
+		$barcode = explode(',', $booking->kode_barang);
 		$qty = explode(',', $booking->qty);
 
 		$booking->tanggal = $tanggal->format('d-m-Y H:i:s');

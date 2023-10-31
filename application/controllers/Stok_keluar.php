@@ -35,7 +35,7 @@ class Stok_keluar extends CI_Controller
 				$tanggal = new DateTime($stok_keluar->tanggal);
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
-					'barcode' => $stok_keluar->barcode,
+					'kode_barang' => $stok_keluar->kode_barang,
 					'nama_produk' => $stok_keluar->nama_produk,
 					'jumlah' => $stok_keluar->jumlah,
 					'keterangan' => $stok_keluar->keterangan,
@@ -53,7 +53,7 @@ class Stok_keluar extends CI_Controller
 
 	public function add()
 	{
-		$id = $this->input->post('barcode');
+		$id = $this->input->post('kode_barang');
 		$jumlah = $this->input->post('jumlah');
 		$stok = $this->stok_keluar_model->getStok($id)->stok;
 		$rumus = max($stok - $jumlah, 0);
@@ -62,7 +62,7 @@ class Stok_keluar extends CI_Controller
 			$tanggal = new DateTime($this->input->post('tanggal'));
 			$data = array(
 				'tanggal' => $tanggal->format('Y-m-d H:i:s'),
-				'barcode' => $id,
+				'kode_barang' => $id,
 				'jumlah' => $jumlah,
 				'keterangan' => $this->input->post('keterangan')
 			);
