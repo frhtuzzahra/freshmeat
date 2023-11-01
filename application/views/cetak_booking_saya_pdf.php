@@ -37,6 +37,7 @@
                                 <tr>
                                     <th>ID</th>
                                     <th>Nama Produk</th>
+                                    <th>Satuan</th>
                                     <th>Harga</th>
                                     <th>Qty</th>
                                     <th>Total</th>
@@ -48,6 +49,7 @@
                                     <tr>
                                         <td><?= $i++ ?></td>
                                         <td><?= $p->nama_produk ?></td>
+                                        <td><?= $p ?></td>
                                         <td>Rp. <?= number_format($p->harga_jual, 0, ',', '.') ?></td>
                                         <td><?= $p->total ?></td>
                                         <td>Rp. <?= number_format($p->harga_jual * $p->total, 0, ',', '.') ?></td>

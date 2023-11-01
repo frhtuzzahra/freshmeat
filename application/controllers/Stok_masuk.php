@@ -35,10 +35,9 @@ class Stok_masuk extends CI_Controller
 		header('Content-type: application/json');
 		if ($this->stok_masuk_model->read()->num_rows() > 0) {
 			foreach ($this->stok_masuk_model->read()->result() as $stok_masuk) {
-				$tanggal = new DateTime($stok_masuk->tanggal);
 				$satuan = $this->satuan_produk_model->getKategori($stok_masuk->satuan)->result();
 				$data[] = array(
-					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
+					'tanggal' => date($stok_masuk->tanggal),
 					'kode_barang' => $stok_masuk->kode_barang,
 					'nama_produk' => $stok_masuk->nama_produk,
 					'harga' => "Rp. " . number_format($stok_masuk->harga, 0, ',', '.'),
@@ -109,6 +108,7 @@ class Stok_masuk extends CI_Controller
 				'status' => $this->input->post('status'),
 				'keterangan' => $this->input->post('keterangan'),
 				'supplier' => $this->input->post('supplier'),
+				'tanggal' => date("Y-m-d H:i:s"),
 				'tanggal_frezer' => $tanggal_frezer_mysql, // Format datetime MySQL
 				'tanggal_expired' => $tanggal_expired_mysql, // Format datetime MySQL
 			);

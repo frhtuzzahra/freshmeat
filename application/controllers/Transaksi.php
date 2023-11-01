@@ -65,7 +65,7 @@ class Transaksi extends CI_Controller
 		}
 		$data = array(
 			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
-			'barcode' => implode(',', $barcode),
+			'kode_barang' => implode(',', $barcode),
 			'qty' => implode(',', $this->input->post('qty')),
 			'total_bayar' => $this->input->post('total_bayar'),
 			'jumlah_uang' => $this->input->post('jumlah_uang'),
@@ -93,7 +93,7 @@ class Transaksi extends CI_Controller
 		$produk = $this->transaksi_model->getAll($id);
 
 		$tanggal = new DateTime($produk->tanggal);
-		$barcode = explode(',', $produk->barcode);
+		$barcode = explode(',', $produk->kode_barang);
 		$qty = explode(',', $produk->qty);
 
 		$produk->tanggal = $tanggal->format('d-m-Y H:i:s');

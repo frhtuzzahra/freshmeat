@@ -68,6 +68,14 @@ class Produk_model extends CI_Model
 		return $this->db->get($this->table)->row();
 	}
 
+	public function getSatuanProduk($id)
+	{
+		$this->db->select('satuan_produk.*');
+		$this->db->where('produk.id', $id);
+		$this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id', 'left');
+		return $this->db->get($this->table)->row();
+	}
+
 	public function getNamaDetail($id)
 	{
 		$this->db->select('produk.nama_produk, (stok_masuk.jumlah * produk.harga) AS total');

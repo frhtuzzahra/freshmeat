@@ -57,7 +57,7 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Tanggal</th>
+                    <th>Tanggal Masuk</th>
                     <th>Kode Barang</th>
                     <th>Nama Produk</th>
                     <th>Qty</th>

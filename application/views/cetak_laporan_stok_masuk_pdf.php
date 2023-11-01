@@ -36,7 +36,7 @@
                             <thead>
                                 <tr>
                                     <th>ID</th>
-                                    <th>Tanggal</th>
+                                    <th>Tanggal Masuk</th>
                                     <th>Kode Barang</th>
                                     <th>Nama Produk</th>
                                     <th>Qty</th>

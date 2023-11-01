@@ -89,6 +89,7 @@ class Stok_masuk_model extends CI_Model
 		(stok_masuk.jumlah * produk.harga) AS total,
 		stok_masuk.status,
 		stok_masuk.keterangan,
+		satuan_produk.satuan,
 		supplier.nama as supplier,
 		(
 			SELECT SUM(stok_masuk.jumlah * produk.harga)
@@ -99,9 +100,18 @@ class Stok_masuk_model extends CI_Model
 	FROM
 		stok_masuk
 	JOIN
-		produk ON produk.id = stok_masuk.kode_barang
-		JOIN supplier ON supplier.id = stok_masuk.supplier
-		where stok_masuk.status = 'lunas'";
+		produk 
+	ON 
+		produk.id = stok_masuk.kode_barang
+	JOIN
+		satuan_produk
+	ON
+		produk.satuan = satuan_produk.id
+	JOIN 
+		supplier 
+	ON 
+		supplier.id = stok_masuk.supplier
+	where stok_masuk.status = 'lunas'";
 
 		return $this->db->query($query);
 	}
