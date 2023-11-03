@@ -65,6 +65,7 @@
                                         <th>No</th>
                                         <th>ID SM</th>
                                         <th>Nama Produk</th>
+                                        <th>Satuan</th>
                                         <th>Tanggal</th>
                                         <th>Harga</th>
                                         <th>Qty</th>

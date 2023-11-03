@@ -38,6 +38,7 @@ class Detail_masuk_model extends CI_Model
         detail_stokmasuk.id,
         detail_stokmasuk.id_stokmasuk,
 	    produk.nama_produk,
+        satuan_produk.satuan,
 	    produk.harga,
 	    detail_stokmasuk.tanggal,
         stok_masuk.jumlah,
@@ -48,6 +49,7 @@ class Detail_masuk_model extends CI_Model
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'stok_masuk.id = detail_stokmasuk.id_stokmasuk');
         $this->db->join('produk', 'produk.id = stok_masuk.kode_barang');
+        $this->db->join('satuan_produk', 'satuan_produk.id = produk.satuan');
         $this->db->where('stok_masuk.status', 'DP');
         return $this->db->get();
     }
@@ -101,6 +103,7 @@ class Detail_masuk_model extends CI_Model
     {
         $this->db->select('id_stokmasuk,
         nama_produk,
+        satuan_produk.satuan,
         detail_stokmasuk.tanggal,
         produk.harga,
         ( produk.harga * stok_masuk.jumlah ) AS total,
@@ -109,6 +112,7 @@ class Detail_masuk_model extends CI_Model
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'detail_stokmasuk.id_stokmasuk = stok_masuk.id');
         $this->db->join('produk', 'stok_masuk.kode_barang = produk.id');
+        $this->db->join('satuan_produk', 'satuan_produk.id = produk.satuan');
         $this->db->where('stok_masuk.status', 'DP');
         $this->db->order_by('detail_stokmasuk.tanggal', 'ASC');
         return $this->db->get();

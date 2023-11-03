@@ -59,6 +59,7 @@ class Detail_stok_masuk extends CI_Controller
                 $data[] = array(
                     'id_stokmasuk' => $detail_stokmasuk->id_stokmasuk,
                     'nama_produk' => $detail_stokmasuk->nama_produk,
+                    'satuan' => $detail_stokmasuk->satuan,
                     'harga' => "Rp. " . number_format($detail_stokmasuk->harga, 0, ',', '.'),
                     'tanggal' => $detail_stokmasuk->tanggal,
                     'jumlah' => $detail_stokmasuk->jumlah,

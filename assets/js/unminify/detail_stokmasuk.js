@@ -15,6 +15,7 @@ let detail_stokmasuk = $("#detail_stokmasuk").DataTable({
         { data: null }, 
         { data: "id_stokmasuk" },
         { data: "nama_produk" },
+        { data: "satuan" },
         { data: "tanggal" },
         { data: "harga" },
         { data: "jumlah" },

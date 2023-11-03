@@ -38,6 +38,7 @@
                                     <th>ID</th>
                                     <th>ID SM</th>
                                     <th>Nama Produk</th>
+                                    <th>Satuan</th>
                                     <th>Tanggal</th>
                                     <th>Harga</th>
                                     <th>Total</th>
@@ -52,6 +53,7 @@
                                         <td><?= $i++ ?></td>
                                         <td><?= $dm->id_stokmasuk ?></td>
                                         <td><?= $dm->nama_produk ?></td>
+                                        <td><?= $dm->satuan ?></td>
                                         <td><?= $dm->tanggal ?></td>
                                         <td>Rp. <?= number_format($dm->harga, 0, ',', '.') ?></td>
                                         <td>Rp. <?= number_format($dm->total, 0, ',', '.') ?></td>
