@@ -38,20 +38,22 @@
                                     <th>Tanggal</th>
                                     <th>Kode Barang</th>
                                     <th>Nama Produk</th>
+									<th>Satuan</th>
                                     <th>Jumlah</th>
                                     <th>Keterangan</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <?php $i = 1;
-                                foreach ($stok_keluar as $sk) : ?>
+                                foreach ($stok_keluar as $sm) : ?>
                                     <tr>
-                                        <td><?php echo $i++ ?></td>
-                                        <td><?php echo $sk->tanggal ?></td>
-                                        <td><?php echo $sk->kode_barang ?></td>
-                                        <td><?php echo $sk->nama_produk ?></td>
-                                        <td><?php echo $sk->jumlah ?></td>
-                                        <td><?php echo $sk->keterangan ?></td>
+                                        <td><?= $i++ ?></td>
+                                        <td><?= $sm->tanggal ?></td>
+                                        <td><?= $sm->kode_barang ?></td>
+                                        <td><?= $sm->nama_produk ?></td>
+										<td><?= $sm->satuan ?></td>
+                                        <td><?= $sm->jumlah ?></td>
+                                        <td><?= $sm->keterangan ?></td>
                                     </tr>
                                 <?php endforeach ?>
                             </tbody>

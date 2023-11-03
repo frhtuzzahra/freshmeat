@@ -38,7 +38,7 @@
                                     <th>ID</th>
                                     <th>Tanggal</th>
                                     <th>Kode Booking</th>
-                                    <th>Qty</th>
+                                    <th>Detail Booking</th>
                                     <th>Total Bayar</th>
                                     <th>Pelanggan</th>
                                     <th>Status</th>
