@@ -50,10 +50,9 @@
                   <th>Tanggal</th>
                   <th>Kode Barang</th>
                   <th>Nama Produk</th>
-                  <th>Jumlah</th>
                   <th>Satuan</th>
+                  <th>Jumlah</th>
                   <th>Keterangan</th>
-                 
                 </tr>
               </thead>
             </table>

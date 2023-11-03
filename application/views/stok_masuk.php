@@ -52,8 +52,8 @@
                     <th>Detail Tanggal</th>
                     <th>Kode Barang</th>
                     <th>Nama Produk</th>
-                    <th>Jumlah</th>
                     <th>Satuan</th>
+                    <th>Jumlah</th>
                     <th>Harga</th>
                     <th>Total</th>
                     <th>Status</th>

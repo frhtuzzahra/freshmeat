@@ -60,8 +60,8 @@
                     <th>Tanggal Masuk</th>
                     <th>Kode Barang</th>
                     <th>Nama Produk</th>
-                    <th>Qty</th>
                     <th>Satuan</th>
+                    <th>Qty</th>
                     <th>Harga</th>
                     <th>Total</th>
                     <th>Supplier</th>

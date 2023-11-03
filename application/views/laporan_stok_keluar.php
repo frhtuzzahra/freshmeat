@@ -50,8 +50,8 @@
                     <th>Tanggal</th>
                     <th>Kode Barang</th>
                     <th>Nama Produk</th>
-                    <th>Qty</th>
                     <th>Satuan</th>
+                    <th>Qty</th>
                     <th>Keterangan</th>
                   </tr>
                 </thead>

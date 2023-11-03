@@ -50,9 +50,10 @@ class Stok_keluar_model extends CI_Model {
 		//pindah stock masuk ke stock keluar karena kadaluarsa
 		$this->MoveStockFromIntoOut();
 
-		$this->db->select('stok_keluar.tanggal, stok_keluar.jumlah, stok_keluar.keterangan, produk.kode_barang, produk.nama_produk , produk.satuan');
+		$this->db->select('stok_keluar.tanggal, stok_keluar.jumlah, stok_keluar.keterangan, produk.kode_barang, produk.nama_produk , satuan_produk.satuan');
 		$this->db->from($this->table);
 		$this->db->join('produk', 'produk.id = stok_keluar.kode_barang');
+		$this->db->join('satuan_produk', 'satuan_produk.id = produk.satuan');
 		return $this->db->get();
 	}
 

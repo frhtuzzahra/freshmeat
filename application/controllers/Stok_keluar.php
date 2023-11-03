@@ -39,7 +39,7 @@ class Stok_keluar extends CI_Controller
 					'nama_produk' => $stok_keluar->nama_produk,
 					'jumlah' => $stok_keluar->jumlah,
 					'keterangan' => $stok_keluar->keterangan,
-					'satuan' => $satuan[0]->satuan,
+					'satuan' => $stok_keluar->satuan,
 				);
 			}
 		} else {
