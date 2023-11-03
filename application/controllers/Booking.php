@@ -47,7 +47,6 @@ class Booking extends CI_Controller
 			'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 			'kode_barang' => implode(',', $barcode),
 			'qty' => implode(',', $this->input->post('qty')),
-			'satuan' => implode(',', $satuan),
 			'total_bayar' => $this->input->post('total_bayar'),
 			'pelanggan' => $pelanggan,
 			'nota' => 'BKG' . date('YmdHis'),

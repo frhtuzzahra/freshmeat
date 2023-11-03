@@ -48,7 +48,7 @@
                                 <?php $i = 1;
                                 foreach ($data_booking as $databooking) : ?>
                                     <?php
-                                    $barcode = explode(',', $databooking->barcode);
+                                    $barcode = explode(',', $databooking->kode_barang);
                                     $qty = explode(',', $databooking->qty);
                                     
                                     ?>
@@ -65,7 +65,7 @@
                                                 </tr>
                                                 <?php $i=0; foreach ($barcode as $item) : ?>
                                                     <?php
-                                                    $this->db->select('produk.id, produk.barcode, produk.nama_produk, produk.harga, produk.harga_jual, produk.stok, kategori_produk.id as kategori_id, kategori_produk.kategori, satuan_produk.id as satuan_id, satuan_produk.satuan');
+                                                    $this->db->select('produk.id, produk.kode_barang, produk.nama_produk, produk.harga, produk.harga_jual, produk.stok, kategori_produk.id as kategori_id, kategori_produk.kategori, satuan_produk.id as satuan_id, satuan_produk.satuan');
                                                     $this->db->from('produk');
                                                     $this->db->join('kategori_produk', 'produk.kategori = kategori_produk.id');
                                                     $this->db->join('satuan_produk', 'produk.satuan = satuan_produk.id');

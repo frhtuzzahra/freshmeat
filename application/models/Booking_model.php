@@ -128,8 +128,9 @@ class Booking_model extends CI_Model
     public function getName($barcode)
     {
         foreach ($barcode as $b) {
-            $this->db->select('nama_produk, harga_jual');
-            $this->db->where('id', $b);
+            $this->db->select('produk.nama_produk, produk.harga_jual, satuan_produk.satuan');
+            $this->db->join("satuan_produk", "satuan_produk.id = produk.satuan");
+            $this->db->where('produk.id', $b);
             $data[] = $this->db->get('produk')->row();
         }
         return $data;

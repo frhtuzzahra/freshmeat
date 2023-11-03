@@ -49,7 +49,7 @@
                                     <tr>
                                         <td><?= $i++ ?></td>
                                         <td><?= $p->nama_produk ?></td>
-                                        <td><?= $p ?></td>
+                                        <td><?= $p->satuan ?></td>
                                         <td>Rp. <?= number_format($p->harga_jual, 0, ',', '.') ?></td>
                                         <td><?= $p->total ?></td>
                                         <td>Rp. <?= number_format($p->harga_jual * $p->total, 0, ',', '.') ?></td>
