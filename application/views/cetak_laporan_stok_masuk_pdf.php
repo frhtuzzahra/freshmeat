@@ -39,8 +39,8 @@
                                     <th>Tanggal Masuk</th>
                                     <th>Kode Barang</th>
                                     <th>Nama Produk</th>
-                                    <th>Qty</th>
                                     <th>Satuan</th>
+                                    <th>Qty</th>
                                     <th>Harga</th>
                                     <th>Suplier</th>
                                     <th>Total</th>
@@ -54,8 +54,8 @@
                                         <td><?= $sm->tanggal ?></td>
                                         <td><?= $sm->kode_barang ?></td>
                                         <td><?= $sm->nama_produk ?></td>
-                                        <td><?= $sm->jumlah ?></td>
                                         <td><?= $sm->satuan ?></td>
+                                        <td><?= $sm->jumlah ?></td>
                                         <td>Rp. <?= number_format($sm->harga_jual, 0, ',', '.') ?></td>
                                         <td><?= $sm->supplier ?></td>
                                         <td class="text-right">Rp. <?= number_format($sm->total, 0, ',', '.') ?></td>

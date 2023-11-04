@@ -16,7 +16,7 @@ class Booking_model extends CI_Model
 
     public function getBookingWithPeriode($tgl_awal, $tgl_akhir)
     {
-        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status`");
+        $this->db->select("booking.tanggal, booking.nota, pengguna.nama, booking.total_bayar, booking.`status`, booking.kode_barang, booking.qty");
         $this->db->from($this->table);
         $this->db->join("pengguna", "booking.pelanggan = pengguna.id");
         $this->db->where("booking.tanggal BETWEEN '" . $tgl_awal . "' AND '" . $tgl_akhir . "'");

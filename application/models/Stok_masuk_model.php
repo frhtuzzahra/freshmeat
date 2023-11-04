@@ -141,6 +141,7 @@ class Stok_masuk_model extends CI_Model
 		produk.kode_barang,
 		produk.nama_produk,
 		stok_masuk.jumlah,
+		satuan_produk.satuan,
 		produk.harga_jual,
 		(stok_masuk.jumlah * produk.harga) AS total,
 		stok_masuk.status,
@@ -157,6 +158,7 @@ class Stok_masuk_model extends CI_Model
 	JOIN
 		produk ON produk.id = stok_masuk.kode_barang
 		join supplier on supplier.id = stok_masuk.supplier
+		JOIN satuan_produk ON satuan_produk.id = produk.satuan
 		WHERE
 		stok_masuk.tanggal BETWEEN '$tgl_awal' AND '$tgl_akhir'
 		ORDER BY

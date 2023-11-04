@@ -86,12 +86,14 @@ class Detail_masuk_model extends CI_Model
         nama_produk,
         detail_stokmasuk.tanggal,
         produk.harga,
+        satuan_produk.satuan,
         ( produk.harga * stok_masuk.jumlah ) AS total,
         dp,
         ( produk.harga * stok_masuk.jumlah - dp ) AS kekurangan ');
         $this->db->from($this->table);
         $this->db->join('stok_masuk', 'detail_stokmasuk.id_stokmasuk = stok_masuk.id');
         $this->db->join('produk', 'stok_masuk.kode_barang = produk.id');
+        $this->db->join('satuan_produk', 'satuan_produk.id = produk.satuan');
         $this->db->where('stok_masuk.status', 'DP');
         $this->db->where('detail_stokmasuk.tanggal >=', $tgl_awal);
         $this->db->where('detail_stokmasuk.tanggal <=', $tgl_akhir);
