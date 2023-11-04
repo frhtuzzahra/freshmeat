@@ -25,9 +25,11 @@ class Transaksi extends CI_Controller
 			foreach ($this->transaksi_model->read()->result() as $transaksi) {
 				$barcode = explode(',', $transaksi->kode_barang);
 				$tanggal = new DateTime($transaksi->tanggal);
+
 				$data[] = array(
 					'tanggal' => $tanggal->format('Y-m-d H:i:s'),
 					'nama_produk' => '<table>' . $this->transaksi_model->getProduk($barcode, $transaksi->qty) . '</table>',
+					"satuan" => '<table>' . $this->transaksi_model->getSatuanProduk($barcode) . '</table>',
 					'total_bayar' => "Rp. " . number_format($transaksi->total_bayar, 0, ',', '.'), // number_format($number, $decimals, $dec_point, $thousands_sep
 					'jumlah_uang' => "Rp. " . number_format($transaksi->jumlah_uang, 0, ',', '.'),
 					'diskon' => $transaksi->diskon . "%",

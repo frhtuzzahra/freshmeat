@@ -75,6 +75,24 @@ class Transaksi_model extends CI_Model
 		return join($data);
 	}
 
+	public function getSatuanProduk($barcode)
+	{
+		$data = array();
+
+		foreach ($barcode as $key => $value) {
+			$this->db->select('produk.nama_produk, satuan_produk.satuan');
+			$this->db->from('produk');
+			$this->db->join('satuan_produk', 'satuan_produk.id = produk.satuan');
+			$this->db->where('produk.id', $value);
+
+			$result = $this->db->get()->row();
+			if ($result) {
+				$data[] = '<tr><td>' . $result->satuan .'</td></tr>';
+			}
+		}
+		return join($data);
+	}
+
 	public function penjualanBulan($date)
 	{
 		$qty = $this->db->query("SELECT qty FROM transaksi WHERE DATE_FORMAT(tanggal, '%d %m %Y') = '$date'")->result();

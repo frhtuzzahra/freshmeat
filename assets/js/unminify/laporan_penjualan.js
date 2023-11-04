@@ -9,46 +9,50 @@ let laporan_penjualan = $("#laporan_penjualan").DataTable({
     }],
     order: [
         [1, "desc"]],
-    columns: [{
-        data: null
-    }
-        , {
-        data: "tanggal"
-    }
-        , {
-        data: "nama_produk"
-    }
-        , {
-        data: "total_bayar"
-    }, {
-        data: "qty",
-        render: function (data, type, row) {
-            if (type === "display" || type === "filter") {
-                // Menggabungkan nilai qty yang dipisahkan oleh koma
-                var qtyArray = data.split(",");
-                var qtyTotal = qtyArray.reduce(function (a, b) {
-                    return parseInt(a) + parseInt(b);
-                }, 0);
-                return qtyTotal;
+        columns: [{
+            data: null
+        },
+        {
+            data: "tanggal"
+        },
+        {
+            data: "nama_produk"
+        },
+        {
+            data: "satuan"
+        },
+        {
+            data: "total_bayar"
+        },
+        {
+            data: "qty",
+            render: function (data, type, row) {
+                if (type === "display" || type === "filter") {
+                    // Menggabungkan nilai qty yang dipisahkan oleh koma
+                    var qtyArray = data.split(",");
+                    var qtyTotal = qtyArray.reduce(function (a, b) {
+                        return parseInt(a) + parseInt(b);
+                    }, 0);
+                    return qtyTotal;
+                }
+                return data;
             }
-            return data;
         }
-    }
         , {
-        data: "jumlah_uang"
-    }
-        , {
-        data: "diskon"
-    }
-        , {
-        data: "pelanggan",
-        render: function (data) {
-            return data !== null ? data : "non-member";
+            data: "jumlah_uang"
         }
-    }
         , {
-        data: "action"
-    }
+            data: "diskon"
+        }
+        , {
+            data: "pelanggan",
+            render: function (data) {
+                return data !== null ? data : "non-member";
+            }
+        }
+        , {
+            data: "action"
+        }
     ]
 }
 

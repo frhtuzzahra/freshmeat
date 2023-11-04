@@ -59,6 +59,7 @@
                     <th>No</th>
                     <th>Tanggal</th>
                     <th>Nama Produk</th>
+                    <th>Satuan</th>
                     <th>Total Bayar</th>
                     <th>Total Qty</th>
                     <th>Jumlah Uang</th>
